@@ -1,0 +1,56 @@
+---
+const problems = [
+  {
+    number: "01",
+    title: "Perdés consultas",
+    copy: "No contestás a tiempo y se van con la competencia.",
+  },
+  {
+    number: "02",
+    title: "Cargás todo a mano",
+    copy: "Planillas, WhatsApp, mil pestañas. Horas que se van cada semana.",
+  },
+  {
+    number: "03",
+    title: "No tenés presencia digital",
+    copy: "O la que tenés no convierte ni genera confianza.",
+  },
+  {
+    number: "04",
+    title: "No sabés de dónde vienen tus clientes",
+    copy: "Tomás decisiones a ciegas y sin datos reales.",
+  },
+];
+---
+
+<section class="pt-17.5 px-12 max-[900px]:px-6" id="problema">
+  <div>
+    <p class="mb-3.5 flex items-center gap-2 text-[12px] font-bold tracking-[1px] text-accent">
+      <span
+        class="flex h-5 w-5 items-center justify-center rounded-full bg-ink text-[10px] text-white"
+        >03</span
+      >
+      EL PROBLEMA ✧
+    </p>
+    <h2 class="mb-7 text-[30px] font-extrabold">¿Esto te pasa en<br />tu negocio?</h2>
+  </div>
+
+  <div class="rounded-[26px] bg-panel px-10 pt-9.5 pb-7.5 text-white max-[560px]:px-5.5 max-[560px]:py-7.5">
+    <div class="mb-6.5 flex justify-between gap-5 max-[900px]:flex-wrap">
+      {
+        problems.map((item) => (
+          <div class="flex-1 pr-5 last:pr-0 max-[900px]:min-w-[45%] max-[560px]:min-w-full">
+            <div class="mb-4 flex h-8.5 w-8.5 items-center justify-center rounded-full bg-accent text-[13px] font-bold">
+              {item.number}
+            </div>
+            <p class="mb-2 text-base font-bold">{item.title}</p>
+            <p class="text-[13px] leading-normal text-ondark">{item.copy}</p>
+          </div>
+        ))
+      }
+    </div>
+    <p class="border-t border-white/12 pt-5.5 text-center text-xl font-bold">
+      Para eso <span class="text-accent underline">existimos.</span> ✦
+    </p>
+  </div>
+</section>

@@ -1,0 +1,40 @@
+---
+const navLinks = [
+  { label: "Servicios", href: "#servicios" },
+  { label: "Cómo trabajamos", href: "#como-trabajamos" },
+  { label: "Proyectos", href: "#proyectos" },
+  { label: "Contacto", href: "#contacto" },
+];
+---
+
+<header
+  class="flex items-center justify-between gap-6 pt-8 px-12 max-[640px]:flex-wrap max-[640px]:px-5"
+>
+  <a href="/" class="flex items-center gap-2.5 text-ink hover:text-ink" aria-label="LEVN — inicio">
+    <span
+      class="flex h-7.5 w-7.5 items-center justify-center rounded-lg bg-ink text-sm font-extrabold text-white"
+      >N</span
+    >
+    <span class="text-xl font-extrabold tracking-[0.5px]">LEVN</span>
+  </a>
+
+  <nav
+    class="flex gap-9 text-[14.5px] font-semibold max-[900px]:hidden"
+    aria-label="Navegación principal"
+  >
+    {
+      navLinks.map((link) => (
+        <a href={link.href} class="text-ink hover:text-accent">
+          {link.label}
+        </a>
+      ))
+    }
+  </nav>
+
+  <a
+    href="#contacto"
+    class="inline-flex items-center gap-2 whitespace-nowrap rounded-full bg-accent px-5 py-3 text-sm font-bold text-white hover:bg-accent-hover hover:text-white"
+  >
+    Pedí tu diagnóstico <span aria-hidden="true">→</span>
+  </a>
+</header>

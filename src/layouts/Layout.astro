@@ -1,0 +1,58 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "LEVN — Soluciones digitales para PyMEs",
+  description = "Automatizamos, construimos y hacemos crecer tu negocio con soluciones que generan resultados.",
+} = Astro.props;
+---
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="relative overflow-hidden bg-cream">
+      <div
+        class="pointer-events-none absolute -top-35 -right-65 z-0 h-105 w-130 rounded-[58%_42%_60%_40%/45%_55%_45%_55%] bg-accent max-[900px]:hidden"
+        aria-hidden="true"
+      >
+      </div>
+      <div
+        class="pointer-events-none absolute -top-15 -left-95 z-0 h-95 w-105 rounded-full bg-accent max-[900px]:hidden"
+        aria-hidden="true"
+      >
+      </div>
+      <div
+        class="pointer-events-none absolute top-205 -right-35 z-0 h-55 w-85 rounded-[50%_50%_40%_60%/60%_40%_60%_40%] bg-accent max-[900px]:hidden"
+        aria-hidden="true"
+      >
+      </div>
+      <div
+        class="pointer-events-none absolute top-375 -left-45 z-0 h-85 w-105 rounded-[45%_55%_55%_45%/55%_45%_55%_45%] bg-accent max-[900px]:hidden"
+        aria-hidden="true"
+      >
+      </div>
+
+      <div class="relative z-10">
+        <slot />
+      </div>
+    </div>
+  </body>
+</html>

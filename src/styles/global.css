@@ -1,0 +1,47 @@
+@import url('https://fonts.cdnfonts.com/css/satoshi');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Satoshi", "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+
+  --color-cream: #fbf2e8;
+  --color-ink: #171225;
+  --color-panel: #15121f;
+  --color-accent: #6c3ce0;
+  --color-accent-hover: #4e28b8;
+  --color-accent-soft: #efe6fc;
+  --color-muted: #4a4458;
+  --color-muted-2: #6a6478;
+  --color-muted-3: #8b8598;
+  --color-ondark: #b3adc4;
+  --color-whatsapp: #25d366;
+}
+
+@layer base {
+  body {
+    @apply bg-cream text-ink font-sans antialiased;
+  }
+
+  a {
+    @apply text-accent;
+  }
+
+  a:hover {
+    @apply text-accent-hover;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-accent outline-offset-2;
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
