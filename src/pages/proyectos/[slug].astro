@@ -1,0 +1,136 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import { projects } from "../../data/projects.json";
+
+export function getStaticPaths() {
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+---
+
+<Layout title={`${project.title} — LEVN`} description={project.summary}>
+  <Header />
+
+  <section class="flex flex-wrap gap-6 pt-14 px-12 max-[900px]:px-6 max-[900px]:pt-10">
+    {project.images.hero ? (
+      <img
+        src={project.images.hero}
+        alt={project.title}
+        class="min-h-95 flex-[1_1_480px] min-w-80 rounded-[22px] object-cover"
+      />
+    ) : (
+      <div class="flex min-h-95 flex-[1_1_480px] min-w-80 items-center justify-center rounded-[22px] bg-[#e6e6e6] text-[13px] text-[#999]">
+        imagen del proyecto
+      </div>
+    )}
+
+    <div class="box-border flex-[1_1_380px] min-w-75 rounded-[22px] bg-panel p-10 text-white">
+      <a href="/#proyectos" class="text-[12px] font-bold tracking-[1px] text-[#a08ce0] hover:text-white"
+        >← PROYECTOS</a
+      >
+      <h1 class="my-4.5 text-[34px] font-extrabold leading-[1.15]">{project.title}</h1>
+      <div class="mb-5.5 flex flex-wrap gap-2">
+        {
+          project.tags.map((tag) => (
+            <span class="rounded-full bg-white/10 px-3 py-1.5 text-[11.5px] font-bold">{tag}</span>
+          ))
+        }
+      </div>
+      <p class="text-[14.5px] leading-[1.7] text-[#d6cfe8]" set:html={project.heroDescription} />
+    </div>
+  </section>
+
+  <section class="mt-17.5 rounded-[26px] bg-white px-15 py-17.5 mx-12 max-[900px]:mx-6 max-[900px]:px-6 max-[900px]:py-10" data-reveal>
+    <div class="mb-14 text-center">
+      <p class="mb-3.5 text-[12px] font-bold tracking-[1px] text-accent">● CASO DE ESTUDIO</p>
+      <h2 class="text-[34px] font-extrabold">{project.title}</h2>
+    </div>
+
+    <div class="flex flex-col gap-14">
+      {
+        project.sections.map((section) => (
+          <div class="flex flex-wrap items-center gap-15" data-reveal>
+            <div
+              class={`flex-[1_1_380px] min-w-70 ${section.imagePosition === "left" ? "max-[900px]:order-2 order-2" : "order-1"}`}
+            >
+              <p class="mb-2.5 text-[13px] font-bold text-muted-3">{section.number}</p>
+              <h3 class="mb-4.5 text-[22px] font-extrabold">{section.title}</h3>
+              {
+                section.paragraphs.map((paragraph) => (
+                  <p class="mb-3.5 text-[14.5px] leading-[1.7] text-muted last:mb-0" set:html={paragraph} />
+                ))
+              }
+            </div>
+            <div
+              class={`flex min-h-65 flex-[1_1_380px] min-w-70 items-center justify-center rounded-[20px] bg-[#F5F1FB] p-6 ${section.imagePosition === "left" ? "order-1" : "order-2"}`}
+            >
+              {section.image ? (
+                <img src={section.image} alt={section.title} class="h-55 w-full rounded-[14px] object-cover" />
+              ) : (
+                <div class="flex h-55 w-full items-center justify-center rounded-[14px] bg-[#e6e6e6] text-[13px] text-[#999]">
+                  imagen
+                </div>
+              )}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="mt-10 grid grid-cols-3 gap-5 px-12 max-[900px]:grid-cols-1 max-[900px]:px-6" data-reveal>
+    <div class="rounded-[20px] bg-ink px-6.5 py-6.5 text-white">
+      <p class="mb-3.5 text-xl">🛠</p>
+      <p class="mb-2 text-[15px] font-bold">Tecnologías Utilizadas</p>
+      <p class="text-[12.5px] leading-[1.6] text-ondark">{project.tech}</p>
+    </div>
+    <div class="rounded-[20px] bg-ink px-6.5 py-6.5 text-white">
+      <p class="mb-3.5 text-xl">⏱</p>
+      <p class="mb-2 text-[15px] font-bold">Duración del Proyecto</p>
+      <p class="text-[12.5px] leading-[1.6] text-ondark">{project.duration}</p>
+    </div>
+    <div class="rounded-[20px] bg-ink px-6.5 py-6.5 text-white">
+      <p class="mb-3.5 text-xl">📈</p>
+      <p class="mb-2 text-[15px] font-bold">Resultados Obtenidos</p>
+      <p class="text-[12.5px] leading-[1.6] text-ondark">{project.results}</p>
+    </div>
+  </section>
+
+  <section class="mt-10 rounded-[26px] bg-white px-15 py-15 mx-12 max-[900px]:mx-6 max-[900px]:px-6" data-reveal>
+    <p class="mb-8 text-center text-2xl font-extrabold">Capturas del proyecto</p>
+    <div class="grid grid-cols-3 gap-5 max-[700px]:grid-cols-1">
+      {
+        project.images.screenshots.map((src) =>
+          src ? (
+            <img src={src} alt={`Captura de ${project.title}`} class="h-55 rounded-2xl object-cover" />
+          ) : (
+            <div class="flex h-55 items-center justify-center rounded-2xl bg-[#e6e6e6] text-[13px] text-[#999]">
+              imagen
+            </div>
+          )
+        )
+      }
+    </div>
+  </section>
+
+  <section class="mt-10 mb-17.5 rounded-[26px] bg-ink px-15 py-15 mx-12 text-center text-white max-[900px]:mx-6 max-[900px]:px-6" data-reveal>
+    <h2 class="mb-2.5 text-[28px] font-extrabold">¿Querés algo así?</h2>
+    <p class="mb-7 text-[14.5px] text-ondark">Contanos tu proyecto y lo construimos juntos.</p>
+    <div class="flex flex-wrap items-center justify-center gap-6">
+      <a
+        href="/#contacto"
+        class="rounded-full bg-accent px-6.5 py-3.5 text-sm font-bold text-white hover:bg-accent-hover hover:text-white"
+        >Hablemos →</a
+      >
+      <a href="/#proyectos" class="text-sm font-semibold text-[#d6cfe8] hover:text-white">← Ver más proyectos</a>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

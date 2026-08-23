@@ -109,7 +109,7 @@ Los breakpoints se escriben inline con variantes arbitrarias de Tailwind (`max-[
 
 ## Hero interactivo — `ImpactCarousel.tsx`
 
-La burbuja "Resumen de impacto" del Hero y el gráfico circular de íconos (antes decorativo) ahora son una sola isla de React: **una ruleta de funcionalidades**. Cada ícono del anillo representa uno de los servicios del "Catálogo de arranque" (☎ WhatsApp/reactivación, ✉ landing + captación, ▦ reportes automáticos, ▤ turnos + recordatorios); al hacer click en un ícono:
+La burbuja "Resumen de impacto" del Hero y el gráfico circular de íconos (antes decorativo) ahora son una sola isla de React: **una ruleta de funcionalidades**. Cada ícono del anillo representa uno de los servicios del "Catálogo de arranque" (📱 WhatsApp/reactivación, ✉ landing + captación, ▦ reportes automáticos, ▤ turnos + recordatorios); al hacer click en un ícono:
 
 - Un puntero (punto violeta) gira sobre el anillo punteado hasta la posición del ícono elegido, y el bloque central también rota levemente — el efecto "ruleta".
 - La tarjeta de impacto cambia de contenido (label, métrica principal, mini-gráfico de sparkline y las 3 estadísticas chicas) para reflejar esa funcionalidad puntual, con una animación de fade-in (`@keyframes fade-in` en `global.css`).

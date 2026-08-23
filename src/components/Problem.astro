@@ -23,7 +23,7 @@ const problems = [
 ];
 ---
 
-<section class="pt-17.5 px-12 max-[900px]:px-6" id="problema">
+<section class="pt-17.5 px-12 max-[900px]:px-6 2xl:flex gap-5" id="problema" data-reveal>
   <div>
     <p class="mb-3.5 flex items-center gap-2 text-[12px] font-bold tracking-[1px] text-accent">
       <span
@@ -35,7 +35,7 @@ const problems = [
     <h2 class="mb-7 text-[30px] font-extrabold">¿Esto te pasa en<br />tu negocio?</h2>
   </div>
 
-  <div class="rounded-[26px] bg-panel px-10 pt-9.5 pb-7.5 text-white max-[560px]:px-5.5 max-[560px]:py-7.5">
+  <div class="rounded-[26px] w-full bg-panel px-10 pt-9.5 pb-7.5 text-white max-[560px]:px-5.5 max-[560px]:py-7.5">
     <div class="mb-6.5 flex justify-between gap-5 max-[900px]:flex-wrap">
       {
         problems.map((item) => (

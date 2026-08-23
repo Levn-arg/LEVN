@@ -1,0 +1,89 @@
+---
+import { projects } from "../data/projects.json";
+---
+
+<section class="pt-17.5 px-12 max-[900px]:px-6" id="proyectos" data-reveal>
+  <p class="mb-3.5 flex items-center gap-2 text-[12px] font-bold tracking-[1px] text-accent">
+    <span
+      class="flex h-5 w-5 items-center justify-center rounded-full bg-ink text-[10px] text-white"
+      >07</span
+    >
+    PROYECTOS
+  </p>
+
+  <div class="mb-6.5 flex items-end justify-between gap-5 max-[560px]:flex-col max-[560px]:items-start">
+    <h2 class="text-[26px] font-extrabold">Casos que ya estamos<br />construyendo.</h2>
+    <div class="flex flex-none gap-2.5">
+      <button
+        type="button"
+        data-projects-prev
+        aria-label="Proyecto anterior"
+        class="flex h-9.5 w-9.5 cursor-pointer items-center justify-center rounded-full border-[1.5px] border-ink text-sm hover:bg-ink hover:text-white"
+        >←</button
+      >
+      <button
+        type="button"
+        data-projects-next
+        aria-label="Siguiente proyecto"
+        class="flex h-9.5 w-9.5 cursor-pointer items-center justify-center rounded-full border-[1.5px] border-ink text-sm hover:bg-ink hover:text-white"
+        >→</button
+      >
+    </div>
+  </div>
+
+  <div
+    data-projects-track
+    class="flex snap-x snap-mandatory gap-5 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+  >
+    {
+      projects.map((project) => (
+        <a
+          href={`/proyectos/${project.slug}/`}
+          class="flex-none w-85 snap-start rounded-[22px] bg-white p-5 text-ink shadow-[0_12px_30px_rgba(60,40,110,0.06)] hover:text-ink"
+        >
+          {project.images.card ? (
+            <img
+              src={project.images.card}
+              alt={project.title}
+              class="mb-4 h-45 w-full rounded-[14px] object-cover"
+            />
+          ) : (
+            <div class="mb-4 flex h-45 w-full items-center justify-center rounded-[14px] bg-[#e6e6e6] text-[12px] text-[#999]">
+              imagen
+            </div>
+          )}
+          <div class="mb-2.5 flex flex-wrap gap-1.5">
+            {project.tags.slice(0, 3).map((tag) => (
+              <span class="rounded-full bg-accent-soft px-2.5 py-1 text-[10.5px] font-bold text-accent">
+                {tag}
+              </span>
+            ))}
+          </div>
+          <p class="mb-1.5 text-[17px] font-extrabold">{project.title}</p>
+          <p class="mb-3.5 text-[12.5px] leading-normal text-muted-2">{project.summary}</p>
+          <span class="text-[13px] font-bold text-accent">Ver proyecto →</span>
+        </a>
+      ))
+    }
+
+    <div class="flex min-h-85 w-85 flex-none flex-col items-center justify-center rounded-[22px] border-[1.5px] border-dashed border-[#d8d3e0] bg-white p-5 text-center snap-start">
+      <div class="mb-4 flex h-45 w-full items-center justify-center rounded-[14px] bg-[#e6e6e6] text-[12px] text-[#999]">
+        imagen
+      </div>
+      <p class="mb-1.5 text-[15px] font-extrabold">¿Querés ser el próximo caso?</p>
+      <p class="text-[12.5px] text-muted-2">Condiciones preferenciales para los primeros.</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLElement>("[data-projects-track]").forEach((track) => {
+    const section = track.closest("section");
+    section?.querySelector("[data-projects-prev]")?.addEventListener("click", () => {
+      track.scrollBy({ left: -360, behavior: "smooth" });
+    });
+    section?.querySelector("[data-projects-next]")?.addEventListener("click", () => {
+      track.scrollBy({ left: 360, behavior: "smooth" });
+    });
+  });
+</script>

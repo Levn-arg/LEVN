@@ -1,0 +1,51 @@
+{
+  "projects": [
+    {
+      "slug": "industrias-palladino",
+      "title": "Industrias Palladino",
+      "tags": ["Sistema", "Finanzas", "Catálogo", "Analítica", "E-commerce"],
+      "summary": "Sistema integral que centraliza la gestión financiera y el catálogo de productos.",
+      "heroDescription": "Sistema integral que centraliza la <strong>gestión financiera</strong> y el <strong>catálogo de productos</strong> de Industrias Paladino. Control de gastos en tiempo real, carga y visualización de productos tipo e-commerce, y <strong>analíticas avanzadas</strong> de comportamiento del catálogo.",
+      "images": {
+        "card": "",
+        "hero": "",
+        "screenshots": ["", "", ""]
+      },
+      "sections": [
+        {
+          "number": "01",
+          "title": "Control de Gastos y Finanzas",
+          "imagePosition": "right",
+          "image": "",
+          "paragraphs": [
+            "Desarrollamos un <strong>módulo financiero completo</strong> donde el equipo de Paladino registra y supervisa todos los movimientos económicos de la empresa. El sistema permite cargar gastos por categoría, visualizar balances, controlar cuentas corrientes y obtener reportes de rentabilidad en tiempo real.",
+            "Toda la información financiera se consolida en un <strong>panel de control centralizado</strong>, lo que elimina el uso de planillas dispersas y da visibilidad inmediata sobre el estado económico del negocio."
+          ]
+        },
+        {
+          "number": "02",
+          "title": "Catálogo de Productos",
+          "imagePosition": "left",
+          "image": "",
+          "paragraphs": [
+            "Se creó un <strong>catálogo digital tipo e-commerce</strong> donde el equipo puede cargar productos con fotos, descripciones, precios y categorías. Los productos se visualizan de forma atractiva y organizada, facilitando tanto la gestión interna como la presentación a clientes.",
+            "El sistema permite <strong>editar, publicar y despublicar productos</strong> de manera sencilla, mantener el stock actualizado y organizar el catálogo por rubros o líneas de producto."
+          ]
+        },
+        {
+          "number": "03",
+          "title": "Analíticas del Catálogo",
+          "imagePosition": "right",
+          "image": "",
+          "paragraphs": [
+            "El sistema registra automáticamente el <strong>comportamiento de los usuarios</strong> dentro del catálogo: qué productos son más vistos, cuáles reciben más clicks, cuáles se agregan más al carrito y cuáles generan más consultas.",
+            "Esta información se presenta en <strong>dashboards claros y accionables</strong>, permitiendo al equipo de Paladino tomar decisiones estratégicas sobre qué productos destacar, cuáles reponer con prioridad y cómo optimizar la oferta según la demanda real."
+          ]
+        }
+      ],
+      "tech": "Next.js, Node.js, PostgreSQL, Tailwind CSS, analíticas de comportamiento en tiempo real.",
+      "duration": "Desarrollo e implementación del sistema integral.",
+      "results": "Centralización financiera, catálogo digital profesional y analíticas de comportamiento para optimizar la oferta de productos."
+    }
+  ]
+}

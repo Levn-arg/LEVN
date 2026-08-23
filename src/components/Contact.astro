@@ -1,39 +1,20 @@
 ---
-const channels = [
-  {
-    icon: "☎",
-    iconBg: "bg-[#e7f8ee]",
-    iconColor: "text-whatsapp",
-    title: "WhatsApp directo",
-    copy: "Escribinos y te respondemos al toque.",
-    cta: "Escribir ahora →",
-    ctaColor: "text-[#1fae5f]",
-    href: "https://wa.me/5491112345678",
-  },
-  {
-    icon: "▤",
-    iconBg: "bg-accent-soft",
-    iconColor: "text-accent",
-    title: "Formulario corto",
-    copy: "2 minutos y ya estamos en contacto.",
-    cta: "Completar ahora →",
-    ctaColor: "text-accent",
-    href: "#formulario",
-  },
-  {
-    icon: "📅",
-    iconBg: "bg-accent-soft",
-    iconColor: "text-accent",
-    title: "Agenda una reunión",
-    copy: "Si preferís, coordinamos una llamada.",
-    cta: "Agendar llamada →",
-    ctaColor: "text-accent",
-    href: "#agenda",
-  },
-];
+import ContactFormModal from "./ContactFormModal";
+import ScheduleModal from "./ScheduleModal";
+
+const whatsapp = {
+  icon: "📱",
+  iconBg: "bg-[#e7f8ee]",
+  iconColor: "text-whatsapp",
+  title: "WhatsApp directo",
+  copy: "Escribinos y te respondemos al toque.",
+  cta: "Escribir ahora →",
+  ctaColor: "text-[#1fae5f]",
+  href: "https://wa.me/5491158486166",
+};
 ---
 
-<section class="pt-17.5 px-12 max-[900px]:px-6" id="contacto">
+<section class="pt-17.5 px-12 max-[900px]:px-6" id="contacto" data-reveal>
   <p class="mb-3.5 flex items-center gap-2 text-[12px] font-bold tracking-[1px] text-accent">
     <span
       class="flex h-5 w-5 items-center justify-center rounded-full bg-ink text-[10px] text-white"
@@ -47,25 +28,26 @@ const channels = [
   </p>
 
   <div class="grid grid-cols-4 gap-4.5 max-[900px]:grid-cols-2 max-[560px]:grid-cols-1">
-    {
-      channels.map((channel) => (
-        <a
-          href={channel.href}
-          class="block rounded-[20px] bg-white px-5.5 py-6.5 text-ink hover:text-ink"
-        >
-          <div
-            class={`mb-4 flex h-10 w-10 items-center justify-center rounded-[12px] text-lg ${channel.iconBg} ${channel.iconColor}`}
-          >
-            {channel.icon}
-          </div>
-          <p class="mb-2 text-[15px] font-bold">{channel.title}</p>
-          <p class="mb-4 text-[12.5px] text-muted-2">{channel.copy}</p>
-          <span class={`text-[13px] font-bold ${channel.ctaColor}`}>
-            {channel.cta}
-          </span>
-        </a>
-      ))
-    }
+    <a
+      href={whatsapp.href}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="block rounded-[20px] bg-white px-5.5 py-6.5 text-ink hover:text-ink"
+    >
+      <div
+        class={`mb-4 flex h-10 w-10 items-center justify-center rounded-[12px] text-lg ${whatsapp.iconBg} ${whatsapp.iconColor}`}
+      >
+        {whatsapp.icon}
+      </div>
+      <p class="mb-2 text-[15px] font-bold">{whatsapp.title}</p>
+      <p class="mb-4 text-[12.5px] text-muted-2">{whatsapp.copy}</p>
+      <span class={`text-[13px] font-bold ${whatsapp.ctaColor}`}>
+        {whatsapp.cta}
+      </span>
+    </a>
+
+    <ContactFormModal client:load />
+    <ScheduleModal client:load />
 
     <div class="rounded-[20px] bg-accent px-5.5 py-6.5 text-white">
       <p class="mb-3 text-[15px] font-extrabold">¿Qué pasa después? ✦</p>
