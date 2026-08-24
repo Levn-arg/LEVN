@@ -2,6 +2,20 @@
 
 Este documento sirve de guía para trabajar en este proyecto (humano o IA). Resume de dónde viene el diseño, cómo está construido el código y las convenciones a seguir para mantener consistencia.
 
+## ⚠️ Incidente de seguridad (2026-08-23) — leer antes de tocar `.env*`
+
+En el commit `b9be60c` ("1st version to Deploy") se pusheó `.env.example` con la **URL real de Supabase y la anon/publishable key real** hardcodeadas en vez de dejarlas vacías. El repo (`github.com/panadxro/LEVN`) es **público**, así que esos valores quedaron expuestos en el historial de git desde entonces.
+
+Causa raíz: se editó directamente `.env.example` (el archivo que se commitea, pensado como plantilla) con los valores reales, en vez de crear un `.env` local (que sí está en `.gitignore`, línea `.env`) y dejar `.env.example` con las claves vacías.
+
+Qué se corrigió el 2026-08-23:
+- Se creó `.env` (gitignorado, no se sube) con los valores reales de trabajo.
+- Se volvió a dejar `.env.example` con los valores vacíos, como corresponde a una plantilla.
+- **Pendiente por el usuario**: rotar la anon/publishable key de Supabase (Project Settings → API → Reset/rotate) porque quedó expuesta en un repo público, y actualizar `.env` con la nueva clave. Ver el TODO dentro de `.env`.
+- Se decidió **no** reescribir el historial de git (no purge/force-push) — el fix es solo hacia adelante. Si en el futuro se quiere limpiar el historial también, usar `git filter-repo` sobre `.env.example` y coordinar el force-push con cualquier colaborador.
+
+Regla para el futuro: **nunca** pegar valores reales en `.env.example`, `README.md`, código fuente ni ningún archivo trackeado por git. Los secretos van solo en `.env` (o `.env.local`/`.env.production`), que están en `.gitignore`. Antes de cada commit que toque configuración, revisar `git diff` en busca de URLs/keys reales.
+
 ## Origen
 
 La landing se implementó a partir de un diseño exportado desde Claude Design (`claude.ai/design`), proyecto `547874c0-62ef-477a-a57e-fcb9998361b7`, archivo `LEVN Landing.dc.html`. Ese archivo es un mockup estático en HTML con estilos inline — se usó como referencia visual exacta (colores, tipografías, espaciados, textos) para reconstruir la página como un sitio Astro real, componetizado y responsive.
