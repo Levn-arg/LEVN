@@ -5,7 +5,7 @@ import {
   createBooking,
   fetchBlockedDates,
   fetchBookedSlots,
-  INDUSTRIES,
+  SERVICES,
   TIME_SLOTS,
   type BookedSlots,
 } from "../lib/scheduling";
@@ -44,6 +44,7 @@ export default function ScheduleModal() {
   const [open, setOpen] = useState(false);
   const [status, setStatus] = useState<Status>("idle");
   const [errorMessage, setErrorMessage] = useState("");
+  const [step, setStep] = useState<"datetime" | "lead">("datetime");
 
   const today = useMemo(() => startOfToday(), []);
   const [viewYear, setViewYear] = useState(today.getFullYear());
@@ -75,6 +76,7 @@ export default function ScheduleModal() {
       setStatus("idle");
       setSelectedDate(null);
       setSelectedTime(null);
+      setStep("datetime");
     }, 300);
   }
 
@@ -129,7 +131,7 @@ export default function ScheduleModal() {
         hora: selectedTime,
         nombre: data.nombre,
         email: data.email,
-        rubro: data.rubro,
+        servicio: data.servicio,
         mensaje: data.mensaje || undefined,
       }),
       sendToWeb3Forms({
@@ -137,7 +139,7 @@ export default function ScheduleModal() {
         from_name: "Agenda LEVN",
         nombre: data.nombre,
         email: data.email,
-        rubro: data.rubro,
+        servicio: data.servicio,
         fecha_solicitada: selectedDate,
         horario_solicitado: `${selectedTime} hs`,
         mensaje: data.mensaje || `Reunión para el ${selectedDate} a las ${selectedTime} hs.`,
@@ -157,6 +159,7 @@ export default function ScheduleModal() {
         );
       }
       setSelectedTime(null);
+      setStep("datetime");
     }
   }
 
@@ -186,7 +189,9 @@ export default function ScheduleModal() {
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="flex flex-col">
-            <div className="grid grid-cols-[1fr_220px] max-[720px]:grid-cols-1">
+            {/* Paso 1: fecha y horario */}
+            <div className={step === "datetime" ? "contents" : "hidden"}>
+              <div className="grid grid-cols-[1fr_220px] max-[720px]:grid-cols-1">
               {/* Calendario */}
               <div className="p-7 max-[480px]:p-5.5">
                 <div className="mb-5 flex items-center justify-between">
@@ -288,7 +293,7 @@ export default function ScheduleModal() {
               </div>
             </div>
 
-            {/* Resumen + datos de contacto */}
+            {/* Resumen + continuar */}
             <div className="border-t border-white/10 p-7 max-[480px]:p-5.5">
               <p className="mb-4 text-[13.5px] text-white/70">
                 {selectedDate && selectedTime ? (
@@ -299,6 +304,33 @@ export default function ScheduleModal() {
                 ) : (
                   "Elegí día y horario arriba para continuar."
                 )}
+              </p>
+
+              <button
+                type="button"
+                disabled={!selectedDate || !selectedTime}
+                onClick={() => setStep("lead")}
+                className="w-full cursor-pointer rounded-full bg-accent py-3 text-sm font-bold text-white hover:bg-accent-hover disabled:cursor-not-allowed disabled:opacity-40"
+              >
+                Continuar →
+              </button>
+            </div>
+            </div>
+
+            {/* Paso 2: datos del lead */}
+            <div className={step === "lead" ? "border-t border-white/10 p-7 max-[480px]:p-5.5" : "hidden"}>
+              <button
+                type="button"
+                onClick={() => setStep("datetime")}
+                className="mb-4 flex cursor-pointer items-center gap-1 text-[12.5px] font-semibold text-white/60 hover:text-white"
+              >
+                ‹ Cambiar fecha y horario
+              </button>
+
+              <p className="mb-4 text-[13.5px] text-white/70">
+                Tu reunión sería el{" "}
+                <strong className="text-white">{selectedDateLabel}</strong> a las{" "}
+                <strong className="text-white">{selectedTime} hs</strong>.
               </p>
 
               <div className="grid grid-cols-2 gap-3 max-[480px]:grid-cols-1">
@@ -323,19 +355,19 @@ export default function ScheduleModal() {
               </div>
 
               <label className="mt-3 flex flex-col gap-1.5 text-[13px] font-semibold text-white/80">
-                Rubro
+                ¿Qué servicio necesitás?
                 <select
                   required
-                  name="rubro"
+                  name="servicio"
                   defaultValue=""
                   className="rounded-xl border border-white/15 bg-panel px-3.5 py-2.5 text-sm font-normal text-white focus:border-accent focus:outline-none"
                 >
                   <option value="" disabled>
                     Elegí una opción
                   </option>
-                  {INDUSTRIES.map((industry) => (
-                    <option key={industry} value={industry}>
-                      {industry}
+                  {SERVICES.map((service) => (
+                    <option key={service} value={service}>
+                      {service}
                     </option>
                   ))}
                 </select>

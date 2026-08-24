@@ -2,13 +2,12 @@ import { supabase, supabaseConfigured } from "./supabase";
 
 export const TIME_SLOTS = ["09:00", "10:00", "11:00", "12:00", "14:00", "15:00", "16:00", "17:00"];
 
-export const INDUSTRIES = [
-  "Comercio con clientela",
-  "Servicios profesionales",
-  "Inmobiliaria o concesionaria",
-  "Distribuidora",
-  "Rubro de turno (estética, salud, peluquería)",
-  "Otro",
+export const SERVICES = [
+  "Automatización e Integración",
+  "Presencia Digital",
+  "Adquisición y Crecimiento",
+  "Desarrollo a Medida",
+  "Todavía no sé, quiero asesorarme",
 ];
 
 export type BookedSlots = Record<string, string[]>;
@@ -53,7 +52,7 @@ export type BookingInput = {
   hora: string;
   nombre: string;
   email: string;
-  rubro: string;
+  servicio: string;
   mensaje?: string;
 };
 
