@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from "react";
 import Modal from "./Modal";
-import { sendToWeb3Forms } from "../lib/web3forms";
+import { notifyContact } from "../lib/notify";
 import { createLead } from "../lib/scheduling";
 
 type Status = "idle" | "sending" | "success" | "error";
@@ -26,12 +26,10 @@ export default function ContactFormModal() {
     // email en paralelo. El email es el canal principal: si falla Supabase
     // pero el email sale, igual se muestra éxito al usuario.
     const [result] = await Promise.all([
-      sendToWeb3Forms({
-        subject: `Nueva consulta de ${data.nombre} — LEVN`,
-        from_name: "Formulario LEVN",
+      notifyContact({
         nombre: data.nombre,
         email: data.email,
-        telefono: data.telefono || "-",
+        telefono: data.telefono || undefined,
         mensaje: data.mensaje,
       }),
       createLead({

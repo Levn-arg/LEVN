@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState, type FormEvent } from "react";
 import Modal from "./Modal";
-import { sendToWeb3Forms } from "../lib/web3forms";
+import { notifyBooking } from "../lib/notify";
 import {
   createBooking,
   fetchBlockedDates,
@@ -134,15 +134,13 @@ export default function ScheduleModal() {
         servicio: data.servicio,
         mensaje: data.mensaje || undefined,
       }),
-      sendToWeb3Forms({
-        subject: `Nueva reunión agendada — ${selectedDate} ${selectedTime} — LEVN`,
-        from_name: "Agenda LEVN",
+      notifyBooking({
         nombre: data.nombre,
         email: data.email,
         servicio: data.servicio,
-        fecha_solicitada: selectedDate,
-        horario_solicitado: `${selectedTime} hs`,
-        mensaje: data.mensaje || `Reunión para el ${selectedDate} a las ${selectedTime} hs.`,
+        fecha: selectedDate,
+        hora: selectedTime,
+        mensaje: data.mensaje || undefined,
       }),
     ]);
 
