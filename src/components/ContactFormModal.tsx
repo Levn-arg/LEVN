@@ -64,55 +64,55 @@ export default function ContactFormModal() {
         <span className="text-[13px] font-bold text-accent">Completar ahora →</span>
       </button>
 
-      <Modal open={open} onClose={close} title="Formulario de contacto">
+      <Modal open={open} onClose={close} title="Formulario de contacto" tone="dark">
         {status === "success" ? (
           <div className="py-5 text-center">
             <p className="mb-3 text-3xl">✓</p>
             <p className="mb-1.5 text-lg font-extrabold">¡Listo!</p>
-            <p className="text-[13.5px] text-muted-2">Te respondemos en menos de 24h hábiles.</p>
+            <p className="text-[13.5px] text-white/60">Te respondemos en menos de 24h hábiles.</p>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="flex flex-col gap-3.5">
             <p className="mb-1 pr-6 text-[19px] font-extrabold">Contanos de tu negocio</p>
 
-            <label className="flex flex-col gap-1.5 text-[13px] font-semibold">
+            <label className="flex flex-col gap-1.5 text-[13px] font-semibold text-white/80">
               Nombre
               <input
                 required
                 name="nombre"
                 type="text"
-                className="rounded-xl border border-ink/12 px-3.5 py-2.5 text-sm font-normal text-ink focus:border-accent focus:outline-none"
+                className="rounded-xl border border-white/15 bg-transparent px-3.5 py-2.5 text-sm font-normal text-white focus:border-accent focus:outline-none"
               />
             </label>
-            <label className="flex flex-col gap-1.5 text-[13px] font-semibold">
+            <label className="flex flex-col gap-1.5 text-[13px] font-semibold text-white/80">
               Email
               <input
                 required
                 name="email"
                 type="email"
-                className="rounded-xl border border-ink/12 px-3.5 py-2.5 text-sm font-normal text-ink focus:border-accent focus:outline-none"
+                className="rounded-xl border border-white/15 bg-transparent px-3.5 py-2.5 text-sm font-normal text-white focus:border-accent focus:outline-none"
               />
             </label>
-            <label className="flex flex-col gap-1.5 text-[13px] font-semibold">
+            <label className="flex flex-col gap-1.5 text-[13px] font-semibold text-white/80">
               Teléfono (opcional)
               <input
                 name="telefono"
                 type="tel"
-                className="rounded-xl border border-ink/12 px-3.5 py-2.5 text-sm font-normal text-ink focus:border-accent focus:outline-none"
+                className="rounded-xl border border-white/15 bg-transparent px-3.5 py-2.5 text-sm font-normal text-white focus:border-accent focus:outline-none"
               />
             </label>
-            <label className="flex flex-col gap-1.5 text-[13px] font-semibold">
+            <label className="flex flex-col gap-1.5 text-[13px] font-semibold text-white/80">
               Mensaje
               <textarea
                 required
                 name="mensaje"
                 rows={4}
-                className="resize-none rounded-xl border border-ink/12 px-3.5 py-2.5 text-sm font-normal text-ink focus:border-accent focus:outline-none"
+                className="resize-none rounded-xl border border-white/15 bg-transparent px-3.5 py-2.5 text-sm font-normal text-white focus:border-accent focus:outline-none"
               />
             </label>
 
             {status === "error" && (
-              <p className="text-[12.5px] font-semibold text-red-600">{errorMessage}</p>
+              <p className="text-[12.5px] font-semibold text-red-400">{errorMessage}</p>
             )}
 
             <button
