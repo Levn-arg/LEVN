@@ -22,3 +22,7 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# internal notes / db schema — not for the public repo
+PROJECT_CONTEXT.md
+supabase/
