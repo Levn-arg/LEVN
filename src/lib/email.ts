@@ -8,7 +8,7 @@ import { Resend } from "resend";
 const COLORS = {
   cream: "#fbf2e8",
   ink: "#171225",
-  panel: "#15121f",
+  panel: "#fbf2e8",
   accent: "#6c3ce0",
   accentSoft: "#efe6fc",
   muted: "#4a4458",

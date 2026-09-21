@@ -1,11 +1,62 @@
 {
   "projects": [
     {
-      "slug": "industrias-palladino",
-      "title": "Industrias Palladino",
-      "tags": ["Sistema", "Finanzas", "Catálogo", "Analítica", "E-commerce"],
-      "summary": "Sistema integral que centraliza la gestión financiera y el catálogo de productos.",
-      "heroDescription": "Sistema integral que centraliza la <strong>gestión financiera</strong> y el <strong>catálogo de productos</strong> de Industrias Paladino. Control de gastos en tiempo real, carga y visualización de productos tipo e-commerce, y <strong>analíticas avanzadas</strong> de comportamiento del catálogo.",
+      "slug": "reemo",
+      "title": "Reemo",
+      "tags": ["Identidad de Marca", "Desarrollo de Producto", "App Mobile"],
+      "summary": "Identidad de marca y desarrollo completo de una aplicación de alquiler de autos entre particulares.",
+      "heroDescription": "Desarrollamos la <strong>identidad completa</strong> de Reemo y, sobre esa base, <strong>toda la aplicación</strong>: verificación de usuarios, publicación de vehículos, reservas, seguro por viaje, pagos y calificaciones. Un ecosistema de marca y producto construido como una sola decisión de diseño.",
+      "images": {
+        "card": "/images/projects/reemo/card.jpg",
+        "hero": "/images/projects/reemo/hero.jpg",
+        "screenshots": [
+          "/images/projects/reemo/screenshots/screenshot-1.jpg",
+          "/images/projects/reemo/screenshots/screenshot-2.jpg",
+          "/images/projects/reemo/screenshots/screenshot-3.jpg"
+        ]
+      },
+      "sections": [
+        {
+          "number": "01",
+          "title": "El Problema de Confianza",
+          "imagePosition": "right",
+          "image": "/images/projects/reemo/sections/section-01.jpg",
+          "paragraphs": [
+            "Prestar el auto propio a un desconocido exige transmitir <strong>confianza</strong>, pero sin la frialdad institucional de una aseguradora. La marca tenía que sentirse simple, moderna y segura al mismo tiempo.",
+            "La mayoría de las referencias visuales del rubro son corporativas y frías, o informales al punto de generar desconfianza: Reemo necesitaba un punto medio propio."
+          ]
+        },
+        {
+          "number": "02",
+          "title": "Sistema de Identidad Visual",
+          "imagePosition": "left",
+          "image": "/images/projects/reemo/sections/section-02.jpg",
+          "paragraphs": [
+            "El símbolo es un <strong>trazo continuo</strong> que resuelve tres lecturas a la vez: la letra R, la silueta de un vehículo y un pin de ubicación — la continuidad lee como movimiento, que es justamente lo que vende el producto.",
+            "La paleta usa <strong>azul profundo</strong> como base y <strong>celeste</strong> como acento, deliberadamente solo dos colores porque la marca se usa desde un celular y a las apuradas. La tipografía, Onest, prioriza legibilidad en pantalla chica antes que en cartel."
+          ]
+        },
+        {
+          "number": "03",
+          "title": "Desarrollo de la Aplicación",
+          "imagePosition": "right",
+          "image": "/images/projects/reemo/sections/section-03.jpg",
+          "paragraphs": [
+            "Sobre esa identidad construimos la aplicación completa: <strong>verificación de identidad</strong> de conductores y dueños, publicación de vehículos, buscador y reserva con calendario en tiempo real, y <strong>seguro calculado dinámicamente</strong> por viaje.",
+            "Se sumaron chat interno entre las partes, geolocalización para entrega y devolución, panel de anfitrión, sistema de calificación mutua y <strong>pagos con retención de garantía</strong> — un producto funcional de punta a punta, no una identidad aplicada sobre una app ya existente."
+          ]
+        }
+      ],
+      "tech": "Vue.js, Tailwind CSS, Firebase.",
+      "duration": "5 semanas de identidad de marca + 25 semanas de desarrollo de producto (30 semanas en total).",
+      "results": "Manual de marca funcional de forma autónoma y aplicación operativa que resuelve la fricción de confiar el auto propio a un desconocido."
+    },
+    {
+      "slug": "dropdead",
+      "title": "DropDead",
+      "tags": ["E-commerce", "Gestión de Inventario", "Dashboard", "Moda Urbana"],
+      "summary": "E-commerce transaccional con sistema de gestión de inventario y ventas para una marca de indumentaria urbana.",
+      "heroDescription": "Diseñamos y desarrollamos el <strong>ecosistema digital</strong> de DropDead: una experiencia de compra online completa integrada a un <strong>sistema de gestión personalizado</strong> para administrar productos, inventario, ventas y rendimiento desde un mismo lugar.",
       "images": {
         "card": "",
         "hero": "",
@@ -14,38 +65,508 @@
       "sections": [
         {
           "number": "01",
-          "title": "Control de Gastos y Finanzas",
+          "title": "El Problema de Stock en Tiempo Real",
           "imagePosition": "right",
           "image": "",
           "paragraphs": [
-            "Desarrollamos un <strong>módulo financiero completo</strong> donde el equipo de Paladino registra y supervisa todos los movimientos económicos de la empresa. El sistema permite cargar gastos por categoría, visualizar balances, controlar cuentas corrientes y obtener reportes de rentabilidad en tiempo real.",
-            "Toda la información financiera se consolida en un <strong>panel de control centralizado</strong>, lo que elimina el uso de planillas dispersas y da visibilidad inmediata sobre el estado económico del negocio."
+            "DropDead trabaja con drops de indumentaria de stock limitado, donde cualquier fricción en la compra o error de stock se traduce en <strong>venta perdida en minutos</strong>. La marca no tenía forma de saber en tiempo real cuánto quedaba de cada talle o color.",
+            "La información de ventas y stock vivía repartida entre planillas y memoria del equipo, lo que generaba errores de venta y decisiones a ciegas sobre reposición."
           ]
         },
         {
           "number": "02",
-          "title": "Catálogo de Productos",
+          "title": "E-commerce y Sistema de Inventario",
           "imagePosition": "left",
           "image": "",
           "paragraphs": [
-            "Se creó un <strong>catálogo digital tipo e-commerce</strong> donde el equipo puede cargar productos con fotos, descripciones, precios y categorías. Los productos se visualizan de forma atractiva y organizada, facilitando tanto la gestión interna como la presentación a clientes.",
-            "El sistema permite <strong>editar, publicar y despublicar productos</strong> de manera sencilla, mantener el stock actualizado y organizar el catálogo por rubros o líneas de producto."
+            "Construimos un <strong>e-commerce completo</strong> — catálogo por categorías, carrito y checkout — integrado a un sistema de gestión propio con <strong>inventario por variante</strong> (talle/color), para que el stock real y la vidriera online sean siempre el mismo dato.",
+            "El sistema permite dar de alta productos, organizarlos por categoría y mantener el inventario actualizado sin depender de una planilla paralela."
           ]
         },
         {
           "number": "03",
-          "title": "Analíticas del Catálogo",
+          "title": "Dashboard de Ventas y Rendimiento",
           "imagePosition": "right",
           "image": "",
           "paragraphs": [
-            "El sistema registra automáticamente el <strong>comportamiento de los usuarios</strong> dentro del catálogo: qué productos son más vistos, cuáles reciben más clicks, cuáles se agregan más al carrito y cuáles generan más consultas.",
-            "Esta información se presenta en <strong>dashboards claros y accionables</strong>, permitiendo al equipo de Paladino tomar decisiones estratégicas sobre qué productos destacar, cuáles reponer con prioridad y cómo optimizar la oferta según la demanda real."
+            "Se sumó un <strong>dashboard de gestión</strong> con métricas de ventas y rendimiento por producto, para que el equipo sepa cómo viene funcionando cada lanzamiento sin esperar a un cierre manual.",
+            "El sistema quedó pensado para <strong>repetirse colección tras colección</strong>: alta de producto, control de variantes y métricas no requieren rehacer nada en cada nuevo drop."
           ]
         }
       ],
-      "tech": "Next.js, Node.js, PostgreSQL, Tailwind CSS, analíticas de comportamiento en tiempo real.",
-      "duration": "Desarrollo e implementación del sistema integral.",
-      "results": "Centralización financiera, catálogo digital profesional y analíticas de comportamiento para optimizar la oferta de productos."
+      "tech": "Astro.",
+      "duration": "Desarrollo e implementación en 8 semanas.",
+      "results": "Tienda online y gestión interna operando en un mismo sistema, con control de stock centralizado y estructura lista para escalar a nuevos lanzamientos."
+    },
+        {
+      "slug": "sevre-collection",
+      "title": "Sevrè Collection",
+      "tags": ["Branding", "Identidad Visual", "Diseño UX/UI", "Presencia Digital"],
+      "summary": "Identidad de marca y ecosistema digital de showcase para una marca de indumentaria de lujo urbano.",
+      "heroDescription": "Construimos la <strong>identidad de marca</strong> de Sevrè Collection y, a partir de ella, una <strong>plataforma digital a medida</strong> pensada como espacio de marca: catálogo curado, storytelling de colección y un <strong>sistema de gestión propio</strong> para que el equipo administre productos y contenido sin depender de terceros.",
+      "images": {
+        "card": "",
+        "hero": "",
+        "screenshots": ["", "", ""]
+      },
+      "sections": [
+        {
+          "number": "01",
+          "title": "El Desafío de Posicionamiento",
+          "imagePosition": "right",
+          "image": "",
+          "paragraphs": [
+            "Vender lujo urbano tiene un riesgo puntual: si la estética se percibe genérica, el <strong>valor percibido</strong> del producto se cae de inmediato, sin importar la calidad real de lo que se vende. Sevrè llegó sin paleta, sin tipografía y sin criterio definido para mostrar sus productos.",
+            "Esa falta de sistema visual diluía cualquier esfuerzo de venta o comunicación, y hacía que cada pieza nueva (posteo, foto de producto, pieza de showroom) se resolviera de cero cada vez."
+          ]
+        },
+        {
+          "number": "02",
+          "title": "Sistema de Identidad Visual",
+          "imagePosition": "left",
+          "image": "",
+          "paragraphs": [
+            "Desarrollamos un <strong>sistema visual completo</strong> que cruza códigos de moda de lujo con estética urbana: tipografía editorial, paleta oscura y sobria, y dirección de arte específica para la fotografía de producto.",
+            "El resultado es una identidad que la marca puede aplicar de forma consistente en redes, showroom y comunicación, sin depender de una interpretación distinta cada vez."
+          ]
+        },
+        {
+          "number": "03",
+          "title": "Plataforma de Showcase a Medida",
+          "imagePosition": "right",
+          "image": "",
+          "paragraphs": [
+            "Sobre esa identidad se construyó una <strong>plataforma digital a medida</strong>, con catálogo curado y sistema de gestión propio para que el equipo suba productos y contenido sin depender de un desarrollador cada vez que sale una prenda nueva.",
+            "Se decidió no implementar checkout abierto: en indumentaria de lujo urbano la venta suele cerrarse por <strong>consulta directa</strong> (DM, WhatsApp, showroom), por lo que la plataforma se diseñó para mostrar y generar deseo, no para ejecutar una transacción automática."
+          ]
+        }
+      ],
+      "tech": "Vue.js, Tailwind CSS, Firebase, Vercel.",
+      "duration": "Branding completo y desarrollo de plataforma en 3 semanas.",
+      "results": "Identidad de marca reconocible y plataforma gestionada de forma autónoma por el equipo, sin depender de terceros para actualizar catálogo o contenido."
+    },
+    {
+      "slug": "casa-aurora",
+      "title": "Casa Aurora",
+      "tags": ["E-commerce", "Pagos Online", "Automatización", "Deco de Hogar"],
+      "summary": "Tienda online con checkout integrado y automatización de confirmación de pedidos para una marca de deco de hogar.",
+      "heroDescription": "Transformamos una operación de ventas por <strong>Instagram DM</strong> en una <strong>tienda online</strong> con catálogo, checkout y pago integrado, más un flujo automático que <strong>confirma pedidos</strong> y avisa cuando el stock está bajo.",
+      "images": {
+        "card": "",
+        "hero": "",
+        "screenshots": ["", "", ""]
+      },
+      "sections": [
+        {
+          "number": "01",
+          "title": "Ventas Manuales por WhatsApp",
+          "imagePosition": "right",
+          "image": "",
+          "paragraphs": [
+            "Cada venta se cerraba a mano: mandar fotos, confirmar stock, pasar alias y esperar el comprobante. El proceso dependía por completo de que alguien estuviera <strong>disponible para responder</strong>.",
+            "Fuera del horario de atención, de noche o los fines de semana, los pedidos simplemente se perdían."
+          ]
+        },
+        {
+          "number": "02",
+          "title": "Tienda Online con Checkout Integrado",
+          "imagePosition": "left",
+          "image": "",
+          "paragraphs": [
+            "Se armó una tienda con <strong>catálogo de productos</strong> y checkout con pago online integrado, para que la venta pueda cerrarse sin intervención manual en ningún paso.",
+            "El panel de productos quedó simple, para que el equipo pueda dar de alta o modificar productos sin depender de un desarrollador."
+          ]
+        },
+        {
+          "number": "03",
+          "title": "Automatización de Pedidos y Stock",
+          "imagePosition": "right",
+          "image": "",
+          "paragraphs": [
+            "Se implementó un flujo que <strong>confirma automáticamente</strong> cada pedido apenas se concreta la compra, sin que nadie tenga que intervenir.",
+            "El mismo sistema <strong>avisa cuando el stock está bajo</strong>, para que la reposición se anticipe en lugar de descubrirse cuando el producto ya se agotó."
+          ]
+        }
+      ],
+      "tech": "Astro, Tailwind CSS, Mercado Pago, n8n.",
+      "duration": "Desarrollo e implementación en 5 semanas.",
+      "results": "Ventas y cobros disponibles las 24 horas, sin depender de la atención manual por chat."
+    },
+    {
+      "slug": "rutaflex",
+      "title": "RutaFlex",
+      "tags": ["App a Medida", "Logística", "Geolocalización", "Gestión de Rutas"],
+      "summary": "Aplicación móvil para coordinar repartos y confirmar entregas en tiempo real para una pyme de logística.",
+      "heroDescription": "Construimos una <strong>app web mobile-first</strong> para que RutaFlex asigne pedidos por zona y cada repartidor pueda <strong>marcar el estado de entrega</strong> desde el celular, con foto de respaldo, reemplazando la coordinación manual por grupo de WhatsApp.",
+      "images": {
+        "card": "",
+        "hero": "",
+        "screenshots": ["", "", ""]
+      },
+      "sections": [
+        {
+          "number": "01",
+          "title": "Coordinación Manual por WhatsApp",
+          "imagePosition": "right",
+          "image": "",
+          "paragraphs": [
+            "El dueño armaba las rutas a mano cada mañana en una planilla, y los repartidores solo podían avisar el estado de una entrega por chat.",
+            "Eso generaba discusiones frecuentes de <strong>entregado versus no recibido</strong>, sin ninguna forma de verificar qué había pasado realmente."
+          ]
+        },
+        {
+          "number": "02",
+          "title": "App de Asignación de Rutas",
+          "imagePosition": "left",
+          "image": "",
+          "paragraphs": [
+            "Se construyó una <strong>app web</strong> donde el dueño carga los pedidos del día y estos se asignan automáticamente por zona, integrada con mapas para optimizar el recorrido.",
+            "El armado de rutas, antes manual, pasó a resolverse con la información ya cargada en el sistema."
+          ]
+        },
+        {
+          "number": "03",
+          "title": "Confirmación de Entregas con Respaldo",
+          "imagePosition": "right",
+          "image": "",
+          "paragraphs": [
+            "Cada repartidor marca el estado de la entrega desde el celular, con <strong>foto de respaldo</strong> como evidencia del momento de la entrega.",
+            "Esto eliminó las discusiones sobre entregas no confirmadas, porque cada estado queda documentado en el sistema."
+          ]
+        }
+      ],
+      "tech": "React, Firebase, Google Maps API.",
+      "duration": "Desarrollo del MVP en 8 semanas.",
+      "results": "Eliminación de discusiones por entregas no confirmadas y reducción del tiempo de armado de rutas."
+    },
+    {
+      "slug": "metalurgica-bianchi",
+      "title": "Metalúrgica Bianchi",
+      "tags": ["Automatización", "Control de Stock", "Industria", "n8n"],
+      "summary": "Automatización del control de stock y generación de pedidos a proveedores para un taller metalúrgico.",
+      "heroDescription": "Automatizamos el <strong>control de stock</strong> de insumos críticos: cuando un material baja del mínimo, el sistema genera automáticamente un <strong>borrador de pedido</strong> al proveedor correspondiente y avisa por WhatsApp a quien compra.",
+      "images": {
+        "card": "",
+        "hero": "",
+        "screenshots": ["", "", ""]
+      },
+      "sections": [
+        {
+          "number": "01",
+          "title": "Quiebres de Stock en Producción",
+          "imagePosition": "right",
+          "image": "",
+          "paragraphs": [
+            "El taller gestionaba pedidos a proveedores por teléfono y planilla, sin ninguna alerta de stock mínimo.",
+            "Eso provocaba que se quedaran <strong>sin insumos críticos</strong> en plena producción, porque nadie revisaba el stock hasta que faltaba."
+          ]
+        },
+        {
+          "number": "02",
+          "title": "Automatización de Alertas de Stock",
+          "imagePosition": "left",
+          "image": "",
+          "paragraphs": [
+            "Se centralizó el stock en una base con umbrales mínimos por insumo, y se automatizó la <strong>revisión permanente</strong> de esos niveles.",
+            "La revisión manual de stock, que antes dependía de que alguien se acordara, dejó de ser necesaria."
+          ]
+        },
+        {
+          "number": "03",
+          "title": "Generación Automática de Pedidos",
+          "imagePosition": "right",
+          "image": "",
+          "paragraphs": [
+            "Cuando un insumo baja del mínimo, el sistema genera automáticamente un <strong>borrador de pedido</strong> al proveedor correspondiente.",
+            "Quien compra recibe el aviso directo por WhatsApp, con el pedido ya armado y listo para confirmar."
+          ]
+        }
+      ],
+      "tech": "n8n, Google Sheets, API de WhatsApp Business.",
+      "duration": "Implementación en 3 semanas.",
+      "results": "Eliminación de paradas de producción por falta de insumos y fin de la revisión manual de stock."
+    },
+    {
+      "slug": "estudio-contable-ferreyra",
+      "title": "Estudio Contable Ferreyra",
+      "tags": ["CRM", "Automatización", "Recordatorios", "Servicios Profesionales"],
+      "summary": "Sistema de gestión de clientes con recordatorios automáticos de vencimientos para un estudio contable.",
+      "heroDescription": "Reemplazamos una planilla compartida por un <strong>CRM liviano</strong> con ficha por cliente y estado de cada trámite, con <strong>recordatorios automáticos</strong> de vencimientos tanto para el equipo interno como para el cliente final.",
+      "images": {
+        "card": "",
+        "hero": "",
+        "screenshots": ["", "", ""]
+      },
+      "sections": [
+        {
+          "number": "01",
+          "title": "Vencimientos Perdidos en Planillas",
+          "imagePosition": "right",
+          "image": "",
+          "paragraphs": [
+            "Con cerca de 80 clientes activos, el estudio gestionaba vencimientos de AFIP en una planilla compartida sin ningún tipo de alerta.",
+            "Eso hacía que se pasaran <strong>vencimientos de clientes chicos</strong>, porque la única forma de no olvidarse era que alguien se acordara solo."
+          ]
+        },
+        {
+          "number": "02",
+          "title": "CRM con Ficha por Cliente",
+          "imagePosition": "left",
+          "image": "",
+          "paragraphs": [
+            "Se armó un <strong>CRM liviano</strong> con ficha individual por cliente y estado de cada trámite, reemplazando la planilla única compartida.",
+            "El equipo interno pasó a tener visibilidad clara de qué trámite está en qué etapa, sin depender de preguntar."
+          ]
+        },
+        {
+          "number": "03",
+          "title": "Recordatorios Automáticos",
+          "imagePosition": "right",
+          "image": "",
+          "paragraphs": [
+            "Se configuraron <strong>recordatorios automáticos</strong> antes de cada vencimiento, tanto internos para el equipo como por WhatsApp para el cliente final.",
+            "Esto bajó notablemente la cantidad de llamados de clientes preguntando por el estado de su trámite."
+          ]
+        }
+      ],
+      "tech": "Airtable, n8n, API de WhatsApp Business.",
+      "duration": "Implementación en 6 semanas.",
+      "results": "Cero vencimientos pasados por alto y menor cantidad de consultas de clientes sobre el estado de sus trámites."
+    },
+    {
+      "slug": "peluqueria-lunas",
+      "title": "Peluquería Lunas",
+      "tags": ["Turnos", "Automatización", "WhatsApp", "Minipyme"],
+      "summary": "Agente de WhatsApp para gestión automática de turnos y recordatorios en una peluquería de barrio.",
+      "heroDescription": "Implementamos un <strong>agente de WhatsApp</strong> que toma el turno, lo carga en un calendario compartido y envía un <strong>recordatorio automático</strong> 24 horas antes, reemplazando la coordinación manual por chat.",
+      "images": {
+        "card": "",
+        "hero": "",
+        "screenshots": ["", "", ""]
+      },
+      "sections": [
+        {
+          "number": "01",
+          "title": "Turnos Coordinados a Mano",
+          "imagePosition": "right",
+          "image": "",
+          "paragraphs": [
+            "La dueña coordinaba turnos por WhatsApp a mano, lo que le tomaba entre 15 y 20 minutos por día.",
+            "Además, sufría <strong>turnos vacíos</strong> porque la clienta se olvidaba y no avisaba con anticipación."
+          ]
+        },
+        {
+          "number": "02",
+          "title": "Agente de Turnos por WhatsApp",
+          "imagePosition": "left",
+          "image": "",
+          "paragraphs": [
+            "Se implementó un <strong>agente automático</strong> que responde por WhatsApp, toma el turno solicitado y lo carga directamente en un calendario compartido.",
+            "La dueña dejó de tener que coordinar cada turno manualmente, liberando ese tiempo diario."
+          ]
+        },
+        {
+          "number": "03",
+          "title": "Recordatorios Automáticos",
+          "imagePosition": "right",
+          "image": "",
+          "paragraphs": [
+            "El sistema envía un <strong>recordatorio automático</strong> 24 horas antes de cada turno, sin intervención humana.",
+            "Esto redujo las faltas sin aviso a menos de la mitad respecto a la coordinación manual previa."
+          ]
+        }
+      ],
+      "tech": "n8n, API de WhatsApp Business, Google Calendar.",
+      "duration": "Implementación en 2 semanas.",
+      "results": "Reducción de faltas sin aviso y recuperación del tiempo diario de gestión de agenda."
+    },
+    {
+      "slug": "distribuidora-norte",
+      "title": "Distribuidora Norte",
+      "tags": ["Analítica", "Dashboard", "Automatización", "Distribución"],
+      "summary": "Dashboard automático de ventas por zona y vendedor para una distribuidora mayorista.",
+      "heroDescription": "Centralizamos las fuentes de datos de venta de la distribuidora y armamos un <strong>dashboard automático</strong> que se actualiza solo, con ventas por zona, por vendedor y por producto.",
+      "images": {
+        "card": "",
+        "hero": "",
+        "screenshots": ["", "", ""]
+      },
+      "sections": [
+        {
+          "number": "01",
+          "title": "Datos Dispersos en Planillas",
+          "imagePosition": "right",
+          "image": "",
+          "paragraphs": [
+            "Las ventas por zona y por vendedor se cargaban en <strong>múltiples planillas sueltas</strong>, sin ningún punto único de consolidación.",
+            "El dueño recién se enteraba de cómo venía el mes al cierre, armando un Excel a mano con datos de cada vendedor."
+          ]
+        },
+        {
+          "number": "02",
+          "title": "Consolidación Automática de Datos",
+          "imagePosition": "left",
+          "image": "",
+          "paragraphs": [
+            "Se centralizaron las fuentes de datos en una base intermedia, automatizando la <strong>ingesta y consolidación</strong> de la información de ventas.",
+            "El armado manual del reporte mensual, que antes tomaba días, dejó de ser necesario."
+          ]
+        },
+        {
+          "number": "03",
+          "title": "Dashboard de Ventas en Tiempo Real",
+          "imagePosition": "right",
+          "image": "",
+          "paragraphs": [
+            "Se construyó un <strong>dashboard</strong> que se actualiza automáticamente, con ventas por zona, por vendedor y por producto.",
+            "El dueño pasó de conocer los números del mes días después del cierre a verlos <strong>actualizados todos los días</strong>."
+          ]
+        }
+      ],
+      "tech": "n8n, Google Sheets, Looker Studio.",
+      "duration": "Implementación en 4 semanas.",
+      "results": "Visibilidad diaria de ventas por zona y vendedor, eliminando el armado manual del reporte mensual."
+    },
+    {
+      "slug": "gimnasio-powerfit",
+      "title": "Gimnasio PowerFit",
+      "tags": ["Presencia Digital", "Captación de Leads", "Ads", "Automatización"],
+      "summary": "Landing page y campaña de captación de leads para un gimnasio de barrio sin presencia online.",
+      "heroDescription": "Armamos una <strong>landing con planes y horarios</strong>, una campaña inicial de Meta Ads acotada a la zona, y una automatización que carga cada <strong>lead directo a una planilla</strong> con seguimiento y aviso al encargado.",
+      "images": {
+        "card": "",
+        "hero": "",
+        "screenshots": ["", "", ""]
+      },
+      "sections": [
+        {
+          "number": "01",
+          "title": "Consultas Perdidas por Falta de Presencia Online",
+          "imagePosition": "right",
+          "image": "",
+          "paragraphs": [
+            "El gimnasio dependía por completo del <strong>boca en boca</strong>, sin ningún sitio propio ni forma de aparecer en búsquedas de Google.",
+            "Perdían consultas de gente que buscaba el gimnasio y encontraba, como mucho, un perfil de Instagram desactualizado."
+          ]
+        },
+        {
+          "number": "02",
+          "title": "Landing con Planes y Formulario de Consulta",
+          "imagePosition": "left",
+          "image": "",
+          "paragraphs": [
+            "Se construyó una <strong>landing page</strong> con planes, horarios y formulario de consulta, pensada para convertir a quien llega buscando información concreta.",
+            "Se sumó una campaña inicial de <strong>Meta Ads</strong> acotada a la zona de influencia del gimnasio."
+          ]
+        },
+        {
+          "number": "03",
+          "title": "Automatización de Leads",
+          "imagePosition": "right",
+          "image": "",
+          "paragraphs": [
+            "Cada lead que completa el formulario se carga automáticamente en una <strong>planilla con seguimiento</strong>, sin intervención manual.",
+            "El encargado recibe un <strong>aviso inmediato por WhatsApp</strong> apenas entra una consulta nueva."
+          ]
+        }
+      ],
+      "tech": "Astro, Tailwind CSS, Meta Ads, n8n.",
+      "duration": "Implementación en 4 semanas.",
+      "results": "Primer flujo constante y medible de consultas nuevas por semana, con seguimiento centralizado."
+    },
+    {
+      "slug": "veterinaria-san-roque",
+      "title": "Veterinaria San Roque",
+      "tags": ["Automatización", "Atención al Cliente", "WhatsApp", "IA"],
+      "summary": "Agente de WhatsApp que responde consultas frecuentes y libera tiempo de atención presencial en una veterinaria.",
+      "heroDescription": "Implementamos un <strong>agente de WhatsApp</strong> que responde consultas frecuentes de forma automática y deriva a una persona solo cuando el caso lo requiere, liberando tiempo de atención en el mostrador.",
+      "images": {
+        "card": "",
+        "hero": "",
+        "screenshots": ["", "", ""]
+      },
+      "sections": [
+        {
+          "number": "01",
+          "title": "Atención Interrumpida por Consultas de Rutina",
+          "imagePosition": "right",
+          "image": "",
+          "paragraphs": [
+            "Una sola persona atendía el mostrador y el WhatsApp al mismo tiempo, en una veterinaria con alto volumen de consultas diarias.",
+            "Preguntas simples como disponibilidad de vacunas u horarios de atención <strong>interrumpían constantemente</strong> la atención presencial."
+          ]
+        },
+        {
+          "number": "02",
+          "title": "Agente de WhatsApp con Respuestas Automáticas",
+          "imagePosition": "left",
+          "image": "",
+          "paragraphs": [
+            "Se armó un <strong>agente de WhatsApp</strong> que responde automáticamente las consultas frecuentes, a partir de una base de preguntas y respuestas de la veterinaria.",
+            "La mayoría de las consultas de rutina dejaron de requerir intervención humana."
+          ]
+        },
+        {
+          "number": "03",
+          "title": "Derivación a Atención Humana",
+          "imagePosition": "right",
+          "image": "",
+          "paragraphs": [
+            "El agente identifica cuándo un caso <strong>requiere atención humana</strong> — urgencias, presupuestos puntuales — y deriva la conversación a una persona.",
+            "Esto liberó tiempo de mostrador justo en las horas pico de atención."
+          ]
+        }
+      ],
+      "tech": "n8n, API de WhatsApp Business, integración con Claude.",
+      "duration": "Implementación en 3 semanas.",
+      "results": "Reducción de consultas de rutina que requieren intervención humana en las horas pico de atención."
+    },
+    {
+      "slug": "turnoya",
+      "title": "TurnoYa",
+      "tags": ["SaaS", "Producto Propio", "Turnos", "Suscripción"],
+      "summary": "Producto propio de reservas y gestión de turnos por suscripción, pensado para barberías y peluquerías.",
+      "heroDescription": "A partir de resolver el problema de turnos para un cliente puntual, empaquetamos la solución como <strong>producto propio</strong>: calendario público de reserva, recordatorios automáticos y panel de estadísticas, vendido por <strong>suscripción mensual</strong>.",
+      "images": {
+        "card": "",
+        "hero": "",
+        "screenshots": ["", "", ""]
+      },
+      "sections": [
+        {
+          "number": "01",
+          "title": "Un Problema que se Repetía en Varios Negocios",
+          "imagePosition": "right",
+          "image": "",
+          "paragraphs": [
+            "El problema de coordinar turnos manualmente no era exclusivo de un negocio: se repetía en <strong>decenas de barberías y peluquerías</strong> con la misma lógica.",
+            "Rehacer un desarrollo a medida cada vez no era sostenible como modelo de negocio para el estudio."
+          ]
+        },
+        {
+          "number": "02",
+          "title": "Sistema de Reservas Multi-Tenant",
+          "imagePosition": "left",
+          "image": "",
+          "paragraphs": [
+            "Se construyó un sistema <strong>multi-tenant</strong>: cada negocio se da de alta con su propio calendario público de reserva, sin necesidad de un desarrollo individual.",
+            "El panel incluye recordatorios automáticos y estadísticas básicas de uso para cada negocio."
+          ]
+        },
+        {
+          "number": "03",
+          "title": "Modelo de Suscripción",
+          "imagePosition": "right",
+          "image": "",
+          "paragraphs": [
+            "TurnoYa se vende por <strong>suscripción mensual</strong>, con pasarela de pago integrada para el cobro recurrente.",
+            "El modelo permite generar <strong>ingreso recurrente</strong> de ticket bajo, sin depender de vender un proyecto nuevo por cada negocio."
+          ]
+        }
+      ],
+      "tech": "React, Node.js, base de datos multi-tenant, n8n, pasarela de pagos.",
+      "duration": "Desarrollo de la versión 1.0 en 10 semanas.",
+      "results": "Modelo de ingreso recurrente validado, sin depender de vender un proyecto nuevo por cada negocio."
     }
   ]
 }
