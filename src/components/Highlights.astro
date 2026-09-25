@@ -10,8 +10,8 @@ const audiences = [
 const differentiators = [
   {
     icon: "👥",
-    title: "Un solo equipo para las 4 patas",
-    copy: "Todo integrado, todo alineado a tu negocio.",
+    title: "Un solo equipo, cuatro especialidades.",
+    copy: "Marketing, web, automatización y software con el mismo criterio.",
   },
   {
     icon: "🎯",
@@ -20,8 +20,8 @@ const differentiators = [
   },
   {
     icon: "🔀",
-    title: "Nos adaptamos a vos, no al revés.",
-    copy: "No usamos plantillas genéricas.",
+    title: "Nos adaptamos a tu forma de trabajar, no al revés.",
+    copy: "Cada entrega está pensada para tu negocio, sin plantillas genéricas. ",
   },
 ];
 ---
@@ -29,13 +29,14 @@ const differentiators = [
 <section class="grid grid-cols-2 gap-5 pt-17.5 px-12 max-[900px]:grid-cols-1 max-[900px]:px-6" data-reveal>
   <div class="rounded-[22px] bg-white p-7.5">
     <p class="mb-3.5 flex items-center gap-2 text-[11px] font-bold tracking-[1px] text-accent">
-      <span
-        class="flex h-4.5 w-4.5 items-center justify-center rounded-full bg-ink text-[9px] text-white"
-        >08</span
-      >
       PARA QUIÉN
     </p>
-    <p class="mb-4.5 text-[19px] font-extrabold">Con qué rubros trabajamos.</p>
+    <p class="text-[19px] font-extrabold">Con qué rubros trabajamos.</p>
+    <p class="text-[13.5px] text-muted-2">
+      PyMEs con un problema concreto: pierden consultas, cargan datos a mano, no tienen presencia o no logran traer clientes.
+    <br />
+      Si vendés algo, podemos ayudarte a vender más.
+    </p>
     <ul class="text-[13.5px] leading-[2.4] text-[#3d3750]">
       {
         audiences.map((item) => (
@@ -49,10 +50,6 @@ const differentiators = [
 
   <div class="rounded-[22px] bg-white p-7.5">
     <p class="mb-3.5 flex items-center gap-2 text-[11px] font-bold tracking-[1px] text-accent">
-      <span
-        class="flex h-4.5 w-4.5 items-center justify-center rounded-full bg-ink text-[9px] text-white"
-        >09</span
-      >
       POR QUÉ NOSOTROS
     </p>
     <p class="mb-4.5 text-[19px] font-extrabold">Qué nos hace distintos.</p>

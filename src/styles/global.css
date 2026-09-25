@@ -4,7 +4,7 @@
 @theme {
   --font-sans: "Satoshi", "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
 
-  --color-cream: #fbf2e8;
+  --color-pearl: #FFF7E6;
   --color-ink: #171225;
   --color-panel: #15121f;
   --color-accent: #6c3ce0;
@@ -19,7 +19,7 @@
 
 @layer base {
   body {
-    @apply bg-cream text-ink font-sans antialiased;
+    @apply bg-pearl text-ink font-sans antialiased;
   }
 
   a {

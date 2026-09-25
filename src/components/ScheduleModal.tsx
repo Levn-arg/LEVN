@@ -168,11 +168,11 @@ export default function ScheduleModal() {
         onClick={() => setOpen(true)}
         className="block w-full cursor-pointer rounded-[20px] bg-white px-5.5 py-6.5 text-left text-ink hover:text-ink"
       >
-        <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-[12px] bg-accent-soft text-lg text-accent">
+        <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-accent-soft text-lg text-accent">
           📅
         </div>
-        <p className="mb-2 text-[15px] font-bold">Agenda una reunión</p>
-        <p className="mb-4 text-[12.5px] text-muted-2">Si preferís, coordinamos una llamada.</p>
+        <p className="mb-2 text-[15px] font-bold">Agendá una llamada</p>
+        <p className="mb-4 text-[12.5px] text-muted-2">Si preferís hablar, coordinamos un horario</p>
         <span className="text-[13px] font-bold text-accent">Agendar llamada →</span>
       </button>
 

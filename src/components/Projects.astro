@@ -4,10 +4,6 @@ import { projects } from "../data/projects.json";
 
 <section class="pt-17.5 px-12 max-[900px]:px-6" id="proyectos" data-reveal>
   <p class="mb-3.5 flex items-center gap-2 text-[12px] font-bold tracking-[1px] text-accent">
-    <span
-      class="flex h-5 w-5 items-center justify-center rounded-full bg-ink text-[10px] text-white"
-      >07</span
-    >
     PROYECTOS
   </p>
 
@@ -33,7 +29,7 @@ import { projects } from "../data/projects.json";
 
   <div
     data-projects-track
-    class="flex snap-x snap-mandatory gap-5 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+    class="flex snap-x snap-mandatory gap-5 overflow-x-auto pb-1 scrollbar-none [&::-webkit-scrollbar]:hidden"
   >
     {
       projects.map((project) => (

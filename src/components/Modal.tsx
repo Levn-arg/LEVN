@@ -53,7 +53,7 @@ export default function Modal({ open, onClose, title, children, size = "md", ton
           className={`absolute right-5 top-5 z-10 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full ${
             tone === "dark"
               ? "text-white/60 hover:bg-white/10 hover:text-white"
-              : "text-muted-2 hover:bg-cream hover:text-ink"
+              : "text-muted-2 hover:bg-pearl hover:text-ink"
           }`}
         >
           ✕
