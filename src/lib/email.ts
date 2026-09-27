@@ -153,10 +153,10 @@ export async function sendBrandedEmail(opts: {
   replyTo?: string;
 }): Promise<SendResult> {
   const apiKey = import.meta.env.RESEND_API_KEY;
-  const toEmail = import.meta.env.RESEND_TO_EMAIL || "lucasn.panadero@gmail.com";
-  // onboarding@resend.dev funciona sin verificar dominio propio — apenas se
-  // verifique levn.com.ar en Resend, cambiar a algo tipo "LEVN <no-reply@levn.com.ar>".
-  const fromEmail = import.meta.env.RESEND_FROM_EMAIL || "LEVN <onboarding@resend.dev>";
+  const toEmail = import.meta.env.RESEND_TO_EMAIL || "hola@levn.com.ar";
+  // Requiere el dominio levn.com.ar verificado en Resend. Con el sandbox
+  // (onboarding@resend.dev) Resend sólo deja enviar al mail dueño de la cuenta.
+  const fromEmail = import.meta.env.RESEND_FROM_EMAIL || "LEVN <no-reply@levn.com.ar>";
 
   if (!apiKey) {
     return {
