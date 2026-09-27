@@ -1,56 +1,39 @@
 ---
+import ArrowIcon from "./ArrowIcon.astro";
 import ContactFormModal from "./ContactFormModal";
 import ScheduleModal from "./ScheduleModal";
-
-const whatsapp = {
-  icon: "📱",
-  iconBg: "bg-[#e7f8ee]",
-  iconColor: "text-whatsapp",
-  title: "WhatsApp directo",
-  copy: "Escribinos y te respondemos al instante.",
-  cta: "Escribir ahora →",
-  ctaColor: "text-[#1fae5f]",
-  href: "https://wa.me/5491166316111",
-};
+import { WHATSAPP_URL } from "../data/site";
 ---
 
-<section class="pt-17.5 px-12 max-[900px]:px-6" id="contacto" data-reveal>
-  <p class="mb-3.5 flex items-center gap-2 text-[12px] font-bold tracking-[1px] text-accent">
-    CONTACTO
-  </p>
-  <h2 class="mb-2.5 text-[28px] font-extrabold">Empecemos con<br />un diagnóstico.</h2>
-  <p class="mb-6.5 max-w-85 text-[14px] text-muted-2">
-    Contanos de tu negocio y te respondemos en menos de 24h hábiles.
-  </p>
-
-  <div class="grid grid-cols-4 gap-4.5 max-[900px]:grid-cols-2 max-[560px]:grid-cols-1">
-    <a
-      href={whatsapp.href}
-      target="_blank"
-      rel="noopener noreferrer"
-      class="block rounded-[20px] bg-white px-5.5 py-6.5 text-ink hover:text-ink"
-    >
-      <div
-        class={`mb-4 flex h-10 w-10 items-center justify-center rounded-xl text-lg ${whatsapp.iconBg} ${whatsapp.iconColor}`}
+<section id="contacto" class="mx-auto max-w-360 px-21 pb-20 max-[1100px]:px-10 max-[900px]:px-4 max-[900px]:pb-12">
+  <div class="trama flex flex-col gap-5 rounded-[32px] bg-panel p-20 text-pearl max-[1100px]:p-12 max-[900px]:gap-4 max-[900px]:rounded-[26px] max-[900px]:px-5 max-[900px]:py-10">
+    <h2 class="m-0 text-[56px] leading-[1.05] font-extrabold tracking-[-0.03em] text-pearl max-[900px]:text-[34px] max-[900px]:leading-[1.06]">
+      Contanos qué te está frenando.
+    </h2>
+    <p class="m-0 text-xl leading-[1.45] text-ondark max-[900px]:text-[17px]">El diagnóstico es gratis. Te respondemos en menos de 24 h hábiles.</p>
+    <div class="mt-7 grid grid-cols-[1.4fr_1fr_1fr] gap-5 max-[1100px]:grid-cols-1 max-[900px]:mt-3 max-[900px]:gap-2.5">
+      <a
+        href={WHATSAPP_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="flex min-h-47.5 flex-col gap-2.5 rounded-[26px] bg-whatsapp p-7 text-ink no-underline shadow-[0_24px_50px_-24px_rgba(37,211,102,0.55)] transition-colors duration-200 hover:bg-[#1FBF5B] hover:text-ink max-[1100px]:min-h-19 max-[1100px]:flex-row max-[1100px]:items-center max-[1100px]:gap-3.5 max-[1100px]:rounded-[20px] max-[1100px]:px-4.5 max-[1100px]:py-0 max-[1100px]:shadow-none"
       >
-        {whatsapp.icon}
-      </div>
-      <p class="mb-2 text-[15px] font-bold">{whatsapp.title}</p>
-      <p class="mb-4 text-[12.5px] text-muted-2">{whatsapp.copy}</p>
-      <span class={`text-[13px] font-bold ${whatsapp.ctaColor}`}>
-        {whatsapp.cta}
-      </span>
-    </a>
-
-    <ContactFormModal client:load />
-    <ScheduleModal client:load />
-
-    <div class="rounded-[20px] bg-accent px-5.5 py-6.5 text-white">
-      <p class="mb-3 text-[15px] font-extrabold">¿Qué pasa después? ✦</p>
-      <p class="text-[12.5px] leading-[1.6] text-[#e6ddfb]">
-        Te contactamos, hacemos el diagnóstico y te enviamos un plan claro y
-        sin compromiso.
-      </p>
+        <div class="flex h-13 w-13 flex-none items-center justify-center rounded-2xl bg-ink text-whatsapp max-[1100px]:h-11 max-[1100px]:w-11 max-[1100px]:rounded-[14px]">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="max-[1100px]:h-5.5 max-[1100px]:w-5.5">
+            <path d="M4 5h16v11H9l-5 4z" />
+          </svg>
+        </div>
+        <div class="flex flex-col gap-2.5 max-[1100px]:flex-1 max-[1100px]:gap-0">
+          <div class="mt-2.5 text-[26px] font-extrabold max-[1100px]:mt-0 max-[1100px]:text-[19px]">WhatsApp</div>
+          <div class="flex items-center gap-2 text-[17px] font-semibold max-[1100px]:text-sm">
+            Escribí ahora, sin formularios
+            <ArrowIcon size={18} class="max-[1100px]:hidden" />
+          </div>
+        </div>
+        <ArrowIcon class="hidden max-[1100px]:block" />
+      </a>
+      <ContactFormModal client:load />
+      <ScheduleModal client:load />
     </div>
   </div>
 </section>

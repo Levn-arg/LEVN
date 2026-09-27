@@ -17,6 +17,10 @@
   --color-whatsapp: #25d366;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 @layer base {
   body {
     @apply bg-pearl text-ink font-sans antialiased;
@@ -62,6 +66,103 @@
       opacity: 1;
       transform: none;
       transition: none;
+    }
+  }
+}
+
+@layer components {
+  /* Textura de marca para los paneles oscuros. */
+  .trama {
+    background-image: radial-gradient(rgba(179, 173, 196, 0.16) 1px, transparent 1.6px);
+    background-size: 22px 22px;
+  }
+
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Pantallas: un contenedor [data-fit] escala su hijo de tamaño fijo al
+     ancho disponible (ver Layout.astro). */
+  [data-fit] {
+    position: relative;
+    width: 100%;
+  }
+
+  [data-fit] > * {
+    transform-origin: 0 0;
+  }
+
+  /* Estados antes → después. Cada capa [data-show="0 2"] se ve sólo en esos
+     estados; la pantalla .scr lleva el estado actual en data-estado. */
+  .scr {
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .scr [data-show] {
+    opacity: 0;
+    transform: var(--from, translateY(12px));
+    pointer-events: none;
+    transition:
+      opacity var(--dur, 700ms) var(--ease),
+      transform var(--dur, 700ms) var(--ease);
+    transition-delay: 0ms;
+  }
+
+  .scr[data-estado="0"] [data-show~="0"],
+  .scr[data-estado="1"] [data-show~="1"],
+  .scr[data-estado="2"] [data-show~="2"] {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+    transition-delay: var(--delay, 0ms);
+  }
+
+  .scr [data-step] {
+    min-height: 44px;
+    padding: 0 16px;
+    border: 0;
+    border-radius: 999px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    background: transparent;
+    color: #6a6478;
+    transition:
+      background-color 300ms ease-out,
+      color 300ms ease-out;
+  }
+
+  .scr[data-estado="0"] [data-step="0"],
+  .scr[data-estado="1"] [data-step="1"],
+  .scr[data-estado="2"] [data-step="2"] {
+    background: #efe6fc;
+    color: #4e28b8;
+  }
+
+  /* Botón primario: violeta con sombra, hover más oscuro. */
+  .btn {
+    transition:
+      background-color 200ms ease-out,
+      transform 200ms ease-out;
+  }
+
+  .btn:hover {
+    background-color: #4e28b8 !important;
+    color: #ffffff !important;
+    transform: translateY(-1px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .scr *,
+    .scr *::before,
+    .scr *::after,
+    .btn {
+      transition: none !important;
     }
   }
 }

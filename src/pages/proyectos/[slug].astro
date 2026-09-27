@@ -2,7 +2,9 @@
 import Layout from "../../layouts/Layout.astro";
 import Header from "../../components/Header.astro";
 import Footer from "../../components/Footer.astro";
+import ArrowIcon from "../../components/ArrowIcon.astro";
 import { projects } from "../../data/projects.json";
+import { publicImage } from "../../lib/images";
 
 export function getStaticPaths() {
   return projects.map((project) => ({
@@ -12,125 +14,118 @@ export function getStaticPaths() {
 }
 
 const { project } = Astro.props;
+
+const heroImage = publicImage(project.images.hero) ?? publicImage(project.images.card);
+const sections = project.sections.map((section) => ({ ...section, image: publicImage(section.image) }));
+const screenshots = project.images.screenshots.map((src) => publicImage(src)).filter(Boolean) as string[];
+const facts = [
+  { title: "Tecnologías", copy: project.tech, d: "M8 7l-5 5 5 5M16 7l5 5-5 5" },
+  { title: "Duración", copy: project.duration, d: "M12 7v5l3 2M12 21a9 9 0 100-18 9 9 0 000 18z" },
+  { title: "Resultados", copy: project.results, d: "M4 17l5-5 4 4 7-8M14 8h6v6" },
+];
 ---
 
-<Layout title={`${project.title} — LEVN`} description={project.summary}>
+<Layout title={`${project.title} — Levn`} description={project.summary}>
   <Header />
-
-  <section class="flex flex-wrap gap-6 pt-14 px-12 max-[900px]:px-6 max-[900px]:pt-10">
-    {project.images.hero ? (
-      <img
-        src={project.images.hero}
-        alt={project.title}
-        class="min-h-95 flex-[1_1_480px] min-w-80 rounded-[22px] object-cover"
-      />
-    ) : (
-      <div class="flex min-h-95 flex-[1_1_480px] min-w-80 items-center justify-center rounded-[22px] bg-[#e6e6e6] text-[13px] text-[#999]">
-        imagen del proyecto
+  <main>
+    <section class="mx-auto flex max-w-360 items-center justify-between gap-10 px-21 pt-8 pb-18 max-[1100px]:px-10 max-[900px]:flex-col max-[900px]:items-stretch max-[900px]:gap-7 max-[900px]:px-4 max-[900px]:pt-5 max-[900px]:pb-10">
+      <div class="flex w-140 flex-none flex-col gap-6 max-[1100px]:w-100 max-[900px]:w-full max-[900px]:gap-5">
+        <a href="/#proyectos" class="inline-flex min-h-11 items-center gap-2 self-start text-[15px] font-bold text-accent no-underline hover:text-accent-hover">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"></path></svg>
+          Proyectos
+        </a>
+        <div class="flex flex-wrap gap-2">
+          {project.tags.map((tag) => <span class="rounded-full bg-accent-soft px-3 py-1.5 text-[13px] font-bold text-accent-hover">{tag}</span>)}
+        </div>
+        <h1 class="m-0 text-[66px] leading-[1.02] font-extrabold tracking-[-0.035em] max-[1100px]:text-[54px] max-[900px]:text-[40px] max-[900px]:leading-[1.04]">{project.title}</h1>
+        <p class="m-0 text-xl leading-[1.55] text-muted max-[900px]:text-lg [&_strong]:font-bold [&_strong]:text-ink" set:html={project.heroDescription} />
       </div>
-    )}
-
-    <div class="box-border flex-[1_1_380px] min-w-75 rounded-[22px] bg-panel p-10 text-white">
-      <a href="/#proyectos" class="text-[12px] font-bold tracking-[1px] text-[#a08ce0] hover:text-white"
-        >← PROYECTOS</a
-      >
-      <h1 class="my-4.5 text-[34px] font-extrabold leading-[1.15]">{project.title}</h1>
-      <div class="mb-5.5 flex flex-wrap gap-2">
+      <div class="min-w-0 flex-1">
         {
-          project.tags.map((tag) => (
-            <span class="rounded-full bg-white/10 px-3 py-1.5 text-[11.5px] font-bold">{tag}</span>
-          ))
-        }
-      </div>
-      <p class="text-[14.5px] leading-[1.7] text-[#d6cfe8]" set:html={project.heroDescription} />
-    </div>
-  </section>
-
-  <section class="mt-17.5 rounded-[26px] bg-white px-15 py-17.5 mx-12 max-[900px]:mx-6 max-[900px]:px-6 max-[900px]:py-10" data-reveal>
-    <div class="mb-14 text-center">
-      <p class="mb-3.5 text-[12px] font-bold tracking-[1px] text-accent">● CASO DE ESTUDIO</p>
-      <h2 class="text-[34px] font-extrabold">{project.title}</h2>
-    </div>
-
-    <div class="flex flex-col gap-14">
-      {
-        project.sections.map((section) => (
-          <div class="flex flex-wrap items-center gap-15" data-reveal>
-            <div
-              class={`flex-[1_1_380px] min-w-70 ${section.imagePosition === "left" ? "max-[900px]:order-2 order-2" : "order-1"}`}
-            >
-              <p class="mb-2.5 text-[13px] font-bold text-muted-3">{section.number}</p>
-              <h3 class="mb-4.5 text-[22px] font-extrabold">{section.title}</h3>
-              {
-                section.paragraphs.map((paragraph) => (
-                  <p class="mb-3.5 text-[14.5px] leading-[1.7] text-muted last:mb-0" set:html={paragraph} />
-                ))
-              }
-            </div>
-            <div
-              class={`flex min-h-65 flex-[1_1_380px] min-w-70 items-center justify-center rounded-[20px] bg-[#F5F1FB] p-6 ${section.imagePosition === "left" ? "order-1" : "order-2"}`}
-            >
-              {section.image ? (
-                <img src={section.image} alt={section.title} class="h-55 w-full rounded-[14px] object-cover" />
-              ) : (
-                <div class="flex h-55 w-full items-center justify-center rounded-[14px] bg-[#e6e6e6] text-[13px] text-[#999]">
-                  imagen
-                </div>
-              )}
-            </div>
-          </div>
-        ))
-      }
-    </div>
-  </section>
-
-  <section class="mt-10 grid grid-cols-3 gap-5 px-12 max-[900px]:grid-cols-1 max-[900px]:px-6" data-reveal>
-    <div class="rounded-[20px] bg-ink px-6.5 py-6.5 text-white">
-      <p class="mb-3.5 text-xl">🛠</p>
-      <p class="mb-2 text-[15px] font-bold">Tecnologías Utilizadas</p>
-      <p class="text-[12.5px] leading-[1.6] text-ondark">{project.tech}</p>
-    </div>
-    <div class="rounded-[20px] bg-ink px-6.5 py-6.5 text-white">
-      <p class="mb-3.5 text-xl">⏱</p>
-      <p class="mb-2 text-[15px] font-bold">Duración del Proyecto</p>
-      <p class="text-[12.5px] leading-[1.6] text-ondark">{project.duration}</p>
-    </div>
-    <div class="rounded-[20px] bg-ink px-6.5 py-6.5 text-white">
-      <p class="mb-3.5 text-xl">📈</p>
-      <p class="mb-2 text-[15px] font-bold">Resultados Obtenidos</p>
-      <p class="text-[12.5px] leading-[1.6] text-ondark">{project.results}</p>
-    </div>
-  </section>
-
-  <section class="mt-10 rounded-[26px] bg-white px-15 py-15 mx-12 max-[900px]:mx-6 max-[900px]:px-6" data-reveal>
-    <p class="mb-8 text-center text-2xl font-extrabold">Capturas del proyecto</p>
-    <div class="grid grid-cols-3 gap-5 max-[700px]:grid-cols-1">
-      {
-        project.images.screenshots.map((src) =>
-          src ? (
-            <img src={src} alt={`Captura de ${project.title}`} class="h-55 rounded-2xl object-cover" />
+          heroImage ? (
+            <img src={heroImage} alt={project.title} class="aspect-4/3 w-full rounded-[26px] object-cover shadow-[0_50px_90px_-50px_rgba(108,60,224,0.6)]" />
           ) : (
-            <div class="flex h-55 items-center justify-center rounded-2xl bg-[#e6e6e6] text-[13px] text-[#999]">
-              imagen
+            <div class="trama flex aspect-4/3 w-full items-end overflow-hidden rounded-[26px] bg-accent-soft p-8" aria-hidden="true">
+              <span class="text-[96px] leading-none font-extrabold tracking-[-0.04em] text-accent/25 max-[900px]:text-6xl">{project.title}</span>
             </div>
           )
-        )
-      }
-    </div>
-  </section>
+        }
+      </div>
+    </section>
 
-  <section class="mt-10 mb-17.5 rounded-[26px] bg-ink px-15 py-15 mx-12 text-center text-white max-[900px]:mx-6 max-[900px]:px-6" data-reveal>
-    <h2 class="mb-2.5 text-[28px] font-extrabold">¿Querés algo así?</h2>
-    <p class="mb-7 text-[14.5px] text-ondark">Contanos tu proyecto y lo construimos juntos.</p>
-    <div class="flex flex-wrap items-center justify-center gap-6">
-      <a
-        href="/#contacto"
-        class="rounded-full bg-accent px-6.5 py-3.5 text-sm font-bold text-white hover:bg-accent-hover hover:text-white"
-        >Hablemos →</a
-      >
-      <a href="/#proyectos" class="text-sm font-semibold text-[#d6cfe8] hover:text-white">← Ver más proyectos</a>
-    </div>
-  </section>
+    {
+      sections.map((section, i) => (
+        <section class="mx-auto flex max-w-360 items-center justify-between gap-16 px-21 py-16 max-[1100px]:gap-10 max-[1100px]:px-10 max-[900px]:flex-col max-[900px]:items-stretch max-[900px]:gap-6 max-[900px]:px-4 max-[900px]:py-10">
+          <div class:list={["flex max-w-140 flex-1 flex-col gap-5 max-[900px]:max-w-none", i % 2 === 1 && "order-last max-[900px]:order-none"]}>
+            <div class="text-[13px] font-extrabold tracking-widest text-accent uppercase">{section.number}</div>
+            <h2 class="m-0 text-[46px] leading-[1.05] font-extrabold tracking-[-0.03em] max-[900px]:text-4xl max-[900px]:leading-[1.06]">{section.title}</h2>
+            {section.paragraphs.map((paragraph) => (
+              <p class="m-0 text-lg leading-[1.6] text-muted [&_strong]:font-bold [&_strong]:text-ink" set:html={paragraph} />
+            ))}
+          </div>
+          <div class="min-w-0 flex-1">
+            {section.image ? (
+              <img src={section.image} alt={section.title} loading="lazy" class="aspect-4/3 w-full rounded-[26px] object-cover" />
+            ) : (
+              <div class="trama flex aspect-4/3 w-full items-end rounded-[26px] bg-panel p-8" aria-hidden="true">
+                <span class="text-[120px] leading-none font-extrabold tracking-[-0.04em] text-pearl/15">{section.number}</span>
+              </div>
+            )}
+          </div>
+        </section>
+      ))
+    }
 
+    <section class="mx-auto max-w-360 px-21 py-10 max-[1100px]:px-10 max-[900px]:px-4">
+      <ul class="m-0 grid list-none grid-cols-3 gap-5 p-0 max-[900px]:grid-cols-1 max-[900px]:gap-3">
+        {
+          facts.map((fact) => (
+            <li class="flex flex-col gap-3 rounded-3xl border border-ink/6 bg-white p-7 max-[900px]:rounded-[20px] max-[900px]:p-5">
+              <div class="flex h-13 w-13 items-center justify-center rounded-2xl bg-accent text-white">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d={fact.d} />
+                </svg>
+              </div>
+              <h3 class="m-0 mt-1.5 text-[22px] font-extrabold">{fact.title}</h3>
+              <p class="m-0 text-[17px] leading-[1.5] text-muted">{fact.copy}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    {
+      screenshots.length > 0 && (
+        <section class="mx-auto max-w-360 px-21 py-10 max-[1100px]:px-10 max-[900px]:px-4">
+          <ul class="m-0 grid list-none grid-cols-3 gap-5 p-0 max-[900px]:grid-cols-1 max-[900px]:gap-3">
+            {screenshots.map((src) => (
+              <li>
+                <img src={src} alt={`Pantalla de ${project.title}`} loading="lazy" class="aspect-4/3 w-full rounded-3xl object-cover" />
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+
+    <section class="mx-auto max-w-360 px-21 pt-10 pb-20 max-[1100px]:px-10 max-[900px]:px-4 max-[900px]:pb-12">
+      <div class="trama flex flex-col gap-5 rounded-[32px] bg-panel p-20 text-pearl max-[1100px]:p-12 max-[900px]:gap-4 max-[900px]:rounded-[26px] max-[900px]:px-5 max-[900px]:py-10">
+        <h2 class="m-0 text-[56px] leading-[1.05] font-extrabold tracking-[-0.03em] text-pearl max-[900px]:text-[34px] max-[900px]:leading-[1.06]">¿Tu negocio necesita algo así?</h2>
+        <p class="m-0 text-xl leading-[1.45] text-ondark max-[900px]:text-[17px]">El diagnóstico es gratis. Te respondemos en menos de 24 h hábiles.</p>
+        <div class="mt-4 flex flex-wrap items-center gap-6 max-[900px]:flex-col max-[900px]:items-stretch max-[900px]:gap-3">
+          <a
+            class="btn inline-flex min-h-14.5 items-center gap-2.5 rounded-2xl bg-accent px-6.5 text-[17px] font-bold text-white no-underline shadow-[0_16px_32px_-14px_rgba(108,60,224,0.75)] max-[900px]:justify-center"
+            href="/#contacto"
+          >
+            Quiero mi diagnóstico gratis
+            <ArrowIcon />
+          </a>
+          <a href="/#proyectos" class="inline-flex min-h-11 items-center gap-2 text-[17px] font-bold text-pearl no-underline hover:text-white max-[900px]:justify-center">
+            Ver más proyectos
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
   <Footer />
 </Layout>

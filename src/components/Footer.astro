@@ -1,59 +1,26 @@
 ---
-const navLinks = ["Servicios", "Cómo trabajamos", "Proyectos", "Contacto"];
-const legalLinks = ["Términos y condiciones", "Política de privacidad"];
-const socials = ["◎", "in", "✕"];
+import { EMAIL, INSTAGRAM_URL, WHATSAPP_URL } from "../data/site";
 ---
 
-<footer class="mt-17.5 border-t border-ink/10 py-11 px-12 max-[900px]:py-9 max-[900px]:px-6" data-reveal>
-  <div class="flex flex-wrap justify-between gap-5 max-[900px]:flex-col">
-    <div class="max-w-55">
-      <a href="/" class="flex items-center text-ink hover:text-ink" aria-label="LEVN — inicio">
-        <img
-          src="/images/logo.svg"
-          alt="Logo de LEVN"
-          width="32"
-          height="32"
-          class="h-8 w-8"
-          />
-          <span class="text-[17px] font-extrabold">LEVN</span>
-        </a>
-        <p class="text-[12.5px] leading-normal text-muted-2">
-        Soluciones digitales a medida para PyMEs.
-      </p>
+<footer class="border-t border-ink/8">
+  <div
+    class="mx-auto flex max-w-360 items-center justify-between px-21 py-9 text-sm text-muted-2 max-[1100px]:px-10 max-[900px]:flex-col max-[900px]:items-start max-[900px]:gap-3.5 max-[900px]:px-4 max-[900px]:pt-7"
+  >
+    <div class="flex items-center gap-5 max-[900px]:flex-col max-[900px]:items-start max-[900px]:gap-3.5">
+      <img src="/images/levn-logo.svg" alt="Levn" width="91" height="32" class="h-8 w-auto" />
+      <span>levn.com.ar · Buenos Aires</span>
     </div>
-
-    <div>
-      <p class="mb-3 text-[13px] font-bold">Navegación</p>
-      <p class="text-[12.5px] leading-[2.3] text-muted-2">
-        {navLinks.map((link, i) => <Fragment>{link}{i < navLinks.length - 1 && <br />}</Fragment>)}
-      </p>
+    <div class="flex gap-6 font-semibold max-[900px]:gap-5">
+      <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" class="text-muted no-underline hover:text-ink">WhatsApp</a>
+      {
+        INSTAGRAM_URL && (
+          <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" class="text-muted no-underline hover:text-ink">
+            Instagram
+          </a>
+        )
+      }
+      <a href={`mailto:${EMAIL}`} class="text-muted no-underline hover:text-ink">{EMAIL}</a>
     </div>
-
-    <div>
-      <p class="mb-3 text-[13px] font-bold">Legal</p>
-      <p class="text-[12.5px] leading-[2.3] text-muted-2">
-        {legalLinks.map((link, i) => <Fragment>{link}{i < legalLinks.length - 1 && <br />}</Fragment>)}
-      </p>
-    </div>
-
-    <div>
-      <p class="mb-3 text-[13px] font-bold">Contacto</p>
-      <p class="mb-2.5 text-[12.5px] leading-[2.3] text-muted-2">
-        hola@levn.com.ar<br />+54 9 11 6631-6111
-      </p>
-      <div class="flex gap-2.5">
-        {
-          socials.map((icon) => (
-            <span class="flex h-6.5 w-6.5 items-center justify-center rounded-full bg-ink text-[12px] text-white">
-              {icon}
-            </span>
-          ))
-        }
-      </div>
-    </div>
-
-    <p class="max-w-55 text-right text-[12px] text-muted-3 max-[900px]:max-w-none max-[900px]:text-left">
-      © 2026 LEVN Agencia Digital.<br />Todos los derechos reservados.
-    </p>
+    <span>© 2026 Levn</span>
   </div>
 </footer>

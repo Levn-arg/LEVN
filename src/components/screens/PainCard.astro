@@ -1,0 +1,128 @@
+---
+// Tarjeta de dolor: mini-pantalla + la frase que el cliente reconoce.
+interface Props {
+  tipo: 1 | 2 | 3 | 4;
+}
+
+const { tipo } = Astro.props;
+
+const textos = {
+  1: "Contestás tarde y la consulta se va con otro.",
+  2: "Cargás los mismos datos en tres lugares distintos.",
+  3: "Te buscan y no aparecés.",
+  4: "Tu idea sigue en tu cabeza.",
+};
+
+const cell = "height:32px; box-sizing:border-box; padding:0 6px; border-right:1px solid #E5E2EA; border-bottom:1px solid #E5E2EA; display:flex; align-items:center; white-space:nowrap; overflow:hidden; font-size:11px;";
+const K: Record<string, string> = {
+  n: cell + "background:#F4F3F6; color:#6A6478; justify-content:center; font-size:10px;",
+  b: cell + "font-weight:700;",
+  x: cell,
+  e: cell + "background:#FDE8E8; color:#B42318; font-weight:700;",
+};
+const rows = [
+  ["1", "b", "Fecha", "b", "Total", "b", "Stock", "b"],
+  ["2", "n", "02/03", "x", "$86.400", "x", "#¡VALOR!", "e"],
+  ["3", "n", "2-mar", "x", "#¡VALOR!", "e", "14", "x"],
+  ["4", "n", "03/03", "x", "$41.900", "x", "#¡REF!", "e"],
+  ["5", "n", "", "x", "#¡VALOR!", "e", "", "x"],
+];
+const xl = rows.map((r) => [
+  { t: r[0], st: K.n },
+  { t: r[2], st: K[r[3]] },
+  { t: r[4], st: K[r[5]] },
+  { t: r[6], st: K[r[7]] },
+]);
+const res = [
+  { n: "Cerrajería Rápida", d: "★ 4,7 · Abierto ahora" },
+  { n: "Llaves Palermo", d: "★ 4,5 · Cierra 20:00" },
+  { n: "Cerrajero 24 h", d: "★ 4,6 · A domicilio" },
+];
+---
+
+<div style="width: 300px; height: 340px; box-sizing: border-box; padding: 14px; background: #FFFFFF; border: 1px solid rgba(23,18,37,0.07); border-radius: 24px; box-shadow: 0 24px 48px -28px rgba(108,60,224,0.4), 0 2px 8px rgba(23,18,37,0.04); display: flex; flex-direction: column; color: #171225">
+  <div style="position: relative; width: 270px; height: 200px; border-radius: 16px; overflow: hidden; flex-shrink: 0" aria-hidden="true">
+    {
+      tipo === 1 && (
+        <div style="width: 100%; height: 100%; background: #EFE7DC">
+          <div style="height: 38px; box-sizing: border-box; padding: 0 12px; background: #FFFFFF; display: flex; align-items: center; gap: 8px">
+            <div style="width: 24px; height: 24px; border-radius: 50%; background: #D6F0E0; color: #146C3A; font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center">R</div>
+            <div style="font-size: 12px; font-weight: 700">Ramiro</div>
+            <div style="margin-left: auto; width: 18px; height: 18px; border-radius: 50%; background: #25D366" />
+          </div>
+          <div style="padding: 12px; display: flex; flex-direction: column; gap: 8px">
+            <div style="align-self: flex-start; padding: 7px 10px; border-radius: 12px 12px 12px 4px; background: #FFFFFF; font-size: 13px">
+              ¿Siguen abiertos?<span style="font-size: 9px; color: #6A6478; margin-left: 8px">18:02</span>
+            </div>
+            <div style="align-self: center; display: flex; align-items: center; gap: 5px; padding: 4px 10px; border-radius: 8px; background: rgba(255,255,255,0.75); font-size: 10px; font-weight: 700; color: #B42318">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg>
+              En visto hace 3 h
+            </div>
+            <div style="align-self: flex-start; padding: 7px 10px; border-radius: 12px 12px 12px 4px; background: #FFFFFF; font-size: 13px; opacity: 0.85">
+              Ya conseguí en otro lado, gracias<span style="font-size: 9px; color: #6A6478; margin-left: 8px">21:10</span>
+            </div>
+          </div>
+        </div>
+      )
+    }
+    {
+      tipo === 2 && (
+        <div style="width: 100%; height: 100%; background: #FFFFFF; border: 1px solid #E5E2EA; box-sizing: border-box; border-radius: 16px; overflow: hidden">
+          <div style="height: 30px; box-sizing: border-box; padding: 0 10px; background: #F4F3F6; border-bottom: 1px solid #E5E2EA; display: flex; align-items: center; gap: 6px">
+            <div style="width: 14px; height: 14px; border-radius: 3px; background: #2F7A4F; color: #FFFFFF; font-size: 8px; font-weight: 800; display: flex; align-items: center; justify-content: center">X</div>
+            <div style="font-size: 11px; font-weight: 700">ventas_FINAL_v7 (2).xlsx</div>
+          </div>
+          {xl.map((cells) => (
+            <div style="display: grid; grid-template-columns: 24px 70px 1fr 1fr">
+              {cells.map((c) => <div style={c.st}>{c.t}</div>)}
+            </div>
+          ))}
+        </div>
+      )
+    }
+    {
+      tipo === 3 && (
+        <div style="width: 100%; height: 100%; background: #FFFFFF; border: 1px solid #E5E2EA; box-sizing: border-box; border-radius: 16px; padding: 12px">
+          <div style="height: 30px; box-sizing: border-box; border: 1px solid #E0DBE8; border-radius: 15px; padding: 0 12px; display: flex; align-items: center; justify-content: space-between; font-size: 12px">
+            cerrajería en palermo
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6A6478" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6" /><path d="M20 20l-4.5-4.5" /></svg>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 9px; margin-top: 12px">
+            {res.map((x) => (
+              <div style="display: flex; align-items: center; gap: 8px">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="#4A4458"><path d="M12 22s-7-6-7-12a7 7 0 0114 0c0 6-7 12-7 12z" /></svg>
+                <div>
+                  <div style="font-size: 12px; font-weight: 700">{x.n}</div>
+                  <div style="font-size: 10px; color: #6A6478">{x.d}</div>
+                </div>
+              </div>
+            ))}
+            <div style="display: flex; align-items: center; gap: 8px; padding: 6px 8px; border: 1.5px dashed #E3A9A3; border-radius: 10px">
+              <div style="width: 14px; height: 14px; border-radius: 50%; border: 1.5px dashed #B42318; box-sizing: border-box" />
+              <div style="font-size: 11px; font-weight: 700; color: #B42318">Tu negocio · no aparece</div>
+            </div>
+          </div>
+        </div>
+      )
+    }
+    {
+      tipo === 4 && (
+        <div style="position: relative; width: 100%; height: 100%; box-sizing: border-box; background: #FFF3C4; padding: 16px">
+          <div style="font-size: 16px; font-weight: 800">idea app 💡</div>
+          <div style="display: flex; flex-direction: column; gap: 6px; margin-top: 10px; font-size: 12px; color: #4A4458">
+            <div>— que los clientes reserven solos</div>
+            <div>— cobrar con Mercado Pago</div>
+            <div>— avisos por WhatsApp</div>
+            <div>— ¿cuánto saldría?</div>
+          </div>
+          <div style="position: absolute; left: 16px; bottom: 12px; display: flex; align-items: center; gap: 5px; font-size: 10px; font-weight: 700; color: #6E5A00">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg>
+            Editada hace 11 meses
+          </div>
+        </div>
+      )
+    }
+  </div>
+  <p style="margin: 0; padding: 16px 6px 0; font-size: 18px; line-height: 1.3; font-weight: 700; letter-spacing: -0.01em">{textos[tipo]}</p>
+  <div style="margin-top: auto; padding: 0 6px; font-size: 11px; font-weight: 500; color: #6A6478">Ejemplo ilustrativo</div>
+</div>

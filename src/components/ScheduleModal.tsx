@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState, type FormEvent } from "react";
-import Modal from "./Modal";
+import Modal, { ArrowRight, SuccessMessage, fieldInput, fieldLabel, primaryButton } from "./Modal";
+import ContactOption from "./ContactOption";
 import { notifyBooking } from "../lib/notify";
 import {
   createBooking,
@@ -163,58 +164,62 @@ export default function ScheduleModal() {
 
   return (
     <>
-      <button
-        type="button"
+      <ContactOption
         onClick={() => setOpen(true)}
-        className="block w-full cursor-pointer rounded-[20px] bg-white px-5.5 py-6.5 text-left text-ink hover:text-ink"
-      >
-        <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-accent-soft text-lg text-accent">
-          📅
-        </div>
-        <p className="mb-2 text-[15px] font-bold">Agendá una llamada</p>
-        <p className="mb-4 text-[12.5px] text-muted-2">Si preferís hablar, coordinamos un horario</p>
-        <span className="text-[13px] font-bold text-accent">Agendar llamada →</span>
-      </button>
+        title="Agendar llamada"
+        description="Elegí día y hora."
+        icon={
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <rect x="4" y="5" width="16" height="15" rx="2" />
+            <path d="M4 10h16M9 3v4M15 3v4" />
+          </svg>
+        }
+      />
 
-      <Modal open={open} onClose={close} title="Agendar una reunión" size="lg" tone="dark">
+      <Modal open={open} onClose={close} title="Agendar una llamada" size="lg">
         {status === "success" ? (
-          <div className="px-7 py-14 text-center">
-            <p className="mb-3 text-3xl">✓</p>
-            <p className="mb-1.5 text-lg font-extrabold">¡Reunión agendada!</p>
-            <p className="text-[13.5px] text-white/60">
+          <div className="p-8 max-[480px]:p-5">
+            <SuccessMessage title="¡Llamada agendada!">
               {selectedDateLabel} a las {selectedTime} hs. Te confirmamos por email.
-            </p>
+            </SuccessMessage>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="flex flex-col">
+            <div className="flex flex-col gap-2 px-8 pt-8 pr-20 max-[480px]:px-5 max-[480px]:pt-6 max-[480px]:pr-16">
+              <p className="m-0 text-[32px] leading-[1.05] font-extrabold tracking-[-0.03em] max-[480px]:text-[26px]">
+                {step === "datetime" ? "Elegí día y hora." : "Último paso."}
+              </p>
+              <p className="m-0 text-base text-muted">Una charla de 45 min para contarnos qué te frena.</p>
+            </div>
+
             {/* Paso 1: fecha y horario */}
             <div className={step === "datetime" ? "contents" : "hidden"}>
-              <div className="grid grid-cols-[1fr_220px] max-[720px]:grid-cols-1">
+              <div className="m-8 mb-0 grid grid-cols-[1fr_220px] overflow-hidden rounded-3xl border border-ink/7 max-[720px]:grid-cols-1 max-[480px]:m-5 max-[480px]:mb-0">
               {/* Calendario */}
-              <div className="p-7 max-[480px]:p-5.5">
-                <div className="mb-5 flex items-center justify-between">
+              <div className="p-6 max-[480px]:p-4">
+                <div className="mb-4 flex items-center justify-between">
                   <button
                     type="button"
                     onClick={() => changeMonth(-1)}
                     aria-label="Mes anterior"
-                    className="flex h-7 w-7 cursor-pointer items-center justify-center rounded-full text-white/60 hover:bg-white/10 hover:text-white"
+                    className="flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border-0 bg-accent-soft text-accent transition-colors hover:bg-accent hover:text-white"
                   >
-                    ‹
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6" /></svg>
                   </button>
-                  <p className="text-[15px] font-bold">
+                  <p className="m-0 text-lg font-extrabold">
                     {MONTHS[viewMonth]} {viewYear}
                   </p>
                   <button
                     type="button"
                     onClick={() => changeMonth(1)}
                     aria-label="Mes siguiente"
-                    className="flex h-7 w-7 cursor-pointer items-center justify-center rounded-full text-white/60 hover:bg-white/10 hover:text-white"
+                    className="flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border-0 bg-accent-soft text-accent transition-colors hover:bg-accent hover:text-white"
                   >
-                    ›
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6" /></svg>
                   </button>
                 </div>
 
-                <div className="mb-1 grid grid-cols-7 text-center text-[11px] font-semibold text-white/40">
+                <div className="mb-1.5 grid grid-cols-7 text-center text-xs font-bold text-muted-2">
                   {WEEKDAYS.map((w) => (
                     <div key={w}>{w}</div>
                   ))}
@@ -239,12 +244,12 @@ export default function ScheduleModal() {
                         disabled={disabled}
                         onClick={() => selectDay(day)}
                         title={blocked ? "No disponible" : undefined}
-                        className={`relative mx-auto flex h-9 w-9 items-center justify-center rounded-full text-[13px] font-semibold ${
+                        className={`relative mx-auto flex h-10 w-10 items-center justify-center rounded-full border-0 text-sm font-bold transition-colors ${
                           isSelected
-                            ? "bg-accent text-white"
+                            ? "bg-accent text-white shadow-[0_8px_18px_-8px_rgba(108,60,224,0.8)]"
                             : disabled
-                              ? "cursor-not-allowed text-white/25 line-through"
-                              : "cursor-pointer text-white hover:bg-white/10"
+                              ? "cursor-not-allowed bg-transparent text-muted-3/50 line-through"
+                              : "cursor-pointer bg-transparent text-ink hover:bg-accent-soft hover:text-accent-hover"
                         }`}
                       >
                         {day}
@@ -258,11 +263,12 @@ export default function ScheduleModal() {
               </div>
 
               {/* Horarios */}
-              <div className="border-t border-white/10 p-7 max-[720px]:p-5.5 min-[721px]:border-l min-[721px]:border-t-0">
+              <div className="border-t border-ink/7 bg-pearl/50 p-6 max-[720px]:p-4 min-[721px]:border-t-0 min-[721px]:border-l">
+                <p className="m-0 mb-3 text-sm font-bold text-ink">Horarios</p>
                 {!selectedDate ? (
-                  <p className="text-[13px] text-white/50">Elegí un día para ver los horarios.</p>
+                  <p className="m-0 text-[15px] text-muted-2">Elegí un día para ver los horarios.</p>
                 ) : loadingSlots ? (
-                  <p className="text-[13px] text-white/50">Cargando disponibilidad…</p>
+                  <p className="m-0 text-[15px] text-muted-2">Cargando disponibilidad…</p>
                 ) : (
                   <div className="flex max-h-70 flex-col gap-2 overflow-y-auto pr-1">
                     {TIME_SLOTS.map((slot) => {
@@ -274,12 +280,12 @@ export default function ScheduleModal() {
                           type="button"
                           disabled={taken}
                           onClick={() => setSelectedTime(slot)}
-                          className={`rounded-xl border py-2.5 text-[13px] font-semibold ${
+                          className={`min-h-11 rounded-[14px] border text-[15px] font-bold transition-colors ${
                             isSelected
                               ? "border-accent bg-accent text-white"
                               : taken
-                                ? "cursor-not-allowed border-white/10 text-white/25 line-through"
-                                : "cursor-pointer border-white/15 text-white hover:border-accent"
+                                ? "cursor-not-allowed border-ink/7 bg-transparent text-muted-3/50 line-through"
+                                : "cursor-pointer border-ink/12 bg-white text-ink hover:border-accent hover:text-accent-hover"
                           }`}
                         >
                           {slot}
@@ -292,15 +298,15 @@ export default function ScheduleModal() {
             </div>
 
             {/* Resumen + continuar */}
-            <div className="border-t border-white/10 p-7 max-[480px]:p-5.5">
-              <p className="mb-4 text-[13.5px] text-white/70">
+            <div className="flex flex-col gap-4 p-8 max-[480px]:p-5">
+              <p className="m-0 text-base text-muted">
                 {selectedDate && selectedTime ? (
                   <>
-                    Tu reunión sería el <strong className="text-white">{selectedDateLabel}</strong> a las{" "}
-                    <strong className="text-white">{selectedTime} hs</strong>.
+                    Tu llamada sería el <strong className="text-ink">{selectedDateLabel}</strong> a las{" "}
+                    <strong className="text-ink">{selectedTime} hs</strong>.
                   </>
                 ) : (
-                  "Elegí día y horario arriba para continuar."
+                  "Elegí día y horario para continuar."
                 )}
               </p>
 
@@ -308,57 +314,47 @@ export default function ScheduleModal() {
                 type="button"
                 disabled={!selectedDate || !selectedTime}
                 onClick={() => setStep("lead")}
-                className="w-full cursor-pointer rounded-full bg-accent py-3 text-sm font-bold text-white hover:bg-accent-hover disabled:cursor-not-allowed disabled:opacity-40"
+                className={primaryButton}
               >
-                Continuar →
+                Continuar
+                <ArrowRight />
               </button>
             </div>
             </div>
 
             {/* Paso 2: datos del lead */}
-            <div className={step === "lead" ? "border-t border-white/10 p-7 max-[480px]:p-5.5" : "hidden"}>
+            <div className={step === "lead" ? "flex flex-col gap-4 p-8 max-[480px]:p-5" : "hidden"}>
               <button
                 type="button"
                 onClick={() => setStep("datetime")}
-                className="mb-4 flex cursor-pointer items-center gap-1 text-[12.5px] font-semibold text-white/60 hover:text-white"
+                className="flex min-h-11 cursor-pointer items-center gap-1.5 self-start border-0 bg-transparent p-0 text-[15px] font-bold text-accent hover:text-accent-hover"
               >
-                ‹ Cambiar fecha y horario
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6" /></svg>
+                Cambiar fecha y horario
               </button>
 
-              <p className="mb-4 text-[13.5px] text-white/70">
-                Tu reunión sería el{" "}
-                <strong className="text-white">{selectedDateLabel}</strong> a las{" "}
-                <strong className="text-white">{selectedTime} hs</strong>.
+              <p className="m-0 rounded-2xl bg-accent-soft px-4.5 py-3.5 text-base text-accent-hover">
+                Tu llamada sería el <strong>{selectedDateLabel}</strong> a las <strong>{selectedTime} hs</strong>.
               </p>
 
-              <div className="grid grid-cols-2 gap-3 max-[480px]:grid-cols-1">
-                <label className="flex flex-col gap-1.5 text-[13px] font-semibold text-white/80">
+              <div className="grid grid-cols-2 gap-4 max-[480px]:grid-cols-1">
+                <label className={fieldLabel}>
                   Nombre
-                  <input
-                    required
-                    name="nombre"
-                    type="text"
-                    className="rounded-xl border border-white/15 bg-transparent px-3.5 py-2.5 text-sm font-normal text-white focus:border-accent focus:outline-none"
-                  />
+                  <input required name="nombre" type="text" autoComplete="name" className={fieldInput} />
                 </label>
-                <label className="flex flex-col gap-1.5 text-[13px] font-semibold text-white/80">
+                <label className={fieldLabel}>
                   Email
-                  <input
-                    required
-                    name="email"
-                    type="email"
-                    className="rounded-xl border border-white/15 bg-transparent px-3.5 py-2.5 text-sm font-normal text-white focus:border-accent focus:outline-none"
-                  />
+                  <input required name="email" type="email" autoComplete="email" className={fieldInput} />
                 </label>
               </div>
 
-              <label className="mt-3 flex flex-col gap-1.5 text-[13px] font-semibold text-white/80">
+              <label className={fieldLabel}>
                 ¿Qué servicio necesitás?
                 <select
                   required
                   name="servicio"
                   defaultValue=""
-                  className="rounded-xl border border-white/15 bg-panel px-3.5 py-2.5 text-sm font-normal text-white focus:border-accent focus:outline-none"
+                  className={fieldInput}
                 >
                   <option value="" disabled>
                     Elegí una opción
@@ -371,25 +367,20 @@ export default function ScheduleModal() {
                 </select>
               </label>
 
-              <label className="mt-3 flex flex-col gap-1.5 text-[13px] font-semibold text-white/80">
+              <label className={fieldLabel}>
                 Contanos brevemente qué necesitás (opcional)
-                <textarea
-                  name="mensaje"
-                  rows={2}
-                  className="resize-none rounded-xl border border-white/15 bg-transparent px-3.5 py-2.5 text-sm font-normal text-white focus:border-accent focus:outline-none"
-                />
+                <textarea name="mensaje" rows={2} className={`${fieldInput} resize-none py-3.5`} />
               </label>
 
-              {status === "error" && (
-                <p className="mt-3 text-[12.5px] font-semibold text-red-400">{errorMessage}</p>
-              )}
+              {status === "error" && <p className="m-0 text-sm font-semibold text-[#B42318]">{errorMessage}</p>}
 
               <button
                 type="submit"
                 disabled={status === "sending" || !selectedDate || !selectedTime}
-                className="mt-4 w-full cursor-pointer rounded-full bg-accent py-3 text-sm font-bold text-white hover:bg-accent-hover disabled:cursor-not-allowed disabled:opacity-40"
+                className={`${primaryButton} mt-2`}
               >
-                {status === "sending" ? "Enviando…" : "Confirmar solicitud"}
+                {status === "sending" ? "Enviando…" : "Confirmar llamada"}
+                {status !== "sending" && <ArrowRight />}
               </button>
             </div>
           </form>

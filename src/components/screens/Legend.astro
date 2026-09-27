@@ -1,0 +1,27 @@
+---
+// Leyenda de pasos de una pantalla ("Excel → Automatización → Sistema").
+// Cada paso es un botón que salta a ese estado (ver Layout.astro).
+interface Props {
+  steps: string[];
+  style: string;
+}
+
+const { steps, style } = Astro.props;
+---
+
+<div style={`position: absolute; display: flex; justify-content: center; align-items: center; gap: 4px; ${style}`}>
+  {
+    steps.map((label, i) => (
+      <>
+        {i > 0 && (
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6A6478" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 12h14M13 6l6 6-6 6" />
+          </svg>
+        )}
+        <button type="button" data-step={i}>
+          {label}
+        </button>
+      </>
+    ))
+  }
+</div>

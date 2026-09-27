@@ -1,0 +1,85 @@
+---
+import ArrowIcon from "./ArrowIcon.astro";
+
+// Sección de servicio: dolor en cita, título, resultados y CTA, con su pantalla
+// al costado (arriba en mobile). La pantalla va en el slot "screen".
+interface Props {
+  id: string;
+  eyebrow: string;
+  quote: string;
+  title: string;
+  subtitle?: string;
+  results: string[];
+  cta: string;
+  // Del lado de la pantalla en desktop.
+  screenSide: "left" | "right";
+  // "wide": columna de texto de 540 px y título de 52 px (Desarrollo a medida).
+  wide?: boolean;
+  // La cita entra en una línea (pill) o puede partirse (esquinas de 22 px).
+  pillQuote?: boolean;
+}
+
+const { id, eyebrow, quote, title, subtitle, results, cta, screenSide, wide = false, pillQuote = false } = Astro.props;
+---
+
+<section
+  id={id}
+  class="mx-auto flex max-w-360 items-center justify-between gap-10 px-21 py-20 max-[1100px]:px-10 max-[900px]:flex-col max-[900px]:items-stretch max-[900px]:gap-5 max-[900px]:px-4 max-[900px]:py-12"
+>
+  <div
+    class:list={[
+      "flex min-w-0 flex-1 justify-center max-[900px]:order-first",
+      screenSide === "left" ? "order-first" : "order-last",
+      wide ? "max-w-160" : "max-w-205",
+    ]}
+  >
+    <slot name="screen" />
+  </div>
+
+  <div
+    class:list={[
+      "flex flex-none flex-col max-[900px]:w-full max-[900px]:gap-5",
+      wide ? "w-135 gap-6 max-[1100px]:w-100" : "w-100 gap-5.5 max-[1100px]:w-85",
+    ]}
+  >
+    <div class="text-[13px] font-extrabold tracking-widest text-accent uppercase max-[900px]:mt-2 max-[900px]:text-xs">{eyebrow}</div>
+    <blockquote
+      class:list={[
+        "m-0 self-start bg-accent-soft px-4.5 py-2.5 text-[17px] leading-[1.4] font-medium text-accent-hover italic max-[900px]:rounded-[20px] max-[900px]:px-4 max-[900px]:text-base",
+        pillQuote ? "rounded-full" : "rounded-[22px]",
+      ]}
+    >
+      “{quote}”
+    </blockquote>
+    <h2
+      class:list={[
+        "m-0 leading-[1.05] font-extrabold tracking-[-0.03em] max-[900px]:text-4xl max-[900px]:leading-[1.06]",
+        wide ? "text-[52px]" : "text-[46px]",
+      ]}
+    >
+      {title}
+    </h2>
+    {subtitle && <p class="m-0 text-xl leading-[1.45] text-muted max-[900px]:text-lg">{subtitle}</p>}
+    <ul class="m-0 flex list-none flex-col gap-3.5 p-0 max-[900px]:gap-3">
+      {
+        results.map((result) => (
+          <li class="flex items-start gap-3 text-lg leading-[1.4] font-medium max-[900px]:text-[17px]">
+            <span class="flex h-6.5 w-6.5 flex-none items-center justify-center rounded-full bg-accent text-white max-[900px]:h-6 max-[900px]:w-6">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M5 12.5l4.5 4.5L19 7.5" />
+              </svg>
+            </span>
+            {result}
+          </li>
+        ))
+      }
+    </ul>
+    <a
+      class="btn inline-flex min-h-14 items-center gap-2.5 self-start rounded-2xl bg-accent px-6 text-[17px] font-bold text-white no-underline shadow-[0_16px_32px_-14px_rgba(108,60,224,0.75)] max-[900px]:self-stretch max-[900px]:justify-center"
+      href="#diagnostico"
+    >
+      {cta}
+      <ArrowIcon />
+    </a>
+  </div>
+</section>

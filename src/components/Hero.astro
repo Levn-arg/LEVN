@@ -1,45 +1,59 @@
 ---
-import ImpactCarousel from "./ImpactCarousel.tsx";
+import ArrowIcon from "./ArrowIcon.astro";
+import ScreenHero from "./screens/ScreenHero.astro";
+
+const integrations = [
+  { label: "WhatsApp", short: "WhatsApp", hover: "hover:text-[#128C4A]" },
+  { label: "Mercado Pago", short: "Mercado Pago", hover: "hover:text-[#0079B8]" },
+  { label: "Google", short: "Google", hover: "hover:text-[#1A66D9]" },
+  { label: "Instagram", short: "Instagram", hover: "hover:text-[#C1306B]" },
+  { label: "Google Sheets / Excel", short: "Sheets / Excel", hover: "hover:text-[#11804A]" },
+  { label: "Tienda Nube", short: "Tienda Nube", hover: "hover:text-[#2B3A8C]" },
+];
 ---
 
-<section class="flex items-start gap-10 pt-14 px-12 pb-10 max-[900px]:flex-col max-[900px]:px-6 max-[900px]:pt-10 max-[900px]:pb-8" data-reveal>
-  <div class="flex-none w-110 max-[900px]:w-full">
-    <p class="mb-3.5 flex items-center gap-2 text-[12px] font-bold tracking-[1px] text-accent">
-      SOLUCIONES DIGITALES PARA TU NEGOCIO ✦
-    </p>
-    <h1 class="mb-5 text-[52px] font-extrabold leading-[1.05] max-[480px]:text-[34px] max-[900px]:text-[40px]">
-      Menos caos.<br />
-      <span class="text-accent">Más clientes.</span>
+<section
+  id="inicio"
+  class="mx-auto flex max-w-360 items-center justify-between gap-10 px-21 pt-8 pb-18 max-[1100px]:px-10 max-[900px]:flex-col max-[900px]:items-stretch max-[900px]:gap-5 max-[900px]:px-4 max-[900px]:pt-5 max-[900px]:pb-10"
+>
+  <div class="flex w-140 flex-none flex-col gap-7 max-[1100px]:w-100 max-[900px]:w-full max-[900px]:gap-5">
+    <h1 class="m-0 text-[66px] leading-[1.02] font-extrabold tracking-[-0.035em] max-[1100px]:text-[54px] max-[900px]:text-[40px] max-[900px]:leading-[1.04]">
+      Hacé crecer tu negocio sin sumar más horas de trabajo.
     </h1>
-    <p class="mb-6.5 max-w-95 text-base leading-[1.6] text-muted">
-      Diseñamos, desarrollamos y hacemos crecer la operación digital de tu negocio. Resultados concretos, no promesas.
-    </p>
-    <div class="mb-7 flex flex-wrap gap-3">
+    <p class="m-0 text-[22px] leading-[1.45] text-muted max-[900px]:text-lg">Menos tareas a mano. Más consultas. Más ventas.</p>
+    <div class="mt-1 flex items-center gap-6 max-[900px]:mt-0 max-[900px]:flex-col max-[900px]:items-stretch max-[900px]:gap-5">
       <a
-        href="#contacto"
-        class="inline-flex items-center gap-1.5 rounded-full bg-accent px-5.5 py-3.5 text-sm font-bold text-white hover:bg-accent-hover hover:text-white"
-        >Pedí tu diagnóstico<span aria-hidden="true">→</span></a
+        class="btn inline-flex min-h-14.5 items-center gap-2.5 rounded-2xl bg-accent px-6.5 text-[17px] font-bold text-white no-underline shadow-[0_16px_32px_-14px_rgba(108,60,224,0.75)] max-[900px]:min-h-14 max-[900px]:justify-center"
+        href="#diagnostico"
       >
-      <a
-        href="#servicios"
-        class="inline-flex items-center gap-1.5 rounded-full border-[1.5px] border-ink px-5.5 py-3.5 text-sm font-bold text-ink hover:bg-ink hover:text-white"
-        >Ver qué resolvemos <span aria-hidden="true">↓</span></a
-      >
-    </div>
-    <div class="flex items-center gap-3">
-      <div class="flex" aria-hidden="true">
-        <span class="h-8 w-8 -mr-2.5 rounded-full border-2 border-pearl bg-[#d9d9d9]"></span>
-        <span class="h-8 w-8 -mr-2.5 rounded-full border-2 border-pearl bg-[#c7c7c7]"></span>
-        <span class="h-8 w-8 rounded-full border-2 border-pearl bg-[#b5b5b5]"></span>
-      </div>
-      <p class="text-[13px] font-semibold leading-[1.3]">
-        +12 negocios ya diagnosticados<br />
-        <span class="font-medium text-muted-2">y en camino al crecimiento.</span>
-      </p>
+        Quiero mi diagnóstico gratis
+        <ArrowIcon />
+      </a>
+      <a class="inline-flex min-h-11 items-center gap-2 text-[17px] font-bold text-ink no-underline hover:text-accent-hover max-[900px]:justify-center max-[900px]:text-base" href="#dolor">
+        Ver cómo se ve
+        <ArrowIcon size={18} down />
+      </a>
     </div>
   </div>
+  <div class="flex min-w-0 flex-1 justify-end max-[900px]:mt-2">
+    <div data-fit data-w="720" data-h="600" class="max-w-180">
+      <ScreenHero />
+    </div>
+  </div>
+</section>
 
-  <div class="flex flex-1 items-start justify-end gap-6 pt-2.5 max-[900px]:w-full max-[900px]:justify-start">
-    <ImpactCarousel client:load />
-  </div>
+<section aria-label="Integraciones" class="mx-auto flex max-w-360 flex-col items-center gap-4.5 px-21 pt-6 pb-16 max-[900px]:gap-3.5 max-[900px]:px-4 max-[900px]:pt-2 max-[900px]:pb-12">
+  <p class="m-0 text-sm font-semibold text-muted-2">Funciona con lo que ya usás.</p>
+  <ul class="m-0 flex list-none flex-wrap justify-center gap-3 p-0 max-[900px]:gap-2">
+    {
+      integrations.map((item) => (
+        <li
+          class={`flex h-13 items-center rounded-[14px] border border-ink/7 bg-white/55 px-5.5 text-[17px] font-bold text-muted-2 transition-colors duration-300 max-[900px]:h-10 max-[900px]:rounded-xl max-[900px]:px-3.5 max-[900px]:text-sm ${item.hover}`}
+        >
+          <span class="max-[900px]:hidden">{item.label}</span>
+          <span class="hidden max-[900px]:inline">{item.short}</span>
+        </li>
+      ))
+    }
+  </ul>
 </section>

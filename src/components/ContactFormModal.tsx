@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from "react";
-import Modal from "./Modal";
+import Modal, { ArrowRight, SuccessMessage, fieldInput, fieldLabel, primaryButton } from "./Modal";
+import ContactOption from "./ContactOption";
 import { notifyContact } from "../lib/notify";
 import { createLead } from "../lib/scheduling";
 
@@ -51,76 +52,50 @@ export default function ContactFormModal() {
 
   return (
     <>
-      <button
-        type="button"
+      <ContactOption
         onClick={() => setOpen(true)}
-        className="block w-full cursor-pointer rounded-[20px] bg-white px-5.5 py-6.5 text-left text-ink hover:text-ink"
-      >
-        <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-[12px] bg-accent-soft text-lg text-accent">
-          ▤
-        </div>
-        <p className="mb-2 text-[15px] font-bold">Formulario corto</p>
-        <p className="mb-4 text-[12.5px] text-muted-2">2 minutos y ya estamos en contacto.</p>
-        <span className="text-[13px] font-bold text-accent">Completar ahora →</span>
-      </button>
+        title="Formulario"
+        description="Contanos por escrito."
+        icon={
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <rect x="4" y="3" width="16" height="18" rx="2" />
+            <path d="M8 8h8M8 12h8M8 16h5" />
+          </svg>
+        }
+      />
 
-      <Modal open={open} onClose={close} title="Formulario de contacto" tone="dark">
+      <Modal open={open} onClose={close} title="Formulario de contacto">
         {status === "success" ? (
-          <div className="py-5 text-center">
-            <p className="mb-3 text-3xl">✓</p>
-            <p className="mb-1.5 text-lg font-extrabold">¡Listo!</p>
-            <p className="text-[13.5px] text-white/60">Te respondemos en menos de 24h hábiles.</p>
-          </div>
+          <SuccessMessage title="¡Listo!">Te respondemos en menos de 24 h hábiles.</SuccessMessage>
         ) : (
-          <form onSubmit={handleSubmit} className="flex flex-col gap-3.5">
-            <p className="mb-1 pr-6 text-[19px] font-extrabold">Contanos de tu negocio</p>
+          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+            <div className="mb-2 flex flex-col gap-2 pr-12">
+              <p className="m-0 text-[32px] leading-[1.05] font-extrabold tracking-[-0.03em] max-[480px]:text-[26px]">Contanos qué te está frenando.</p>
+              <p className="m-0 text-base text-muted">El diagnóstico es gratis y sin compromiso.</p>
+            </div>
 
-            <label className="flex flex-col gap-1.5 text-[13px] font-semibold text-white/80">
+            <label className={fieldLabel}>
               Nombre
-              <input
-                required
-                name="nombre"
-                type="text"
-                className="rounded-xl border border-white/15 bg-transparent px-3.5 py-2.5 text-sm font-normal text-white focus:border-accent focus:outline-none"
-              />
+              <input required name="nombre" type="text" autoComplete="name" className={fieldInput} />
             </label>
-            <label className="flex flex-col gap-1.5 text-[13px] font-semibold text-white/80">
+            <label className={fieldLabel}>
               Email
-              <input
-                required
-                name="email"
-                type="email"
-                className="rounded-xl border border-white/15 bg-transparent px-3.5 py-2.5 text-sm font-normal text-white focus:border-accent focus:outline-none"
-              />
+              <input required name="email" type="email" autoComplete="email" className={fieldInput} />
             </label>
-            <label className="flex flex-col gap-1.5 text-[13px] font-semibold text-white/80">
+            <label className={fieldLabel}>
               Teléfono (opcional)
-              <input
-                name="telefono"
-                type="tel"
-                className="rounded-xl border border-white/15 bg-transparent px-3.5 py-2.5 text-sm font-normal text-white focus:border-accent focus:outline-none"
-              />
+              <input name="telefono" type="tel" autoComplete="tel" className={fieldInput} />
             </label>
-            <label className="flex flex-col gap-1.5 text-[13px] font-semibold text-white/80">
-              Mensaje
-              <textarea
-                required
-                name="mensaje"
-                rows={4}
-                className="resize-none rounded-xl border border-white/15 bg-transparent px-3.5 py-2.5 text-sm font-normal text-white focus:border-accent focus:outline-none"
-              />
+            <label className={fieldLabel}>
+              ¿Qué te gustaría resolver?
+              <textarea required name="mensaje" rows={4} className={`${fieldInput} resize-none py-3.5`} />
             </label>
 
-            {status === "error" && (
-              <p className="text-[12.5px] font-semibold text-red-400">{errorMessage}</p>
-            )}
+            {status === "error" && <p className="m-0 text-sm font-semibold text-[#B42318]">{errorMessage}</p>}
 
-            <button
-              type="submit"
-              disabled={status === "sending"}
-              className="mt-1.5 cursor-pointer rounded-full bg-accent py-3 text-sm font-bold text-white hover:bg-accent-hover disabled:cursor-not-allowed disabled:opacity-60"
-            >
+            <button type="submit" disabled={status === "sending"} className={`${primaryButton} mt-2`}>
               {status === "sending" ? "Enviando…" : "Enviar mensaje"}
+              {status !== "sending" && <ArrowRight />}
             </button>
           </form>
         )}
