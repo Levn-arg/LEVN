@@ -1,0 +1,190 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "./Header.astro";
+import Footer from "./Footer.astro";
+import ArrowIcon from "./ArrowIcon.astro";
+import LogoMark from "./LogoMark.astro";
+import { resolveLogo, type LogoSource } from "../lib/logos";
+
+// Página de catálogo categorizado (/integraciones y /tecnologias): cada
+// herramienta con su logo y para qué la usamos.
+interface Props {
+  title: string;
+  description: string;
+  heading: string;
+  highlight: string;
+  intro: string;
+  categories: { id: string; title: string; intro: string; icon: string; items: (LogoSource & { text: string })[] }[];
+  ctaHeading: string;
+  ctaHighlight: string;
+}
+
+const { title, description, heading, highlight, intro, categories, ctaHeading, ctaHighlight } = Astro.props;
+const sections = categories.map((category) => ({
+  ...category,
+  items: category.items.map((item) => ({ logo: resolveLogo(item), text: item.text })),
+}));
+---
+
+<Layout title={title} description={description}>
+  <Header />
+  <main>
+    <section class="mx-auto flex max-w-360 flex-col gap-6 px-21 pt-8 pb-6 max-[1100px]:px-10 max-[900px]:gap-5 max-[900px]:px-4 max-[900px]:pt-5 max-[900px]:pb-4">
+      <a href="/" class="inline-flex min-h-11 items-center gap-2 self-start text-[15px] font-bold text-accent no-underline hover:text-accent-hover">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"></path></svg>
+        Inicio
+      </a>
+      <h1 class="m-0 max-w-250 text-[66px] leading-[1.02] font-extrabold tracking-[-0.035em] max-[1100px]:text-[54px] max-[900px]:text-[40px] max-[900px]:leading-[1.04]">
+        {heading} <span class="text-accent">{highlight}</span>
+      </h1>
+      <p class="m-0 max-w-170 text-[22px] leading-[1.45] text-muted max-[900px]:text-lg">{intro}</p>
+    </section>
+
+    <div class="mx-auto flex max-w-360 items-start gap-16 px-21 pb-8 max-[1100px]:gap-10 max-[1100px]:px-10 max-[900px]:flex-col max-[900px]:gap-0 max-[900px]:px-0">
+      <aside class="catalog-nav sticky w-72 flex-none max-[1100px]:w-60 max-[900px]:z-30 max-[900px]:w-full max-[900px]:border-b max-[900px]:border-ink/7 max-[900px]:bg-pearl/90 max-[900px]:backdrop-blur-md">
+        <nav aria-label="Categorías">
+          <ul class="no-scrollbar m-0 flex list-none flex-col gap-1 p-0 max-[900px]:flex-row max-[900px]:gap-1 max-[900px]:overflow-x-auto max-[900px]:px-4 max-[900px]:py-2.5">
+            {
+              sections.map((section) => (
+                <li class="max-[900px]:flex-none">
+                  <a
+                    href={`#${section.id}`}
+                    data-catalog-link={section.id}
+                    class="catalog-link flex min-h-12 items-center gap-3 rounded-2xl border border-transparent px-2.5 text-base font-bold text-muted no-underline transition-colors duration-200 hover:text-ink max-[900px]:min-h-11 max-[900px]:gap-2 max-[900px]:px-2 max-[900px]:text-[15px]"
+                  >
+                    <span class="catalog-ico flex h-9 w-9 flex-none items-center justify-center rounded-xl bg-accent-soft text-accent transition-colors duration-200 max-[900px]:h-8 max-[900px]:w-8">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d={section.icon} />
+                      </svg>
+                    </span>
+                    {section.title}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+      </aside>
+
+      <div class="flex min-w-0 flex-1 flex-col max-[900px]:w-full max-[900px]:px-4">
+        {
+          sections.map((section) => (
+            <section id={section.id} data-catalog-section class="catalog-section flex flex-col gap-6 py-10 max-[900px]:gap-5 max-[900px]:py-8">
+              <div class="flex flex-col gap-2">
+                <h2 class="m-0 flex items-center gap-3.5 text-[40px] leading-[1.05] font-extrabold tracking-[-0.03em] max-[900px]:text-[30px]">
+                  <span class="flex h-12 w-12 flex-none items-center justify-center rounded-2xl bg-accent text-white max-[900px]:h-10 max-[900px]:w-10">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d={section.icon} />
+                    </svg>
+                  </span>
+                  {section.title}
+                </h2>
+                <p class="m-0 text-lg leading-normal text-muted max-[900px]:text-base">{section.intro}</p>
+              </div>
+              <ul class="m-0 grid list-none grid-cols-2 gap-4 p-0 max-[1100px]:grid-cols-1 max-[900px]:gap-3">
+                {section.items.map(({ logo, text }) => (
+                  <li class="flex gap-4 rounded-3xl border border-ink/6 bg-white p-6 max-[900px]:rounded-[20px] max-[900px]:p-5">
+                    <span class="flex h-13 w-13 flex-none items-center justify-center rounded-2xl border border-ink/6 bg-pearl/60">
+                      <LogoMark logo={logo} size={28} class={logo.kind === "file" && logo.wide ? "max-w-10" : undefined} />
+                    </span>
+                    <span class="flex flex-col gap-1.5">
+                      <h3 class="m-0 text-xl font-extrabold">{logo.name}</h3>
+                      <p class="m-0 text-base leading-normal text-muted">{text}</p>
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ))
+        }
+      </div>
+    </div>
+
+    <section class="mx-auto max-w-360 px-21 pt-10 pb-20 max-[1100px]:px-10 max-[900px]:px-4 max-[900px]:pb-12">
+      <div class="trama flex flex-col gap-5 rounded-[32px] bg-panel p-20 text-pearl max-[1100px]:p-12 max-[900px]:gap-4 max-[900px]:rounded-[26px] max-[900px]:px-5 max-[900px]:py-10">
+        <h2 class="m-0 text-[56px] leading-[1.05] font-extrabold tracking-[-0.03em] text-pearl max-[900px]:text-[34px] max-[900px]:leading-[1.06]">
+          {ctaHeading} <span class="text-[#B69CF7]">{ctaHighlight}</span>
+        </h2>
+        <p class="m-0 text-xl leading-[1.45] text-ondark max-[900px]:text-[17px]">El diagnóstico es gratis. Te respondemos en menos de 24 h hábiles.</p>
+        <a
+          class="btn mt-4 inline-flex min-h-14.5 items-center gap-2.5 self-start rounded-2xl bg-accent px-6.5 text-[17px] font-bold text-white no-underline shadow-[0_16px_32px_-14px_rgba(108,60,224,0.75)] max-[900px]:self-stretch max-[900px]:justify-center"
+          href="/#contacto"
+        >
+          Quiero mi diagnóstico gratis
+          <ArrowIcon />
+        </a>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>
+
+<script>
+  // Marca en el sidebar la categoría que se está leyendo. En mobile el menú es
+  // una barra horizontal: la categoría activa se desplaza a la vista.
+  const links = new Map(
+    [...document.querySelectorAll<HTMLAnchorElement>("[data-catalog-link]")].map((link) => [link.dataset.catalogLink, link])
+  );
+
+  function setActive(id: string) {
+    for (const [key, link] of links) {
+      if (key === id) {
+        link.setAttribute("aria-current", "true");
+        const bar = link.closest("ul");
+        if (bar && bar.scrollWidth > bar.clientWidth) {
+          bar.scrollTo({ left: link.offsetLeft - 16, behavior: "smooth" });
+        }
+      } else {
+        link.removeAttribute("aria-current");
+      }
+    }
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) if (entry.isIntersecting) setActive(entry.target.id);
+    },
+    { rootMargin: "-35% 0px -60% 0px" }
+  );
+  document.querySelectorAll("[data-catalog-section]").forEach((section) => observer.observe(section));
+  setActive([...links.keys()][0]!);
+</script>
+
+<style>
+  .catalog-nav {
+    top: calc(var(--header-offset, 0px) + 24px);
+    transition: top 300ms ease-out;
+  }
+
+  .catalog-section {
+    scroll-margin-top: 24px;
+  }
+
+  @media (max-width: 899px) {
+    .catalog-nav {
+      top: var(--header-offset, 0px);
+    }
+
+    .catalog-section {
+      scroll-margin-top: 72px;
+    }
+  }
+
+  .catalog-link[aria-current="true"] {
+    border-color: rgba(23, 18, 37, 0.07);
+    background: #ffffff;
+    color: #171225;
+    box-shadow: 0 12px 28px -22px rgba(108, 60, 224, 0.55);
+  }
+
+  .catalog-link[aria-current="true"] .catalog-ico {
+    background: #6c3ce0;
+    color: #ffffff;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .catalog-nav {
+      transition: none;
+    }
+  }
+</style>

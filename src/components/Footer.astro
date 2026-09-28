@@ -1,5 +1,8 @@
 ---
-import { EMAIL, INSTAGRAM_URL, WHATSAPP_URL } from "../data/site";
+import { siInstagram, siWhatsapp } from "simple-icons";
+import { EMAIL, INSTAGRAM_HANDLE, INSTAGRAM_URL, WHATSAPP_DISPLAY, WHATSAPP_URL } from "../data/site";
+
+const link = "inline-flex min-h-11 items-center gap-2.5 text-muted no-underline hover:text-ink";
 ---
 
 <footer class="border-t border-ink/8">
@@ -9,16 +12,28 @@ import { EMAIL, INSTAGRAM_URL, WHATSAPP_URL } from "../data/site";
         <img src="/images/levn-logo.svg" alt="Levn" width="91" height="32" class="h-8 w-auto" />
         <span>levn.com.ar · Buenos Aires</span>
       </div>
-      <div class="flex flex-wrap gap-6 font-semibold max-[900px]:gap-5">
-        <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" class="text-muted no-underline hover:text-ink">WhatsApp</a>
+      <div class="flex flex-wrap gap-x-7 gap-y-1 font-semibold max-[900px]:flex-col max-[900px]:gap-0">
+        <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" class={link}>
+          <svg viewBox="0 0 24 24" width="20" height="20" fill={`#${siWhatsapp.hex}`} aria-hidden="true"><path d={siWhatsapp.path} /></svg>
+          {WHATSAPP_DISPLAY}
+        </a>
         {
           INSTAGRAM_URL && (
-            <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" class="text-muted no-underline hover:text-ink">
-              Instagram
+            <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" class={link}>
+              <svg viewBox="0 0 24 24" width="20" height="20" fill={`#${siInstagram.hex}`} aria-hidden="true">
+                <path d={siInstagram.path} />
+              </svg>
+              {INSTAGRAM_HANDLE}
             </a>
           )
         }
-        <a href={`mailto:${EMAIL}`} class="text-muted no-underline hover:text-ink">{EMAIL}</a>
+        <a href={`mailto:${EMAIL}`} class={link}>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6C3CE0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="5" width="18" height="14" rx="2" />
+            <path d="M3 7l9 6 9-6" />
+          </svg>
+          {EMAIL}
+        </a>
       </div>
     </div>
     <div class="flex items-center justify-between border-t border-ink/6 pt-6 max-[900px]:flex-col max-[900px]:items-start max-[900px]:gap-3 max-[900px]:pt-5">

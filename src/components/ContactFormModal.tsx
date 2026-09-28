@@ -1,10 +1,18 @@
 import { useState, type FormEvent } from "react";
-import Modal, { ArrowRight, SuccessMessage, fieldInput, fieldLabel, primaryButton } from "./Modal";
+import Modal, { ArrowRight, ModalHeader, SuccessMessage, fieldInput, fieldLabel, primaryButton } from "./Modal";
+import { WHATSAPP_URL } from "../data/site";
 import ContactOption from "./ContactOption";
 import { notifyContact } from "../lib/notify";
 import { createLead } from "../lib/scheduling";
 
 type Status = "idle" | "sending" | "success" | "error";
+
+const FORM_ICON = (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <rect x="4" y="3" width="16" height="18" rx="2" />
+    <path d="M8 8h8M8 12h8M8 16h5" />
+  </svg>
+);
 
 export default function ContactFormModal() {
   const [open, setOpen] = useState(false);
@@ -56,12 +64,7 @@ export default function ContactFormModal() {
         onClick={() => setOpen(true)}
         title="Formulario"
         description="Contanos por escrito."
-        icon={
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-            <rect x="4" y="3" width="16" height="18" rx="2" />
-            <path d="M8 8h8M8 12h8M8 16h5" />
-          </svg>
-        }
+        icon={<span className="[&>svg]:h-6.5 [&>svg]:w-6.5">{FORM_ICON}</span>}
       />
 
       <Modal open={open} onClose={close} title="Formulario de contacto">
@@ -69,22 +72,29 @@ export default function ContactFormModal() {
           <SuccessMessage title="¡Listo!">Te respondemos en menos de 24 h hábiles.</SuccessMessage>
         ) : (
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-            <div className="mb-2 flex flex-col gap-2 pr-12">
-              <p className="m-0 text-[32px] leading-[1.05] font-extrabold tracking-[-0.03em] max-[480px]:text-[26px]">Contanos qué te está frenando.</p>
-              <p className="m-0 text-base text-muted">El diagnóstico es gratis y sin compromiso.</p>
+            <div className="mb-3">
+              <ModalHeader
+                icon={FORM_ICON}
+                eyebrow="Formulario"
+                title="Contanos qué"
+                highlight="te está frenando."
+                subtitle="El diagnóstico es gratis y sin compromiso. Te respondemos en menos de 24 h hábiles."
+              />
             </div>
 
-            <label className={fieldLabel}>
-              Nombre
-              <input required name="nombre" type="text" autoComplete="name" className={fieldInput} />
-            </label>
+            <div className="grid grid-cols-2 gap-4 max-[480px]:grid-cols-1">
+              <label className={fieldLabel}>
+                Nombre
+                <input required name="nombre" type="text" autoComplete="name" className={fieldInput} />
+              </label>
+              <label className={fieldLabel}>
+                Teléfono (opcional)
+                <input name="telefono" type="tel" autoComplete="tel" className={fieldInput} />
+              </label>
+            </div>
             <label className={fieldLabel}>
               Email
               <input required name="email" type="email" autoComplete="email" className={fieldInput} />
-            </label>
-            <label className={fieldLabel}>
-              Teléfono (opcional)
-              <input name="telefono" type="tel" autoComplete="tel" className={fieldInput} />
             </label>
             <label className={fieldLabel}>
               ¿Qué te gustaría resolver?
@@ -97,6 +107,12 @@ export default function ContactFormModal() {
               {status === "sending" ? "Enviando…" : "Enviar mensaje"}
               {status !== "sending" && <ArrowRight />}
             </button>
+            <p className="m-0 text-center text-[15px] text-muted-2">
+              ¿Preferís hablar ahora?{" "}
+              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="font-bold text-accent hover:text-accent-hover">
+                Escribinos por WhatsApp
+              </a>
+            </p>
           </form>
         )}
       </Modal>

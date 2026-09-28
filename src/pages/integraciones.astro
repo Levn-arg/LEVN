@@ -1,0 +1,20 @@
+---
+import CatalogPage from "../components/CatalogPage.astro";
+import { INTEGRATION_CATEGORIES } from "../data/integrations";
+
+const categories = INTEGRATION_CATEGORIES.map((category) => ({
+  ...category,
+  items: category.items.map((item) => ({ ...item, text: item.how })),
+}));
+---
+
+<CatalogPage
+  title="Integraciones — Levn"
+  description="Las herramientas que ya usa tu negocio, conectadas entre sí: WhatsApp, Mercado Pago, ARCA, Tienda Nube y más."
+  heading="Todo conectado,"
+  highlight="sin cambiar lo que ya usás."
+  intro="No hace falta reemplazar tus herramientas. Las conectamos para que los datos pasen solos de una a otra y dejes de cargar lo mismo dos veces."
+  categories={categories}
+  ctaHeading="¿Usás otra herramienta?"
+  ctaHighlight="Contanos cuál."
+/>

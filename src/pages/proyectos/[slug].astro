@@ -5,6 +5,9 @@ import Footer from "../../components/Footer.astro";
 import ArrowIcon from "../../components/ArrowIcon.astro";
 import { projects } from "../../data/projects.json";
 import { publicImage } from "../../lib/images";
+import LogoMark from "../../components/LogoMark.astro";
+import { resolveLogo } from "../../lib/logos";
+import { logoSourceFor } from "../../data/technologies";
 
 export function getStaticPaths() {
   return projects.map((project) => ({
@@ -18,8 +21,16 @@ const { project } = Astro.props;
 const heroImage = publicImage(project.images.hero) ?? publicImage(project.images.card);
 const sections = project.sections.map((section) => ({ ...section, image: publicImage(section.image) }));
 const screenshots = project.images.screenshots.map((src) => publicImage(src)).filter(Boolean) as string[];
+const techs = project.tech
+  .replace(/\.$/, "")
+  .split(",")
+  .map((name) => {
+    const source = logoSourceFor(name.trim());
+    // Términos genéricos ("pasarela de pagos") no tienen logo propio.
+    return { logo: resolveLogo(source), known: Boolean(source.icon || source.file) };
+  });
 const facts = [
-  { title: "Tecnologías", copy: project.tech, d: "M8 7l-5 5 5 5M16 7l5 5-5 5" },
+  { title: "Tecnologías", copy: project.tech, d: "M8 7l-5 5 5 5M16 7l5 5-5 5", techs },
   { title: "Duración", copy: project.duration, d: "M12 7v5l3 2M12 21a9 9 0 100-18 9 9 0 000 18z" },
   { title: "Resultados", copy: project.results, d: "M4 17l5-5 4 4 7-8M14 8h6v6" },
 ];
@@ -87,7 +98,24 @@ const facts = [
                 </svg>
               </div>
               <h3 class="m-0 mt-1.5 text-[22px] font-extrabold">{fact.title}</h3>
-              <p class="m-0 text-[17px] leading-[1.5] text-muted">{fact.copy}</p>
+              {fact.techs ? (
+                <ul class="m-0 flex list-none flex-wrap gap-2 p-0">
+                  {fact.techs.map(({ logo, known }) => (
+                    <li class="flex min-h-10 items-center gap-2 rounded-full border border-ink/7 bg-pearl/60 py-1.5 pr-3.5 pl-2 text-[15px] font-bold">
+                      {known ? (
+                        <LogoMark logo={logo} size={20} />
+                      ) : (
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6C3CE0" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                          <path d="M8 7l-5 5 5 5M16 7l5 5-5 5" />
+                        </svg>
+                      )}
+                      {logo.name}
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p class="m-0 text-[17px] leading-[1.5] text-muted">{fact.copy}</p>
+              )}
             </li>
           ))
         }

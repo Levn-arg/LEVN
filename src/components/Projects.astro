@@ -1,10 +1,16 @@
 ---
 import ArrowIcon from "./ArrowIcon.astro";
+import LogoMarquee from "./LogoMarquee.astro";
 import ProjectGrid from "./ProjectGrid.astro";
 import { projects } from "../data/projects.json";
+import { ALL_TECHNOLOGIES } from "../data/technologies";
 
 // En la home van los primeros 5; el resto está en /proyectos.
 const HOME_COUNT = 5;
+
+const techs = ALL_TECHNOLOGIES.filter((tech) => tech.marquee);
+const half = Math.ceil(techs.length / 2);
+const techRows = [techs.slice(0, half), techs.slice(half)];
 ---
 
 <section id="proyectos" class="mx-auto flex max-w-360 flex-col gap-12 px-21 py-20 max-[1100px]:px-10 max-[900px]:gap-7 max-[900px]:px-4 max-[900px]:py-12">
@@ -26,4 +32,18 @@ const HOME_COUNT = 5;
       </a>
     )
   }
+
+  <div class="mt-8 flex flex-col items-center gap-7 max-[900px]:mt-4 max-[900px]:items-start max-[900px]:gap-5">
+    <div class="flex flex-col items-center gap-2 text-center max-[900px]:items-start max-[900px]:text-left">
+      <h3 class="m-0 text-[32px] leading-[1.1] font-extrabold tracking-[-0.02em] max-[900px]:text-2xl">Con qué lo <span class="text-accent">construimos.</span></h3>
+      <p class="m-0 text-lg text-muted max-[900px]:text-base">Tecnologías elegidas por el problema que resuelven, no por moda.</p>
+    </div>
+    <div class="w-full max-[900px]:-mx-4 max-[900px]:w-[calc(100%+32px)]">
+      <LogoMarquee rows={techRows} duration={45} />
+    </div>
+    <a class="inline-flex min-h-11 items-center gap-2 text-[17px] font-bold text-accent no-underline hover:text-accent-hover" href="/tecnologias/">
+      Ver todas las tecnologías
+      <ArrowIcon size={18} />
+    </a>
+  </div>
 </section>

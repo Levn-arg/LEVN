@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState, type FormEvent } from "react";
-import Modal, { ArrowRight, SuccessMessage, fieldInput, fieldLabel, primaryButton } from "./Modal";
+import Modal, { ArrowRight, ModalHeader, SuccessMessage, fieldInput, fieldLabel, primaryButton } from "./Modal";
 import ContactOption from "./ContactOption";
 import { notifyBooking } from "../lib/notify";
 import {
@@ -18,6 +18,13 @@ const MONTHS = [
 ];
 
 type Status = "idle" | "sending" | "success" | "error";
+
+const CALENDAR_ICON = (
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <rect x="4" y="5" width="16" height="15" rx="2" />
+    <path d="M4 10h16M9 3v4M15 3v4" />
+  </svg>
+);
 
 function toISODate(year: number, month: number, day: number) {
   return `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
@@ -168,12 +175,7 @@ export default function ScheduleModal() {
         onClick={() => setOpen(true)}
         title="Agendar llamada"
         description="Elegí día y hora."
-        icon={
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-            <rect x="4" y="5" width="16" height="15" rx="2" />
-            <path d="M4 10h16M9 3v4M15 3v4" />
-          </svg>
-        }
+        icon={<span className="[&>svg]:h-6.5 [&>svg]:w-6.5">{CALENDAR_ICON}</span>}
       />
 
       <Modal open={open} onClose={close} title="Agendar una llamada" size="lg">
@@ -185,16 +187,19 @@ export default function ScheduleModal() {
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="flex flex-col">
-            <div className="flex flex-col gap-2 px-8 pt-8 pr-20 max-[480px]:px-5 max-[480px]:pt-6 max-[480px]:pr-16">
-              <p className="m-0 text-[32px] leading-[1.05] font-extrabold tracking-[-0.03em] max-[480px]:text-[26px]">
-                {step === "datetime" ? "Elegí día y hora." : "Último paso."}
-              </p>
-              <p className="m-0 text-base text-muted">Una charla de 45 min para contarnos qué te frena.</p>
+            <div className="px-9 pt-9 max-[480px]:px-5 max-[480px]:pt-5">
+              <ModalHeader
+                icon={CALENDAR_ICON}
+                eyebrow={step === "datetime" ? "Agendar llamada · Paso 1 de 2" : "Agendar llamada · Paso 2 de 2"}
+                title={step === "datetime" ? "Elegí" : "Último"}
+                highlight={step === "datetime" ? "día y hora." : "paso."}
+                subtitle="Una charla de 45 min para contarnos qué te frena. Sin compromiso."
+              />
             </div>
 
             {/* Paso 1: fecha y horario */}
             <div className={step === "datetime" ? "contents" : "hidden"}>
-              <div className="m-8 mb-0 grid grid-cols-[1fr_220px] overflow-hidden rounded-3xl border border-ink/7 max-[720px]:grid-cols-1 max-[480px]:m-5 max-[480px]:mb-0">
+              <div className="m-9 mb-0 grid grid-cols-[1fr_220px] overflow-hidden rounded-3xl border border-ink/7 bg-white shadow-[0_24px_48px_-32px_rgba(108,60,224,0.5)] max-[720px]:grid-cols-1 max-[480px]:m-5 max-[480px]:mb-0">
               {/* Calendario */}
               <div className="p-6 max-[480px]:p-4">
                 <div className="mb-4 flex items-center justify-between">
@@ -263,7 +268,7 @@ export default function ScheduleModal() {
               </div>
 
               {/* Horarios */}
-              <div className="border-t border-ink/7 bg-pearl/50 p-6 max-[720px]:p-4 min-[721px]:border-t-0 min-[721px]:border-l">
+              <div className="border-t border-ink/7 bg-accent-soft/40 p-6 max-[720px]:p-4 min-[721px]:border-t-0 min-[721px]:border-l">
                 <p className="m-0 mb-3 text-sm font-bold text-ink">Horarios</p>
                 {!selectedDate ? (
                   <p className="m-0 text-[15px] text-muted-2">Elegí un día para ver los horarios.</p>
@@ -298,7 +303,7 @@ export default function ScheduleModal() {
             </div>
 
             {/* Resumen + continuar */}
-            <div className="flex flex-col gap-4 p-8 max-[480px]:p-5">
+            <div className="flex flex-col gap-4 p-9 max-[480px]:p-5">
               <p className="m-0 text-base text-muted">
                 {selectedDate && selectedTime ? (
                   <>
@@ -323,7 +328,7 @@ export default function ScheduleModal() {
             </div>
 
             {/* Paso 2: datos del lead */}
-            <div className={step === "lead" ? "flex flex-col gap-4 p-8 max-[480px]:p-5" : "hidden"}>
+            <div className={step === "lead" ? "flex flex-col gap-4 p-9 pt-6 max-[480px]:p-5" : "hidden"}>
               <button
                 type="button"
                 onClick={() => setStep("datetime")}
@@ -333,7 +338,7 @@ export default function ScheduleModal() {
                 Cambiar fecha y horario
               </button>
 
-              <p className="m-0 rounded-2xl bg-accent-soft px-4.5 py-3.5 text-base text-accent-hover">
+              <p className="m-0 rounded-2xl border border-accent/15 bg-white px-4.5 py-3.5 text-base text-accent-hover">
                 Tu llamada sería el <strong>{selectedDateLabel}</strong> a las <strong>{selectedTime} hs</strong>.
               </p>
 

@@ -1,0 +1,101 @@
+---
+import LogoMark from "./LogoMark.astro";
+import { resolveLogo, type LogoSource } from "../lib/logos";
+
+// Cintas de logos que se mueven como una cinta transportadora; las filas
+// impares van en sentido contrario. Con movimiento reducido quedan quietas.
+interface Props {
+  rows: LogoSource[][];
+  // Segundos que tarda una vuelta completa.
+  duration?: number;
+}
+
+const { rows, duration = 60 } = Astro.props;
+const tracks = rows.map((row) => row.map(resolveLogo));
+---
+
+<div class="marquee flex w-full flex-col gap-3.5 max-[900px]:gap-2.5" style={`--duration:${duration}s`}>
+  {
+    tracks.map((track, i) => (
+      <div class="marquee-row overflow-hidden">
+        <ul class:list={["marquee-track m-0 flex w-max list-none p-0", i % 2 === 1 && "marquee-reverse"]}>
+          {[0, 1].map((copy) =>
+            track.map((logo) => (
+              <li
+                aria-hidden={copy === 1 ? "true" : undefined}
+                class:list={[
+                  "flex h-16 flex-none items-center gap-3 rounded-[18px] border border-ink/7 bg-white px-5.5 text-[17px] font-bold text-ink shadow-[0_12px_28px_-22px_rgba(108,60,224,0.5)] max-[900px]:h-13 max-[900px]:gap-2.5 max-[900px]:rounded-[14px] max-[900px]:px-4 max-[900px]:text-[15px]",
+                  copy === 1 && "marquee-copy",
+                ]}
+              >
+                {logo.kind === "file" && logo.wide ? (
+                  <>
+                    <LogoMark logo={logo} size={30} />
+                    <span class="sr-only">{logo.name}</span>
+                  </>
+                ) : (
+                  <>
+                    <LogoMark logo={logo} class="max-[900px]:h-5.5 max-[900px]:w-5.5" />
+                    {logo.name}
+                  </>
+                )}
+              </li>
+            ))
+          )}
+        </ul>
+      </div>
+    ))
+  }
+</div>
+
+<style>
+  .marquee-row {
+    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  }
+
+  .marquee-track {
+    --gap: 14px;
+    gap: var(--gap);
+    animation: marquee var(--duration) linear infinite;
+  }
+
+  @media (max-width: 899px) {
+    .marquee-track {
+      --gap: 10px;
+    }
+  }
+
+  .marquee-reverse {
+    animation-direction: reverse;
+  }
+
+  .marquee:hover .marquee-track {
+    animation-play-state: paused;
+  }
+
+  /* La pista tiene dos copias iguales: moverla la mitad de su ancho (más
+     medio gap) deja la segunda copia justo donde estaba la primera. */
+  @keyframes marquee {
+    to {
+      transform: translateX(calc(-50% - var(--gap) / 2));
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track {
+      animation: none;
+      width: auto;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 0 16px;
+    }
+
+    .marquee-copy {
+      display: none;
+    }
+
+    .marquee-row {
+      mask-image: none;
+    }
+  }
+</style>
