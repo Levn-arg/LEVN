@@ -8,6 +8,8 @@ interface Props {
   eyebrow: string;
   quote: string;
   title: string;
+  // Fragmento del título que va resaltado en violeta.
+  highlight?: string;
   subtitle?: string;
   results: string[];
   cta: string;
@@ -19,9 +21,12 @@ interface Props {
   pillQuote?: boolean;
 }
 
-const { id, eyebrow, quote, title, subtitle, results, cta, screenSide, wide = false, pillQuote = false } = Astro.props;
+const { id, eyebrow, quote, title, highlight, subtitle, results, cta, screenSide, wide = false, pillQuote = false } = Astro.props;
+
+const [titleStart, titleEnd] = highlight ? title.split(highlight) : [title, ""];
 ---
 
+<div data-pin>
 <section
   id={id}
   class="mx-auto flex max-w-360 items-center justify-between gap-10 px-21 py-20 max-[1100px]:px-10 max-[900px]:flex-col max-[900px]:items-stretch max-[900px]:gap-5 max-[900px]:px-4 max-[900px]:py-12"
@@ -45,7 +50,7 @@ const { id, eyebrow, quote, title, subtitle, results, cta, screenSide, wide = fa
     <div class="text-[13px] font-extrabold tracking-widest text-accent uppercase max-[900px]:mt-2 max-[900px]:text-xs">{eyebrow}</div>
     <blockquote
       class:list={[
-        "m-0 self-start bg-accent-soft px-4.5 py-2.5 text-[17px] leading-[1.4] font-medium text-accent-hover italic max-[900px]:rounded-[20px] max-[900px]:px-4 max-[900px]:text-base",
+        "quote-float m-0 self-start bg-accent-soft px-4.5 py-2.5 text-[17px] leading-[1.4] font-medium text-accent-hover italic max-[900px]:rounded-[20px] max-[900px]:px-4 max-[900px]:text-base",
         pillQuote ? "rounded-full" : "rounded-[22px]",
       ]}
     >
@@ -57,7 +62,7 @@ const { id, eyebrow, quote, title, subtitle, results, cta, screenSide, wide = fa
         wide ? "text-[52px]" : "text-[46px]",
       ]}
     >
-      {title}
+      {titleStart}{highlight && <span class="text-accent">{highlight}</span>}{titleEnd}
     </h2>
     {subtitle && <p class="m-0 text-xl leading-[1.45] text-muted max-[900px]:text-lg">{subtitle}</p>}
     <ul class="m-0 flex list-none flex-col gap-3.5 p-0 max-[900px]:gap-3">
@@ -83,3 +88,4 @@ const { id, eyebrow, quote, title, subtitle, results, cta, screenSide, wide = fa
     </a>
   </div>
 </section>
+</div>

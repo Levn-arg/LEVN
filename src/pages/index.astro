@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
 import Hero from "../components/Hero.astro";
+import Integrations from "../components/Integrations.astro";
 import Pain from "../components/Pain.astro";
 import ServiceSection from "../components/ServiceSection.astro";
 import ScreenApp from "../components/screens/ScreenApp.astro";
@@ -19,6 +20,7 @@ import Footer from "../components/Footer.astro";
   <Header />
   <main>
     <Hero />
+    <Integrations />
     <Pain />
 
     <ServiceSection
@@ -26,6 +28,7 @@ import Footer from "../components/Footer.astro";
       eyebrow="Desarrollo a medida"
       quote="Tengo la idea, pero no sé cómo hacerla."
       title="Llevá tu idea a la realidad."
+      highlight="a la realidad."
       subtitle="De un boceto a una app que tus clientes pueden usar."
       results={["Tu idea probada con usuarios reales en semanas.", "Una herramienta hecha para tu negocio, no una adaptada."]}
       cta="Quiero hacer mi idea"
@@ -33,7 +36,7 @@ import Footer from "../components/Footer.astro";
       wide
       pillQuote
     >
-      <div slot="screen" data-fit data-w="380" data-h="740" class="max-w-95">
+      <div slot="screen" data-fit data-w="380" data-h="700" class="max-w-95">
         <ScreenApp />
       </div>
     </ServiceSection>
@@ -43,6 +46,7 @@ import Footer from "../components/Footer.astro";
       eyebrow="Automatización e integración"
       quote="Me paso el día pasando datos de un lado a otro."
       title="Automatizá el flujo de trabajo de tu negocio."
+      highlight="el flujo de trabajo"
       subtitle="Ahorrá tiempo, optimizá tu trabajo."
       results={[
         "Horas por semana que vuelven a ser tuyas.",
@@ -52,7 +56,7 @@ import Footer from "../components/Footer.astro";
       cta="Quiero recuperar mis horas"
       screenSide="left"
     >
-      <div slot="screen" data-fit data-w="820" data-h="580" class="max-w-205">
+      <div slot="screen" data-fit data-w="820" data-h="560" class="max-w-205">
         <ScreenAuto />
       </div>
     </ServiceSection>
@@ -62,12 +66,13 @@ import Footer from "../components/Footer.astro";
       eyebrow="Adquisición y crecimiento"
       quote="Publico, pero no me escribe nadie."
       title="Llegá a más gente, conseguí más clientes."
+      highlight="conseguí más clientes."
       results={["Consultas reales, no likes.", "Sabés de dónde viene cada cliente.", "Cada peso invertido, medido."]}
       cta="Quiero más consultas"
       screenSide="right"
       pillQuote
     >
-      <div slot="screen" data-fit data-w="820" data-h="580" class="max-w-205">
+      <div slot="screen" data-fit data-w="820" data-h="560" class="max-w-205">
         <ScreenAds />
       </div>
     </ServiceSection>
@@ -77,11 +82,12 @@ import Footer from "../components/Footer.astro";
       eyebrow="Presencia digital"
       quote="Me buscan y encuentran a la competencia."
       title="Que te encuentren. Que te elijan."
+      highlight="Que te elijan."
       results={["Aparecés cuando te buscan.", "Una web que genera confianza y consultas.", "Online en días, no en meses."]}
       cta="Quiero mi web"
       screenSide="left"
     >
-      <div slot="screen" data-fit data-w="820" data-h="580" class="max-w-205">
+      <div slot="screen" data-fit data-w="820" data-h="560" class="max-w-205">
         <ScreenWeb />
       </div>
     </ServiceSection>

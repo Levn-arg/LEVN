@@ -1,0 +1,45 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import ArrowIcon from "../../components/ArrowIcon.astro";
+import ProjectGrid from "../../components/ProjectGrid.astro";
+import { projects } from "../../data/projects.json";
+---
+
+<Layout title="Proyectos — Levn" description="Negocios que ya resolvieron su operación y su presencia digital.">
+  <Header />
+  <main>
+    <section class="mx-auto flex max-w-360 flex-col gap-12 px-21 pt-8 pb-20 max-[1100px]:px-10 max-[900px]:gap-7 max-[900px]:px-4 max-[900px]:pt-5 max-[900px]:pb-12">
+      <div class="flex flex-col gap-5">
+        <a href="/#proyectos" class="inline-flex min-h-11 items-center gap-2 self-start text-[15px] font-bold text-accent no-underline hover:text-accent-hover">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"></path></svg>
+          Inicio
+        </a>
+        <h1 class="m-0 text-[66px] leading-[1.02] font-extrabold tracking-[-0.035em] max-[1100px]:text-[54px] max-[900px]:text-[40px] max-[900px]:leading-[1.04]">
+          Así se ve <span class="text-accent">resuelto.</span>
+        </h1>
+        <p class="m-0 max-w-160 text-[22px] leading-[1.45] text-muted max-[900px]:text-lg">Negocios que dejaron de hacer todo a mano, empezaron a recibir más consultas o llevaron su idea a la realidad.</p>
+      </div>
+
+      <ProjectGrid projects={projects} />
+    </section>
+
+    <section class="mx-auto max-w-360 px-21 pb-20 max-[1100px]:px-10 max-[900px]:px-4 max-[900px]:pb-12">
+      <div class="trama flex flex-col gap-5 rounded-[32px] bg-panel p-20 text-pearl max-[1100px]:p-12 max-[900px]:gap-4 max-[900px]:rounded-[26px] max-[900px]:px-5 max-[900px]:py-10">
+        <h2 class="m-0 text-[56px] leading-[1.05] font-extrabold tracking-[-0.03em] text-pearl max-[900px]:text-[34px] max-[900px]:leading-[1.06]">
+          ¿Tu negocio <span class="text-[#B69CF7]">es el próximo?</span>
+        </h2>
+        <p class="m-0 text-xl leading-[1.45] text-ondark max-[900px]:text-[17px]">El diagnóstico es gratis. Te respondemos en menos de 24 h hábiles.</p>
+        <a
+          class="btn mt-4 inline-flex min-h-14.5 items-center gap-2.5 self-start rounded-2xl bg-accent px-6.5 text-[17px] font-bold text-white no-underline shadow-[0_16px_32px_-14px_rgba(108,60,224,0.75)] max-[900px]:self-stretch max-[900px]:justify-center"
+          href="/#contacto"
+        >
+          Quiero mi diagnóstico gratis
+          <ArrowIcon />
+        </a>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

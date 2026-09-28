@@ -1,0 +1,152 @@
+---
+import * as icons from "simple-icons";
+
+// Herramientas con su logo oficial (simple-icons). Tienda Nube, Excel y
+// Mercado Libre no están en simple-icons: para sumarlas, poner su SVG oficial
+// en /public/images/logos/ y agregarlas con `file`.
+type Tool = { slug?: keyof typeof icons; file?: string; title?: string };
+
+const rows: Tool[][] = [
+  [
+    { slug: "siWhatsapp" },
+    { slug: "siInstagram" },
+    { slug: "siFacebook" },
+    { slug: "siMercadopago" },
+    { slug: "siGoogle" },
+    { slug: "siGooglesheets" },
+    { slug: "siGmail" },
+    { slug: "siGooglecalendar" },
+    { slug: "siGooglemaps" },
+    { slug: "siGoogleads" },
+    { slug: "siGoogleanalytics" },
+    { slug: "siYoutube" },
+    { slug: "siTiktok" },
+    { slug: "siTelegram" },
+  ],
+  [
+    { slug: "siShopify" },
+    { slug: "siWoocommerce" },
+    { slug: "siWordpress" },
+    { slug: "siNotion" },
+    { slug: "siTrello" },
+    { slug: "siCalendly" },
+    { slug: "siZoom" },
+    { slug: "siGooglemeet" },
+    { slug: "siStripe" },
+    { slug: "siPaypal" },
+    { slug: "siHubspot" },
+    { slug: "siMailchimp" },
+    { slug: "siZapier" },
+    { slug: "siAirtable" },
+    { slug: "siGoogledrive" },
+  ],
+];
+
+// Los logos muy claros (Mailchimp, por ejemplo) no se leen sobre blanco:
+// esos se muestran en tinta.
+function readableColor(hex: string) {
+  const [r, g, b] = [0, 2, 4].map((i) => parseInt(hex.slice(i, i + 2), 16) / 255);
+  const luminance = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+  return luminance > 0.6 ? "#171225" : `#${hex}`;
+}
+
+const tracks = rows.map((row) =>
+  row.map((tool) => {
+    if (tool.file) return { title: tool.title ?? "", file: tool.file };
+    const icon = icons[tool.slug!] as { title: string; hex: string; path: string };
+    return { title: icon.title, path: icon.path, color: readableColor(icon.hex) };
+  })
+);
+---
+
+<section aria-labelledby="integraciones-titulo" class="flex flex-col items-center gap-10 pt-6 pb-20 max-[900px]:gap-7 max-[900px]:pt-2 max-[900px]:pb-14">
+  <div class="flex max-w-225 flex-col items-center gap-3.5 px-21 text-center max-[1100px]:px-10 max-[900px]:items-start max-[900px]:px-4 max-[900px]:text-left">
+    <h2 id="integraciones-titulo" class="m-0 text-[52px] leading-[1.05] font-extrabold tracking-[-0.03em] max-[900px]:text-[34px] max-[900px]:leading-[1.06]">
+      Todo conectado, <span class="text-accent">sin cambiar lo que ya usás.</span>
+    </h2>
+    <p class="m-0 text-xl leading-[1.45] text-muted max-[900px]:text-lg">Trabajamos con las herramientas que más usás.</p>
+  </div>
+
+  <div class="marquee flex w-full flex-col gap-3.5 max-[900px]:gap-2.5">
+    {
+      tracks.map((track, i) => (
+        <div class="marquee-row overflow-hidden">
+          <ul class:list={["marquee-track m-0 flex w-max list-none p-0", i % 2 === 1 && "marquee-reverse"]}>
+            {[0, 1].map((copy) =>
+              track.map((tool) => (
+                <li
+                  aria-hidden={copy === 1 ? "true" : undefined}
+                  class:list={[
+                    "flex h-16 flex-none items-center gap-3 rounded-[18px] border border-ink/7 bg-white px-5.5 text-[17px] font-bold text-ink shadow-[0_12px_28px_-22px_rgba(108,60,224,0.5)] max-[900px]:h-13 max-[900px]:gap-2.5 max-[900px]:rounded-[14px] max-[900px]:px-4 max-[900px]:text-[15px]",
+                    copy === 1 && "marquee-copy",
+                  ]}
+                >
+                  {tool.path ? (
+                    <svg viewBox="0 0 24 24" width="26" height="26" fill={tool.color} aria-hidden="true" class="flex-none max-[900px]:h-5.5 max-[900px]:w-5.5">
+                      <path d={tool.path} />
+                    </svg>
+                  ) : (
+                    <img src={tool.file} alt="" width="26" height="26" class="h-6.5 w-6.5 flex-none object-contain" />
+                  )}
+                  {tool.title}
+                </li>
+              ))
+            )}
+          </ul>
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .marquee-row {
+    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  }
+
+  .marquee-track {
+    --gap: 14px;
+    gap: var(--gap);
+    animation: marquee 60s linear infinite;
+  }
+
+  @media (max-width: 899px) {
+    .marquee-track {
+      --gap: 10px;
+    }
+  }
+
+  .marquee-reverse {
+    animation-direction: reverse;
+  }
+
+  .marquee:hover .marquee-track {
+    animation-play-state: paused;
+  }
+
+  /* La pista tiene dos copias iguales: moverla la mitad de su ancho (más
+     medio gap) deja la segunda copia justo donde estaba la primera. */
+  @keyframes marquee {
+    to {
+      transform: translateX(calc(-50% - var(--gap) / 2));
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track {
+      animation: none;
+      width: auto;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 0 16px;
+    }
+
+    .marquee-copy {
+      display: none;
+    }
+
+    .marquee-row {
+      mask-image: none;
+    }
+  }
+</style>

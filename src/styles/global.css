@@ -144,6 +144,28 @@ html {
     color: #4e28b8;
   }
 
+  /* Secciones de servicio fijadas en el centro mientras avanza su pantalla
+     (ver Layout.astro). */
+  .is-pinned > section {
+    position: sticky;
+    top: var(--pin-top, 0px);
+  }
+
+  /* Citas de dolor flotando suavemente. */
+  .quote-float {
+    animation: quote-float 4.5s ease-in-out infinite;
+  }
+
+  @keyframes quote-float {
+    0%,
+    100% {
+      transform: translateY(0) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-7px) rotate(-0.6deg);
+    }
+  }
+
   /* Botón primario: violeta con sombra, hover más oscuro. */
   .btn {
     transition:
@@ -163,6 +185,10 @@ html {
     .scr *::after,
     .btn {
       transition: none !important;
+    }
+
+    .quote-float {
+      animation: none;
     }
   }
 }

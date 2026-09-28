@@ -13,7 +13,7 @@ const notif =
 const bars = [18, 26, 22, 34, 38, 44];
 ---
 
-<div class="scr" data-steps="2" data-trigger="load" data-estado="0" style="position: relative; width: 720px; height: 600px; color: #171225">
+<div class="scr" data-steps="2" data-trigger="load" data-estado="0" style="position: relative; width: 720px; height: 560px; color: #171225">
   <div style="position: absolute; left: 80px; top: 0px; width: 600px; height: 380px; box-sizing: border-box; padding: 10px; background: #15121F; border-radius: 18px 18px 8px 8px; box-shadow: 0 50px 90px -50px rgba(108,60,224,0.6)">
     <div style="width: 580px; height: 360px; border-radius: 9px; overflow: hidden; background: #FAF9FC; display: flex">
       <div style="width: 118px; flex-shrink: 0; box-sizing: border-box; padding: 14px 10px; background: #15121F; color: #B3ADC4; display: flex; flex-direction: column; gap: 2px; font-size: 11px">
@@ -97,13 +97,13 @@ const bars = [18, 26, 22, 34, 38, 44];
     </div>
   </div>
 
-  <div data-show="1" style={notif + "left:430px; top:36px; --from:translateY(-12px); --delay:200ms;"}>
+  <div data-show="1" style={notif + "left:230px; top:196px; --from:translateX(-16px); --delay:200ms;"}>
     <div style="width: 32px; height: 32px; flex-shrink: 0; border-radius: 50%; background: #25D366; color: #171225; display: flex; align-items: center; justify-content: center">
       <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"></path></svg>
     </div>
     <div style="font-size: 13px; font-weight: 700">Nueva consulta <span style="font-weight: 500; color: #6A6478">· hace 1 min</span></div>
   </div>
-  <div data-show="1" style={notif + "left:230px; top:196px; --from:translateX(-16px); --delay:900ms;"}>
+  <div data-show="1" style={notif + "left:430px; top:36px; --from:translateY(-12px); --delay:900ms;"}>
     <div style="width: 32px; height: 32px; flex-shrink: 0; border-radius: 50%; background: #EFE6FC; color: #6C3CE0; display: flex; align-items: center; justify-content: center">
       <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3h7l5 5v13H7z"></path><path d="M14 3v5h5M10 13h6M10 17h6"></path></svg>
     </div>
@@ -116,5 +116,4 @@ const bars = [18, 26, 22, 34, 38, 44];
     <div style="font-size: 13px; font-weight: 700">Pago recibido <span style="font-weight: 500; color: #6A6478">· $38.800</span></div>
   </div>
 
-  <div style="position: absolute; left: 0px; right: 0px; top: 578px; text-align: center; font-size: 12px; font-weight: 500; color: #6A6478">Ejemplo ilustrativo</div>
 </div>

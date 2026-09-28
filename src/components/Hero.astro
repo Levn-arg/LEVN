@@ -1,15 +1,6 @@
 ---
 import ArrowIcon from "./ArrowIcon.astro";
 import ScreenHero from "./screens/ScreenHero.astro";
-
-const integrations = [
-  { label: "WhatsApp", short: "WhatsApp", hover: "hover:text-[#128C4A]" },
-  { label: "Mercado Pago", short: "Mercado Pago", hover: "hover:text-[#0079B8]" },
-  { label: "Google", short: "Google", hover: "hover:text-[#1A66D9]" },
-  { label: "Instagram", short: "Instagram", hover: "hover:text-[#C1306B]" },
-  { label: "Google Sheets / Excel", short: "Sheets / Excel", hover: "hover:text-[#11804A]" },
-  { label: "Tienda Nube", short: "Tienda Nube", hover: "hover:text-[#2B3A8C]" },
-];
 ---
 
 <section
@@ -18,7 +9,7 @@ const integrations = [
 >
   <div class="flex w-140 flex-none flex-col gap-7 max-[1100px]:w-100 max-[900px]:w-full max-[900px]:gap-5">
     <h1 class="m-0 text-[66px] leading-[1.02] font-extrabold tracking-[-0.035em] max-[1100px]:text-[54px] max-[900px]:text-[40px] max-[900px]:leading-[1.04]">
-      Hacé crecer tu negocio sin sumar más horas de trabajo.
+      Hacé crecer tu negocio <span class="text-accent">sin sumar más horas de trabajo.</span>
     </h1>
     <p class="m-0 text-[22px] leading-[1.45] text-muted max-[900px]:text-lg">Menos tareas a mano. Más consultas. Más ventas.</p>
     <div class="mt-1 flex items-center gap-6 max-[900px]:mt-0 max-[900px]:flex-col max-[900px]:items-stretch max-[900px]:gap-5">
@@ -36,24 +27,8 @@ const integrations = [
     </div>
   </div>
   <div class="flex min-w-0 flex-1 justify-end max-[900px]:mt-2">
-    <div data-fit data-w="720" data-h="600" class="max-w-180">
+    <div data-fit data-w="720" data-h="560" class="max-w-180">
       <ScreenHero />
     </div>
   </div>
-</section>
-
-<section aria-label="Integraciones" class="mx-auto flex max-w-360 flex-col items-center gap-4.5 px-21 pt-6 pb-16 max-[900px]:gap-3.5 max-[900px]:px-4 max-[900px]:pt-2 max-[900px]:pb-12">
-  <p class="m-0 text-sm font-semibold text-muted-2">Funciona con lo que ya usás.</p>
-  <ul class="m-0 flex list-none flex-wrap justify-center gap-3 p-0 max-[900px]:gap-2">
-    {
-      integrations.map((item) => (
-        <li
-          class={`flex h-13 items-center rounded-[14px] border border-ink/7 bg-white/55 px-5.5 text-[17px] font-bold text-muted-2 transition-colors duration-300 max-[900px]:h-10 max-[900px]:rounded-xl max-[900px]:px-3.5 max-[900px]:text-sm ${item.hover}`}
-        >
-          <span class="max-[900px]:hidden">{item.label}</span>
-          <span class="hidden max-[900px]:inline">{item.short}</span>
-        </li>
-      ))
-    }
-  </ul>
 </section>

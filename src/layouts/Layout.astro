@@ -70,6 +70,7 @@ const {
 
       const resizeObserver = new ResizeObserver((entries) => {
         for (const entry of entries) applyFit(entry.target as HTMLElement);
+        window.dispatchEvent(new Event("levn:fit"));
       });
       fits.forEach((box) => {
         applyFit(box);
@@ -79,17 +80,58 @@ const {
 
     <script>
       // Estados antes → después de cada pantalla (.scr[data-steps]).
-      // Cambian con el scroll: paso 1 cuando el centro de la pantalla pasa el
-      // 35% del recorrido del viewport, paso 2 al 65%. Los botones de la
-      // leyenda fuerzan un estado hasta el próximo cambio por scroll.
+      //
+      // En desktop, las secciones de servicio ([data-pin]) se fijan en el
+      // centro del viewport al llegar a él y quedan quietas mientras el scroll
+      // avanza los pasos de su pantalla; al terminar, la página sigue.
+      // En mobile (o si la sección no entra en pantalla) cambian por umbral:
+      // paso 1 cuando el centro de la pantalla pasa el 35% del viewport,
+      // paso 2 al 65%. Los botones de la leyenda fuerzan un estado hasta el
+      // próximo cambio por scroll.
       const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       const isMobile = window.matchMedia("(max-width: 899px)").matches;
+      const desktop = window.matchMedia("(min-width: 900px)");
       const screens = document.querySelectorAll<HTMLElement>(".scr[data-steps]");
       const lastComputed = new WeakMap<HTMLElement, number>();
+      // Recorrido de scroll (en altos de viewport) que dura fijada la sección.
+      const PIN_DISTANCE: Record<number, number> = { 2: 0.7, 3: 1.3 };
+      const PIN_THRESHOLDS: Record<number, number[]> = { 2: [0.3], 3: [0.15, 0.6] };
+
+      const pins = [...document.querySelectorAll<HTMLElement>("[data-pin]")].map((pin) => ({
+        pin,
+        section: pin.firstElementChild as HTMLElement,
+        scr: pin.querySelector<HTMLElement>(".scr[data-steps]"),
+      }));
+      const pinOf = new Map(pins.filter((p) => p.scr).map((p) => [p.scr!, p]));
+
+      function layoutPins() {
+        for (const { pin, section, scr } of pins) {
+          const height = section.offsetHeight;
+          const enabled = !!scr && desktop.matches && !reduceMotion && height <= window.innerHeight;
+          pin.classList.toggle("is-pinned", enabled);
+          if (!enabled) {
+            pin.style.height = "";
+            continue;
+          }
+          const extra = PIN_DISTANCE[Number(scr!.dataset.steps)] * window.innerHeight;
+          const top = (window.innerHeight - height) / 2;
+          pin.dataset.extra = String(extra);
+          pin.style.setProperty("--pin-top", `${top}px`);
+          pin.style.height = `${height + extra}px`;
+        }
+      }
 
       function computeState(scr: HTMLElement) {
         const steps = Number(scr.dataset.steps);
         if (reduceMotion || scr.dataset.trigger === "load") return steps - 1;
+
+        const pinned = pinOf.get(scr);
+        if (pinned?.pin.classList.contains("is-pinned")) {
+          const top = parseFloat(pinned.pin.style.getPropertyValue("--pin-top"));
+          const progress = (top - pinned.pin.getBoundingClientRect().top) / Number(pinned.pin.dataset.extra);
+          return PIN_THRESHOLDS[steps].filter((t) => progress >= t).length;
+        }
+
         const rect = scr.getBoundingClientRect();
         const progress = 1 - (rect.top + rect.height / 2) / window.innerHeight;
         const thresholds = steps === 2 ? [0.35] : [0.35, 0.65];
@@ -130,9 +172,16 @@ const {
       }
 
       // El hero arranca en "antes" y pasa a "después" apenas carga la página.
+      layoutPins();
       requestAnimationFrame(() => requestAnimationFrame(update));
       window.addEventListener("scroll", update, { passive: true });
-      window.addEventListener("resize", update);
+      // Las alturas cambian al escalar pantallas y al cargar las fuentes.
+      for (const event of ["resize", "load", "levn:fit"]) {
+        window.addEventListener(event, () => {
+          layoutPins();
+          update();
+        });
+      }
     </script>
   </body>
 </html>

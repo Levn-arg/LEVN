@@ -1,0 +1,19 @@
+---
+import LegalPage from "../components/LegalPage.astro";
+
+// Pendiente: reemplazar las secciones por el texto definitivo de los términos.
+const sections = [
+  "Aceptación de los términos",
+  "Servicios",
+  "Diagnóstico gratuito",
+  "Propuestas, precios y pagos",
+  "Propiedad intelectual",
+  "Responsabilidades",
+  "Cancelación",
+  "Modificaciones",
+  "Ley aplicable y jurisdicción",
+  "Contacto",
+];
+---
+
+<LegalPage title="Términos y condiciones" description="Condiciones de uso del sitio y de los servicios de Levn." sections={sections} />
