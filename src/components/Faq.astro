@@ -1,0 +1,107 @@
+---
+// Acordeón con <details>: se abre una pregunta a la vez, con apertura y
+// cierre animados (ver el script de abajo).
+const faqs = [
+  ["¿Cuánto cuesta?", "Depende de lo que haya que resolver. El precio cerrado lo tenés después del diagnóstico."],
+  ["¿Qué no incluye?", "Te lo decimos por escrito antes de arrancar. Sin sorpresas ni costos ocultos."],
+  ["¿Cuánto tarda?", "Una web, días. Una automatización, semanas. Una app, según el alcance."],
+  ["Ya uso otras herramientas, ¿tengo que cambiarlas?", "No. Trabajamos con lo que ya usás."],
+  ["¿Qué pasa después de la entrega?", "Seguimos. Hay soporte y mejoras mensuales."],
+];
+---
+
+<section
+  id="preguntas"
+  class="mx-auto flex max-w-360 items-start gap-20 px-21 pt-10 pb-24 max-[1100px]:gap-10 max-[1100px]:px-10 max-[900px]:flex-col max-[900px]:gap-6 max-[900px]:px-4 max-[900px]:pt-6 max-[900px]:pb-14"
+>
+  <h2 class="m-0 w-90 flex-none text-[52px] leading-[1.05] font-extrabold tracking-[-0.03em] max-[1100px]:w-70 max-[900px]:w-auto max-[900px]:text-[34px] max-[900px]:leading-[1.06]">
+    Preguntas <span class="text-accent">frecuentes</span>
+  </h2>
+  <div class="flex w-full flex-1 flex-col gap-3 max-[900px]:gap-2.5">
+    {
+      faqs.map(([q, a], i) => (
+        <details open={i === 0} class:list={["faq rounded-[20px] border border-ink/7 bg-white max-[900px]:rounded-[18px]", i === 0 && "is-open"]}>
+          <summary class="flex min-h-19 cursor-pointer list-none items-center justify-between gap-4 px-6 text-[19px] font-bold text-ink hover:text-accent-hover max-[900px]:min-h-16 max-[900px]:gap-3 max-[900px]:px-4.5 max-[900px]:py-3 max-[900px]:text-[17px] max-[900px]:leading-[1.3] [&::-webkit-details-marker]:hidden">
+            <h3 class="m-0 text-[length:inherit] font-[inherit]">{q}</h3>
+            <span class="faq-ico flex h-9 w-9 flex-none items-center justify-center rounded-full bg-accent-soft text-accent max-[900px]:h-8 max-[900px]:w-8" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 5v14M5 12h14" />
+              </svg>
+            </span>
+          </summary>
+          <div class="faq-body overflow-hidden">
+            <p class="m-0 max-w-165 px-6 pb-6 text-[17px] leading-normal text-muted max-[900px]:px-4.5 max-[900px]:pb-4.5 max-[900px]:text-base">{a}</p>
+          </div>
+        </details>
+      ))
+    }
+  </div>
+</section>
+
+<script>
+  // Abre y cierra cada respuesta animando su alto. Al abrir una, la que estaba
+  // abierta se cierra. Con movimiento reducido, cambia sin animación.
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const items = [...document.querySelectorAll<HTMLDetailsElement>("details.faq")];
+  const running = new WeakMap<HTMLDetailsElement, Animation>();
+  const EASING = "cubic-bezier(0.22, 1, 0.36, 1)";
+
+  function animate(item: HTMLDetailsElement, open: boolean) {
+    const body = item.querySelector<HTMLElement>(".faq-body")!;
+    running.get(item)?.cancel();
+    item.classList.toggle("is-open", open);
+
+    if (reduceMotion) {
+      item.open = open;
+      return;
+    }
+
+    const from = open ? 0 : body.offsetHeight;
+    if (open) item.open = true;
+    const to = open ? body.scrollHeight : 0;
+    const animation = body.animate(
+      [
+        { height: `${from}px`, opacity: open ? 0 : 1 },
+        { height: `${to}px`, opacity: open ? 1 : 0 },
+      ],
+      { duration: open ? 420 : 320, easing: EASING }
+    );
+    running.set(item, animation);
+    animation.onfinish = () => {
+      if (!open) item.open = false;
+      running.delete(item);
+    };
+  }
+
+  for (const item of items) {
+    item.querySelector("summary")!.addEventListener("click", (event) => {
+      event.preventDefault();
+      const opening = !item.classList.contains("is-open");
+      if (opening) {
+        for (const other of items) if (other !== item && other.classList.contains("is-open")) animate(other, false);
+      }
+      animate(item, opening);
+    });
+  }
+</script>
+
+<style>
+  .faq-ico {
+    transition:
+      transform 300ms cubic-bezier(0.22, 1, 0.36, 1),
+      background-color 300ms ease-out,
+      color 300ms ease-out;
+  }
+
+  .faq.is-open .faq-ico {
+    transform: rotate(45deg);
+    background-color: #6c3ce0;
+    color: #ffffff;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .faq-ico {
+      transition: none;
+    }
+  }
+</style>

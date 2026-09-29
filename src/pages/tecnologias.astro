@@ -1,0 +1,20 @@
+---
+import CatalogPage from "../components/CatalogPage.astro";
+import { TECHNOLOGY_CATEGORIES } from "../data/technologies";
+
+const categories = TECHNOLOGY_CATEGORIES.map((category) => ({
+  ...category,
+  items: category.items.map((item) => ({ ...item, text: item.use })),
+}));
+---
+
+<CatalogPage
+  title="Tecnologías — Levn"
+  description="Con qué construimos webs, apps y sistemas a medida, y para qué usamos cada tecnología."
+  heading="Con qué lo construimos,"
+  highlight="y para qué."
+  intro="Elegimos cada tecnología por el problema que resuelve, no por moda. Todo lo que construimos queda documentado."
+  categories={categories}
+  ctaHeading="¿Tenés una idea?"
+  ctaHighlight="Hagámosla realidad."
+/>

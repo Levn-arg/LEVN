@@ -1,0 +1,39 @@
+---
+import type { Logo } from "../lib/logos";
+
+// Logo de una herramienta o tecnología: ícono oficial, archivo o monograma.
+interface Props {
+  logo: Logo;
+  size?: number;
+  class?: string;
+}
+
+const { logo, size = 26, class: className } = Astro.props;
+---
+
+{
+  logo.kind === "icon" && (
+    <svg viewBox="0 0 24 24" width={size} height={size} fill={logo.color} aria-hidden="true" class:list={["flex-none", className]}>
+      <path d={logo.path} />
+    </svg>
+  )
+}
+{
+  logo.kind === "file" &&
+    (logo.wide ? (
+      <img src={logo.file} alt="" style={`height:${Math.round(size * 0.8)}px;max-width:${size * 4}px`} class:list={["w-auto flex-none object-contain", className]} />
+    ) : (
+      <img src={logo.file} alt="" width={size} height={size} class:list={["flex-none rounded-[6px] object-contain", className]} />
+    ))
+}
+{
+  logo.kind === "monogram" && (
+    <span
+      aria-hidden="true"
+      style={`width:${size}px;height:${size}px;font-size:${Math.round(size * 0.4)}px`}
+      class:list={["flex flex-none items-center justify-center rounded-[7px] bg-accent-soft font-extrabold tracking-[-0.02em] text-accent-hover", className]}
+    >
+      {logo.initials}
+    </span>
+  )
+}

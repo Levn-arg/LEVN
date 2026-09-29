@@ -1,85 +1,49 @@
 ---
+import ArrowIcon from "./ArrowIcon.astro";
+import LogoMarquee from "./LogoMarquee.astro";
+import ProjectGrid from "./ProjectGrid.astro";
 import { projects } from "../data/projects.json";
+import { ALL_TECHNOLOGIES } from "../data/technologies";
+
+// En la home van los primeros 5; el resto está en /proyectos.
+const HOME_COUNT = 5;
+
+const techs = ALL_TECHNOLOGIES.filter((tech) => tech.marquee);
+const half = Math.ceil(techs.length / 2);
+const techRows = [techs.slice(0, half), techs.slice(half)];
 ---
 
-<section class="pt-17.5 px-12 max-[900px]:px-6" id="proyectos" data-reveal>
-  <p class="mb-3.5 flex items-center gap-2 text-[12px] font-bold tracking-[1px] text-accent">
-    PROYECTOS
-  </p>
-
-  <div class="mb-6.5 flex items-end justify-between gap-5 max-[560px]:flex-col max-[560px]:items-start">
-    <h2 class="text-[26px] font-extrabold">Casos que ya estamos<br />construyendo.</h2>
-    <div class="flex flex-none gap-2.5">
-      <button
-        type="button"
-        data-projects-prev
-        aria-label="Proyecto anterior"
-        class="flex h-9.5 w-9.5 cursor-pointer items-center justify-center rounded-full border-[1.5px] border-ink text-sm hover:bg-ink hover:text-white"
-        >←</button
-      >
-      <button
-        type="button"
-        data-projects-next
-        aria-label="Siguiente proyecto"
-        class="flex h-9.5 w-9.5 cursor-pointer items-center justify-center rounded-full border-[1.5px] border-ink text-sm hover:bg-ink hover:text-white"
-        >→</button
-      >
-    </div>
+<section id="proyectos" class="mx-auto flex max-w-360 flex-col gap-12 px-21 py-20 max-[1100px]:px-10 max-[900px]:gap-7 max-[900px]:px-4 max-[900px]:py-12">
+  <div class="flex flex-col gap-4">
+    <div class="text-[13px] font-extrabold tracking-widest text-accent uppercase max-[900px]:text-xs">Proyectos</div>
+    <h2 class="m-0 text-[52px] leading-[1.05] font-extrabold tracking-[-0.03em] max-[900px]:text-[34px] max-[900px]:leading-[1.06]">Así se ve <span class="text-accent">resuelto.</span></h2>
   </div>
 
-  <div
-    data-projects-track
-    class="flex snap-x snap-mandatory gap-5 overflow-x-auto pb-1 scrollbar-none [&::-webkit-scrollbar]:hidden"
-  >
-    {
-      projects.map((project) => (
-        <a
-          href={`/proyectos/${project.slug}/`}
-          class="flex-none w-85 snap-start rounded-[22px] bg-white p-5 text-ink shadow-[0_12px_30px_rgba(60,40,110,0.06)] hover:text-ink"
-        >
-          {project.images.card ? (
-            <img
-              src={project.images.card}
-              alt={project.title}
-              class="mb-4 h-45 w-full rounded-[14px] object-cover"
-            />
-          ) : (
-            <div class="mb-4 flex h-45 w-full items-center justify-center rounded-[14px] bg-[#e6e6e6] text-[12px] text-[#999]">
-              imagen
-            </div>
-          )}
-          <div class="mb-2.5 flex flex-wrap gap-1.5">
-            {project.tags.slice(0, 3).map((tag) => (
-              <span class="rounded-full bg-accent-soft px-2.5 py-1 text-[10.5px] font-bold text-accent">
-                {tag}
-              </span>
-            ))}
-          </div>
-          <p class="mb-1.5 text-[17px] font-extrabold">{project.title}</p>
-          <p class="mb-3.5 text-[12.5px] leading-normal text-muted-2">{project.summary}</p>
-          <span class="text-[13px] font-bold text-accent">Ver proyecto →</span>
-        </a>
-      ))
-    }
+  <ProjectGrid projects={projects.slice(0, HOME_COUNT)} />
 
-    <div class="flex min-h-85 w-85 flex-none flex-col items-center justify-center rounded-[22px] border-[1.5px] border-dashed border-[#d8d3e0] bg-white p-5 text-center snap-start">
-      <div class="mb-4 flex h-45 w-full items-center justify-center rounded-[14px] bg-[#e6e6e6] text-[12px] text-[#999]">
-        imagen
-      </div>
-      <p class="mb-1.5 text-[15px] font-extrabold">¿Querés ser el próximo caso?</p>
-      <p class="text-[12.5px] text-muted-2">Condiciones preferenciales para los primeros.</p>
+  {
+    projects.length > HOME_COUNT && (
+      <a
+        class="btn inline-flex min-h-14 items-center gap-2.5 self-center rounded-2xl bg-accent px-6 text-[17px] font-bold text-white no-underline shadow-[0_16px_32px_-14px_rgba(108,60,224,0.75)] max-[900px]:self-stretch max-[900px]:justify-center"
+        href="/proyectos/"
+      >
+        Ver más proyectos
+        <ArrowIcon />
+      </a>
+    )
+  }
+
+  <div class="mt-8 flex flex-col items-center gap-7 max-[900px]:mt-4 max-[900px]:items-start max-[900px]:gap-5">
+    <div class="flex flex-col items-center gap-2 text-center max-[900px]:items-start max-[900px]:text-left">
+      <h3 class="m-0 text-[32px] leading-[1.1] font-extrabold tracking-[-0.02em] max-[900px]:text-2xl">Con qué lo <span class="text-accent">construimos.</span></h3>
+      <p class="m-0 text-lg text-muted max-[900px]:text-base">Tecnologías elegidas por el problema que resuelven, no por moda.</p>
     </div>
+    <div class="w-full max-[900px]:-mx-4 max-[900px]:w-[calc(100%+32px)]">
+      <LogoMarquee rows={techRows} duration={45} />
+    </div>
+    <a class="inline-flex min-h-11 items-center gap-2 text-[17px] font-bold text-accent no-underline hover:text-accent-hover" href="/tecnologias/">
+      Ver todas las tecnologías
+      <ArrowIcon size={18} />
+    </a>
   </div>
 </section>
-
-<script>
-  document.querySelectorAll<HTMLElement>("[data-projects-track]").forEach((track) => {
-    const section = track.closest("section");
-    section?.querySelector("[data-projects-prev]")?.addEventListener("click", () => {
-      track.scrollBy({ left: -360, behavior: "smooth" });
-    });
-    section?.querySelector("[data-projects-next]")?.addEventListener("click", () => {
-      track.scrollBy({ left: 360, behavior: "smooth" });
-    });
-  });
-</script>

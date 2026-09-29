@@ -1,0 +1,104 @@
+---
+import ArrowIcon from "./ArrowIcon.astro";
+import { publicImage } from "../lib/images";
+import type { projects } from "../data/projects.json";
+
+// Bento de 4 columnas que se repite cada 7 proyectos: uno destacado (2×2),
+// cuatro chicos (1×1) y dos anchos oscuros (2×1). Con 5 proyectos queda un
+// bloque justo de 4×2.
+interface Props {
+  projects: typeof projects;
+}
+
+type Variant = "feature" | "small" | "wide";
+
+function variantFor(index: number): Variant {
+  const slot = index % 7;
+  if (slot === 0) return "feature";
+  if (slot >= 5) return "wide";
+  return "small";
+}
+
+const cards = Astro.props.projects.map((project, index) => ({
+  ...project,
+  variant: variantFor(index),
+  image: publicImage(project.images.card),
+}));
+---
+
+<ul class="m-0 grid list-none auto-rows-[260px] grid-flow-dense grid-cols-4 gap-5 p-0 max-[1100px]:grid-cols-2 max-[640px]:auto-rows-auto max-[640px]:grid-cols-1 max-[640px]:gap-3">
+  {
+    cards.map((card) => (
+      <li
+        class:list={[
+          card.variant === "feature" && "col-span-2 row-span-2 max-[640px]:col-span-1 max-[640px]:row-span-1",
+          card.variant === "wide" && "col-span-2 max-[640px]:col-span-1",
+        ]}
+      >
+        <a
+          href={`/proyectos/${card.slug}/`}
+          class:list={[
+            "group relative flex h-full flex-col overflow-hidden rounded-[26px] no-underline transition-[transform,box-shadow] duration-300 hover:-translate-y-1 max-[640px]:rounded-[22px]",
+            card.variant === "wide"
+              ? "trama bg-panel p-7 text-pearl hover:text-pearl hover:shadow-[0_30px_60px_-30px_rgba(23,18,37,0.6)] max-[640px]:p-5.5"
+              : "border border-ink/6 bg-white p-7 text-ink hover:text-ink hover:shadow-[0_30px_60px_-30px_rgba(108,60,224,0.55)] max-[640px]:p-5.5",
+          ]}
+        >
+          {card.variant === "feature" &&
+            (card.image ? (
+              <img src={card.image} alt="" loading="lazy" class="mb-6 min-h-0 w-full flex-1 rounded-[18px] object-cover max-[640px]:h-50 max-[640px]:flex-none" />
+            ) : (
+              <div class="trama mb-6 flex min-h-0 w-full flex-1 items-end overflow-hidden rounded-[18px] bg-accent-soft p-6 max-[640px]:h-50 max-[640px]:flex-none" aria-hidden="true">
+                <span class="text-[88px] leading-none font-extrabold tracking-[-0.04em] text-accent/25">{card.title}</span>
+              </div>
+            ))}
+
+          <div class="flex flex-wrap gap-1.5">
+            {card.tags.slice(0, card.variant === "small" ? 1 : 3).map((tag) => (
+              <span
+                class:list={[
+                  "rounded-full px-2.5 py-1 text-xs font-bold",
+                  card.variant === "wide" ? "bg-white/10 text-pearl" : "bg-accent-soft text-accent-hover",
+                ]}
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+
+          <p
+            class:list={[
+              "m-0 mt-3.5 font-extrabold tracking-[-0.02em]",
+              card.variant === "feature" ? "text-[32px] leading-[1.1] max-[640px]:text-2xl" : "text-[22px] leading-[1.2]",
+            ]}
+          >
+            {card.title}
+          </p>
+          <p
+            class:list={[
+              "m-0 mt-2 text-[15px] leading-normal",
+              card.variant === "wide" ? "max-w-110 text-ondark" : "text-muted",
+              card.variant === "small" && "line-clamp-3",
+              card.variant === "feature" && "text-[17px]",
+            ]}
+          >
+            {card.summary}
+          </p>
+
+          <span
+            class:list={[
+              "mt-auto flex h-11 w-11 items-center justify-center self-end rounded-full transition-colors duration-300 max-[640px]:mt-4",
+              card.variant === "wide"
+                ? "bg-white/10 text-pearl group-hover:bg-accent group-hover:text-white"
+                : "bg-accent-soft text-accent group-hover:bg-accent group-hover:text-white",
+            ]}
+            aria-hidden="true"
+          >
+            <ArrowIcon size={18} />
+          </span>
+          <span class="sr-only">Ver proyecto {card.title}</span>
+        </a>
+      </li>
+    ))
+  }
+</ul>

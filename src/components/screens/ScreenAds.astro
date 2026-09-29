@@ -1,0 +1,189 @@
+---
+import Legend from "./Legend.astro";
+
+// Adquisición: anuncio en el feed → consulta por WhatsApp → panel de consultas.
+const vals = [14, 21, 29, 37];
+const barras = vals.map((v, i) => ({
+  v,
+  l: `Sem ${i + 1}`,
+  st: `width:100%; border-radius:8px 8px 4px 4px; background:${i === 3 ? "#6C3CE0" : "#CDBDF5"}; --h0:${8 + i * 3}px; --h2:${Math.round((v / 37) * 104)}px; --bd:${i * 80}ms;`,
+}));
+const fuentes = [["Instagram", 58], ["Google", 31], ["Recomendados", 12]].map(([l, v]) => ({
+  l,
+  v,
+  st: `height:6px; border-radius:3px; background:#6C3CE0; --w2:${Math.round(((v as number) / 101) * 100)}%;`,
+}));
+const notif = "position:absolute; width:250px; box-sizing:border-box; padding:12px 14px; background:#FFFFFF; border-radius:18px; box-shadow:0 18px 40px -16px rgba(108,60,224,.45), 0 2px 6px rgba(23,18,37,.08); display:flex; gap:10px; align-items:center; z-index:6;";
+const scr = "position:absolute; inset:0;";
+const paw =
+  "M12 11c-3 0-5.5 3.5-5.5 6 0 1.5 1.2 2.5 2.6 2.5 1.2 0 1.8-.6 2.9-.6s1.7.6 2.9.6c1.4 0 2.6-1 2.6-2.5 0-2.5-2.5-6-5.5-6z";
+---
+
+<div class="scr scr-ads" data-steps="3" data-estado="0" style="position: relative; width: 820px; height: 560px; color: #171225">
+  <div class="ads-laptop" style="position: absolute; left: 180px; top: 40px">
+    <div style="width: 620px; height: 390px; box-sizing: border-box; padding: 10px; background: #15121F; border-radius: 18px 18px 8px 8px; box-shadow: 0 50px 90px -50px rgba(108,60,224,0.55)">
+      <div style="width: 600px; height: 370px; box-sizing: border-box; border-radius: 9px; overflow: hidden; background: #FAF9FC; padding: 16px 18px; display: flex; flex-direction: column; gap: 12px">
+        <div style="display: flex; align-items: center; justify-content: space-between">
+          <div><div style="font-size: 15px; font-weight: 700">Consultas del mes</div><div style="font-size: 11px; color: #6A6478">Marzo · todas las fuentes</div></div>
+          <div style="padding: 4px 10px; border-radius: 999px; background: #EFE6FC; color: #4E28B8; font-size: 10px; font-weight: 700">Actualizado hoy</div>
+        </div>
+        <div style="display: flex; gap: 12px">
+          <div style="width: 320px; box-sizing: border-box; background: #FFFFFF; border: 1px solid #ECE8F3; border-radius: 12px; padding: 12px 14px">
+            <div style="display: flex; align-items: baseline; gap: 6px"><span style="font-size: 28px; font-weight: 800; letter-spacing: -0.02em">101</span><span style="font-size: 12px; color: #6A6478">consultas</span></div>
+            <div style="display: flex; align-items: flex-end; gap: 16px; height: 150px; margin-top: 8px; padding: 0 6px">
+              {
+                barras.map((b) => (
+                  <div style="flex-grow: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 4px; height: 150px">
+                    <span class="ads-val" style="font-size: 11px; font-weight: 700; min-height: 14px">{b.v}</span>
+                    <div class="ads-bar" style={b.st} />
+                    <span style="font-size: 10px; color: #6A6478">{b.l}</span>
+                  </div>
+                ))
+              }
+            </div>
+          </div>
+          <div style="flex-grow: 1; box-sizing: border-box; background: #FFFFFF; border: 1px solid #ECE8F3; border-radius: 12px; padding: 12px 14px; display: flex; flex-direction: column; gap: 12px">
+            <div style="font-size: 12px; font-weight: 700">¿De dónde vienen?</div>
+            {
+              fuentes.map((f) => (
+                <div style="display: flex; flex-direction: column; gap: 5px">
+                  <div style="display: flex; justify-content: space-between; font-size: 12px">
+                    <span>{f.l}</span>
+                    <span style="font-weight: 700">
+                      <span class="ads-on">{f.v}</span>
+                      <span class="ads-off">—</span>
+                    </span>
+                  </div>
+                  <div style="height: 6px; border-radius: 3px; background: #F1EEF6; overflow: hidden">
+                    <div class="ads-src" style={f.st} />
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px">
+          <div style="background: #FFFFFF; border: 1px solid #ECE8F3; border-radius: 12px; padding: 8px 12px"><div style="font-size: 10px; color: #6A6478">Invertido</div><div style="font-size: 15px; font-weight: 800">$72.400</div></div>
+          <div style="background: #FFFFFF; border: 1px solid #ECE8F3; border-radius: 12px; padding: 8px 12px"><div style="font-size: 10px; color: #6A6478">Costo por consulta</div><div style="font-size: 15px; font-weight: 800">$717</div></div>
+          <div style="background: #FFFFFF; border: 1px solid #ECE8F3; border-radius: 12px; padding: 8px 12px"><div style="font-size: 10px; color: #6A6478">Clientes nuevos</div><div style="font-size: 15px; font-weight: 800">34</div></div>
+        </div>
+      </div>
+    </div>
+    <div style="width: 650px; height: 14px; margin-left: -15px; border-radius: 0 0 14px 14px; background: #2A2536; display: flex; justify-content: center"><div style="width: 110px; height: 5px; border-radius: 0 0 8px 8px; background: #15121F"></div></div>
+  </div>
+
+  <div style="position: absolute; left: 0px; top: 10px; width: 250px; height: 520px; box-sizing: border-box; padding: 9px; background: #15121F; border-radius: 40px; box-shadow: 0 40px 80px -40px rgba(108,60,224,0.6), 0 4px 12px rgba(23,18,37,0.14); z-index: 3">
+    <div style="position: relative; width: 232px; height: 502px; border-radius: 32px; overflow: hidden; background: #FFFFFF">
+      <div style="position: absolute; top: 9px; left: 76px; width: 80px; height: 22px; border-radius: 999px; background: #15121F; z-index: 4"></div>
+
+      <div data-show="0" style={scr + "background:#FFFFFF; padding-top:40px;"}>
+        <div style="height: 34px; padding: 0 12px; display: flex; align-items: center; justify-content: space-between">
+          <span style="font-size: 15px; font-weight: 800">Inicio</span>
+          <span style="display: flex; gap: 10px; color: #4A4458">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.5-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.5-7 10-7 10z"></path></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"></path></svg>
+          </span>
+        </div>
+        <div style="padding: 8px 12px; display: flex; align-items: center; gap: 8px">
+          <div style="width: 30px; height: 30px; border-radius: 50%; background: #FDE3C8; color: #9A4D00; display: flex; align-items: center; justify-content: center">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="7" cy="9" r="2"></circle><circle cx="17" cy="9" r="2"></circle><circle cx="10" cy="5.5" r="2"></circle><circle cx="14" cy="5.5" r="2"></circle><path d={paw}></path></svg>
+          </div>
+          <div><div style="font-size: 12px; font-weight: 700">Patitas a Domicilio</div><div style="font-size: 10px; color: #6A6478">Publicidad</div></div>
+        </div>
+        <div style="height: 200px; background: #FDE3C8; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; color: #5A2A00; text-align: center">
+          <svg width="52" height="52" viewBox="0 0 24 24" fill="#C0661A" aria-hidden="true"><circle cx="7" cy="9" r="2"></circle><circle cx="17" cy="9" r="2"></circle><circle cx="10" cy="5.5" r="2"></circle><circle cx="14" cy="5.5" r="2"></circle><path d={paw}></path></svg>
+          <div style="font-size: 20px; font-weight: 800; line-height: 1.1">Baño y corte<br />a domicilio</div>
+          <div style="font-size: 11px; font-weight: 600">Caballito · Almagro</div>
+        </div>
+        <div style="position: relative; height: 40px; padding: 0 12px; background: #F4F3F6; display: flex; align-items: center; justify-content: space-between; font-size: 12px; font-weight: 700">
+          Enviar mensaje
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg>
+          <div style="position: absolute; right: 18px; top: 0px; width: 40px; height: 40px; border-radius: 50%; border: 2px solid #6C3CE0; background: rgba(108,60,224,0.18); box-sizing: border-box"></div>
+        </div>
+        <div style="padding: 10px 12px 0; font-size: 11px; line-height: 1.45; color: #4A4458"><b style="color: #171225">Patitas a Domicilio</b> Tu perro bañado sin salir de casa. Pedí turno por WhatsApp.</div>
+      </div>
+
+      <div data-show="1 2" style={scr + "background:#EFE7DC;"}>
+        <div style="padding: 38px 12px 8px; background: #FFFFFF; border-bottom: 1px solid #ECE8F3; display: flex; align-items: center; gap: 8px">
+          <div style="width: 30px; height: 30px; border-radius: 50%; background: #D6F0E0; color: #146C3A; font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center">LF</div>
+          <div style="flex-grow: 1"><div style="font-size: 12px; font-weight: 700">Lucía Fernández</div><div style="font-size: 10px; color: #6A6478">en línea</div></div>
+          <div style="width: 22px; height: 22px; border-radius: 50%; background: #25D366; color: #171225; display: flex; align-items: center; justify-content: center">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"></path></svg>
+          </div>
+        </div>
+        <div style="padding: 10px; display: flex; flex-direction: column; gap: 6px">
+          <div style="align-self: center; display: flex; align-items: center; gap: 6px; padding: 4px 8px; border-radius: 8px; background: #FFFFFF; font-size: 10px; color: #4A4458"><div style="width: 6px; height: 6px; border-radius: 50%; background: #6C3CE0"></div>Llegó desde el anuncio</div>
+          <div style="align-self: flex-start; max-width: 80%; box-sizing: border-box; padding: 7px 9px; border-radius: 12px 12px 12px 4px; background: #FFFFFF; font-size: 12px; line-height: 1.35">¡Hola! Vi el anuncio. ¿Tienen turno el sábado para un caniche?<div style="text-align: right; font-size: 9px; color: #6A6478; margin-top: 2px">10:31</div></div>
+          <div style="align-self: flex-end; max-width: 80%; box-sizing: border-box; padding: 7px 9px; border-radius: 12px 12px 4px 12px; background: #D9FDD3; font-size: 12px; line-height: 1.35">¡Hola, Lucía! Sí: sábado 10:30 o 12:00. ¿Cuál te queda mejor?<div style="text-align: right; font-size: 9px; color: #4A4458; margin-top: 2px">10:31</div></div>
+          <div style="align-self: flex-start; max-width: 80%; box-sizing: border-box; padding: 7px 9px; border-radius: 12px 12px 12px 4px; background: #FFFFFF; font-size: 12px; line-height: 1.35">10:30 perfecto<div style="text-align: right; font-size: 9px; color: #6A6478; margin-top: 2px">10:33</div></div>
+          <div style="align-self: flex-end; max-width: 80%; box-sizing: border-box; padding: 7px 9px; border-radius: 12px 12px 4px 12px; background: #D9FDD3; font-size: 12px; line-height: 1.35">Listo, te reservé. Te paso el link de pago.<div style="text-align: right; font-size: 9px; color: #4A4458; margin-top: 2px">10:33</div></div>
+        </div>
+        <div style="position: absolute; left: 8px; right: 8px; bottom: 10px; height: 36px; display: flex; gap: 6px">
+          <div style="flex-grow: 1; border-radius: 18px; background: #FFFFFF; padding: 0 12px; display: flex; align-items: center; font-size: 12px; color: #6A6478">Mensaje</div>
+          <div style="width: 36px; height: 36px; border-radius: 50%; background: #25D366; color: #171225; display: flex; align-items: center; justify-content: center">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12l16-8-6 16-2-7z"></path></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div data-show="1 2" style={notif + "left:150px; top:84px; --from:translateX(-16px); --delay:350ms;"}>
+    <div style="width: 32px; height: 32px; flex-shrink: 0; border-radius: 50%; background: #25D366; color: #171225; display: flex; align-items: center; justify-content: center">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"></path></svg>
+    </div>
+    <div style="flex-grow: 1"><div style="font-size: 13px; font-weight: 700">Nueva consulta · hace 1 min</div><div style="font-size: 12px; color: #6A6478">Lucía F. · desde el anuncio</div></div>
+  </div>
+  <div data-show="2" style={notif + "right:0; top:0; --from:translateY(-12px); --delay:500ms;"}>
+    <div style="width: 32px; height: 32px; flex-shrink: 0; border-radius: 50%; background: #EFE6FC; color: #6C3CE0; display: flex; align-items: center; justify-content: center">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2"></rect><path d="M4 10h16M9 3v4M15 3v4"></path></svg>
+    </div>
+    <div style="flex-grow: 1"><div style="font-size: 13px; font-weight: 700">Turno confirmado</div><div style="font-size: 12px; color: #6A6478">Sábado 10:30 · Lucía F.</div></div>
+  </div>
+
+  <Legend steps={["Anuncio", "Consulta", "Cliente"]} style="left: 180px; right: 0px; top: 472px;" />
+</div>
+
+<style>
+  .ads-laptop {
+    transition:
+      opacity 700ms var(--ease),
+      transform 700ms var(--ease);
+  }
+
+  .scr-ads[data-estado="0"] .ads-laptop {
+    opacity: 0.45;
+    transform: translateX(16px);
+  }
+
+  .ads-bar {
+    height: var(--h0);
+    transition: height 800ms var(--ease) var(--bd);
+  }
+
+  .scr-ads[data-estado="2"] .ads-bar {
+    height: var(--h2);
+  }
+
+  .ads-val {
+    visibility: hidden;
+  }
+
+  .scr-ads[data-estado="2"] .ads-val {
+    visibility: visible;
+  }
+
+  .ads-src {
+    width: 6%;
+    transition: width 800ms var(--ease) 200ms;
+  }
+
+  .scr-ads[data-estado="2"] .ads-src {
+    width: var(--w2);
+  }
+
+  .scr-ads:not([data-estado="2"]) .ads-on,
+  .scr-ads[data-estado="2"] .ads-off {
+    display: none;
+  }
+</style>

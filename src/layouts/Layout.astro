@@ -7,8 +7,8 @@ interface Props {
 }
 
 const {
-  title = "LEVN — Soluciones digitales para PyMEs",
-  description = "Automatizamos, construimos y hacemos crecer tu negocio con soluciones que generan resultados.",
+  title = "Levn — Hacé crecer tu negocio sin sumar más horas de trabajo",
+  description = "Menos tareas a mano. Más consultas. Más ventas. Pedí tu diagnóstico gratis.",
 } = Astro.props;
 ---
 
@@ -23,42 +23,18 @@ const {
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&display=swap"
       rel="stylesheet"
     />
     <script is:inline>
       document.documentElement.classList.add("js");
     </script>
   </head>
-  <body>
-    <div class="relative overflow-hidden bg-pearl">
-      <div
-        class="pointer-events-none absolute -top-35 -right-65 z-0 h-105 w-130 rounded-[58%_42%_60%_40%/45%_55%_45%_55%] bg-accent max-[900px]:hidden"
-        aria-hidden="true"
-      >
-      </div>
-      <div
-        class="pointer-events-none absolute -top-15 -left-95 z-0 h-95 w-105 rounded-full bg-accent max-[900px]:hidden"
-        aria-hidden="true"
-      >
-      </div>
-      <div
-        class="pointer-events-none absolute top-205 -right-35 z-0 h-55 w-85 rounded-[50%_50%_40%_60%/60%_40%_60%_40%] bg-accent max-[900px]:hidden"
-        aria-hidden="true"
-      >
-      </div>
-      <div
-        class="pointer-events-none absolute top-375 -left-95 z-0 h-85 w-105 rounded-[45%_55%_55%_45%/55%_45%_55%_45%] bg-accent max-[900px]:hidden"
-        aria-hidden="true"
-      >
-      </div>
-
-      <div class="relative z-10">
-        <slot />
-      </div>
-    </div>
+  <body class="overflow-x-hidden">
+    <slot />
 
     <script>
+      // Aparición de secciones al entrar en pantalla.
       const revealed = new Set<Element>();
       const observer = new IntersectionObserver(
         (entries) => {
@@ -73,6 +49,139 @@ const {
       );
 
       document.querySelectorAll("[data-reveal]").forEach((el) => observer.observe(el));
+    </script>
+
+    <script>
+      // Escala cada pantalla de tamaño fijo ([data-fit] > hijo de data-w × data-h)
+      // al ancho disponible, sin agrandarla nunca por encima de su tamaño real.
+      const fits = document.querySelectorAll<HTMLElement>("[data-fit]");
+
+      function applyFit(box: HTMLElement) {
+        const inner = box.firstElementChild as HTMLElement | null;
+        if (!inner) return;
+        const w = Number(box.dataset.w);
+        const h = Number(box.dataset.h);
+        const scale = Math.min(1, box.clientWidth / w);
+        inner.style.width = `${w}px`;
+        inner.style.height = `${h}px`;
+        inner.style.transform = `scale(${scale})`;
+        box.style.height = `${h * scale}px`;
+      }
+
+      const resizeObserver = new ResizeObserver((entries) => {
+        for (const entry of entries) applyFit(entry.target as HTMLElement);
+        window.dispatchEvent(new Event("levn:fit"));
+      });
+      fits.forEach((box) => {
+        applyFit(box);
+        resizeObserver.observe(box);
+      });
+    </script>
+
+    <script>
+      // Estados antes → después de cada pantalla (.scr[data-steps]).
+      //
+      // En desktop, las secciones de servicio ([data-pin]) se fijan en el
+      // centro del viewport al llegar a él y quedan quietas mientras el scroll
+      // avanza los pasos de su pantalla; al terminar, la página sigue.
+      // En mobile (o si la sección no entra en pantalla) cambian por umbral:
+      // paso 1 cuando el centro de la pantalla pasa el 35% del viewport,
+      // paso 2 al 65%. Los botones de la leyenda fuerzan un estado hasta el
+      // próximo cambio por scroll.
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const isMobile = window.matchMedia("(max-width: 899px)").matches;
+      const desktop = window.matchMedia("(min-width: 900px)");
+      const screens = document.querySelectorAll<HTMLElement>(".scr[data-steps]");
+      const lastComputed = new WeakMap<HTMLElement, number>();
+      // Recorrido de scroll (en altos de viewport) que dura fijada la sección.
+      const PIN_DISTANCE: Record<number, number> = { 2: 0.7, 3: 1.3 };
+      const PIN_THRESHOLDS: Record<number, number[]> = { 2: [0.3], 3: [0.15, 0.6] };
+
+      const pins = [...document.querySelectorAll<HTMLElement>("[data-pin]")].map((pin) => ({
+        pin,
+        section: pin.firstElementChild as HTMLElement,
+        scr: pin.querySelector<HTMLElement>(".scr[data-steps]"),
+      }));
+      const pinOf = new Map(pins.filter((p) => p.scr).map((p) => [p.scr!, p]));
+
+      function layoutPins() {
+        for (const { pin, section, scr } of pins) {
+          const height = section.offsetHeight;
+          const enabled = !!scr && desktop.matches && !reduceMotion && height <= window.innerHeight;
+          pin.classList.toggle("is-pinned", enabled);
+          if (!enabled) {
+            pin.style.height = "";
+            continue;
+          }
+          const extra = PIN_DISTANCE[Number(scr!.dataset.steps)] * window.innerHeight;
+          const top = (window.innerHeight - height) / 2;
+          pin.dataset.extra = String(extra);
+          pin.style.setProperty("--pin-top", `${top}px`);
+          pin.style.height = `${height + extra}px`;
+        }
+      }
+
+      function computeState(scr: HTMLElement) {
+        const steps = Number(scr.dataset.steps);
+        if (reduceMotion || scr.dataset.trigger === "load") return steps - 1;
+
+        const pinned = pinOf.get(scr);
+        if (pinned?.pin.classList.contains("is-pinned")) {
+          const top = parseFloat(pinned.pin.style.getPropertyValue("--pin-top"));
+          const progress = (top - pinned.pin.getBoundingClientRect().top) / Number(pinned.pin.dataset.extra);
+          return PIN_THRESHOLDS[steps].filter((t) => progress >= t).length;
+        }
+
+        const rect = scr.getBoundingClientRect();
+        const progress = 1 - (rect.top + rect.height / 2) / window.innerHeight;
+        const thresholds = steps === 2 ? [0.35] : [0.35, 0.65];
+        return thresholds.filter((t) => progress >= t).length;
+      }
+
+      function update() {
+        for (const scr of screens) {
+          const next = computeState(scr);
+          if (lastComputed.get(scr) === next) continue;
+          lastComputed.set(scr, next);
+          scr.dataset.estado = String(next);
+        }
+      }
+
+      function setDevice(scr: HTMLElement, device: string) {
+        scr.dataset.dev = device;
+        scr.querySelectorAll<HTMLButtonElement>("[data-dev-pick]").forEach((button) => {
+          button.setAttribute("aria-pressed", String(button.dataset.devPick === device));
+        });
+      }
+
+      for (const scr of screens) {
+        if (isMobile && scr.dataset.devMobile) setDevice(scr, scr.dataset.devMobile);
+
+        scr.querySelectorAll<HTMLButtonElement>("[data-step]").forEach((button) => {
+          button.addEventListener("click", () => {
+            scr.dataset.estado = button.dataset.step;
+          });
+        });
+
+        scr.querySelectorAll<HTMLButtonElement>("[data-dev-pick]").forEach((button) => {
+          button.addEventListener("click", () => {
+            setDevice(scr, button.dataset.devPick!);
+            if (scr.dataset.estado === "0") scr.dataset.estado = "1";
+          });
+        });
+      }
+
+      // El hero arranca en "antes" y pasa a "después" apenas carga la página.
+      layoutPins();
+      requestAnimationFrame(() => requestAnimationFrame(update));
+      window.addEventListener("scroll", update, { passive: true });
+      // Las alturas cambian al escalar pantallas y al cargar las fuentes.
+      for (const event of ["resize", "load", "levn:fit"]) {
+        window.addEventListener(event, () => {
+          layoutPins();
+          update();
+        });
+      }
     </script>
   </body>
 </html>
