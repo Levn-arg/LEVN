@@ -83,7 +83,7 @@ const sections = categories.map((category) => ({
               </div>
               <ul class="m-0 grid list-none grid-cols-2 gap-4 p-0 max-[1100px]:grid-cols-1 max-[900px]:gap-3">
                 {section.items.map(({ logo, text }) => (
-                  <li class="flex gap-4 rounded-3xl border border-ink/6 bg-white p-6 max-[900px]:rounded-[20px] max-[900px]:p-5">
+                  <li class="flex gap-4 rounded-3xl border border-ink/6 bg-surface p-6 max-[900px]:rounded-[20px] max-[900px]:p-5">
                     <span class="flex h-13 w-13 flex-none items-center justify-center rounded-2xl border border-ink/6 bg-pearl/60">
                       <LogoMark logo={logo} size={28} class={logo.kind === "file" && logo.wide ? "max-w-10" : undefined} />
                     </span>
@@ -101,8 +101,8 @@ const sections = categories.map((category) => ({
     </div>
 
     <section class="mx-auto max-w-360 px-21 pt-10 pb-20 max-[1100px]:px-10 max-[900px]:px-4 max-[900px]:pb-12">
-      <div class="trama flex flex-col gap-5 rounded-[32px] bg-panel p-20 text-pearl max-[1100px]:p-12 max-[900px]:gap-4 max-[900px]:rounded-[26px] max-[900px]:px-5 max-[900px]:py-10">
-        <h2 class="m-0 text-[56px] leading-[1.05] font-extrabold tracking-[-0.03em] text-pearl max-[900px]:text-[34px] max-[900px]:leading-[1.06]">
+      <div class="trama flex flex-col gap-5 rounded-[32px] bg-panel p-20 text-cream max-[1100px]:p-12 max-[900px]:gap-4 max-[900px]:rounded-[26px] max-[900px]:px-5 max-[900px]:py-10">
+        <h2 class="m-0 text-[56px] leading-[1.05] font-extrabold tracking-[-0.03em] text-cream max-[900px]:text-[34px] max-[900px]:leading-[1.06]">
           {ctaHeading} <span class="text-[#B69CF7]">{ctaHighlight}</span>
         </h2>
         <p class="m-0 text-xl leading-[1.45] text-ondark max-[900px]:text-[17px]">El diagnóstico es gratis. Te respondemos en menos de 24 h hábiles.</p>
@@ -171,14 +171,15 @@ const sections = categories.map((category) => ({
   }
 
   .catalog-link[aria-current="true"] {
-    border-color: rgba(23, 18, 37, 0.07);
-    background: #ffffff;
-    color: #171225;
+    border-color: color-mix(in srgb, var(--color-ink) 7%, transparent);
+    background: var(--color-surface);
+    color: var(--color-ink);
     box-shadow: 0 12px 28px -22px rgba(108, 60, 224, 0.55);
   }
 
   .catalog-link[aria-current="true"] .catalog-ico {
     background: #6c3ce0;
+    /* Mismo violeta de botón en los dos temas (texto blanco legible). */
     color: #ffffff;
   }
 

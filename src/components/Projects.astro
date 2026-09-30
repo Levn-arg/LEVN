@@ -4,6 +4,9 @@ import LogoMarquee from "./LogoMarquee.astro";
 import ProjectGrid from "./ProjectGrid.astro";
 import { projects } from "../data/projects.json";
 import { ALL_TECHNOLOGIES } from "../data/technologies";
+import { useTranslations } from "../i18n/ui";
+
+const t = useTranslations("es").projects;
 
 // En la home van los primeros 5; el resto está en /proyectos.
 const HOME_COUNT = 5;
@@ -15,8 +18,8 @@ const techRows = [techs.slice(0, half), techs.slice(half)];
 
 <section id="proyectos" class="mx-auto flex max-w-360 flex-col gap-12 px-21 py-20 max-[1100px]:px-10 max-[900px]:gap-7 max-[900px]:px-4 max-[900px]:py-12">
   <div class="flex flex-col gap-4">
-    <div class="text-[13px] font-extrabold tracking-widest text-accent uppercase max-[900px]:text-xs">Proyectos</div>
-    <h2 class="m-0 text-[52px] leading-[1.05] font-extrabold tracking-[-0.03em] max-[900px]:text-[34px] max-[900px]:leading-[1.06]">Así se ve <span class="text-accent">resuelto.</span></h2>
+    <div class="text-[13px] font-extrabold tracking-widest text-accent uppercase max-[900px]:text-xs">{t.eyebrow}</div>
+    <h2 class="m-0 text-[52px] leading-[1.05] font-extrabold tracking-[-0.03em] max-[900px]:text-[34px] max-[900px]:leading-[1.06]">{t.title} <span class="text-accent">{t.highlight}</span></h2>
   </div>
 
   <ProjectGrid projects={projects.slice(0, HOME_COUNT)} />
@@ -27,7 +30,7 @@ const techRows = [techs.slice(0, half), techs.slice(half)];
         class="btn inline-flex min-h-14 items-center gap-2.5 self-center rounded-2xl bg-accent px-6 text-[17px] font-bold text-white no-underline shadow-[0_16px_32px_-14px_rgba(108,60,224,0.75)] max-[900px]:self-stretch max-[900px]:justify-center"
         href="/proyectos/"
       >
-        Ver más proyectos
+        {t.more}
         <ArrowIcon />
       </a>
     )
@@ -35,14 +38,14 @@ const techRows = [techs.slice(0, half), techs.slice(half)];
 
   <div class="mt-8 flex flex-col items-center gap-7 max-[900px]:mt-4 max-[900px]:items-start max-[900px]:gap-5">
     <div class="flex flex-col items-center gap-2 text-center max-[900px]:items-start max-[900px]:text-left">
-      <h3 class="m-0 text-[32px] leading-[1.1] font-extrabold tracking-[-0.02em] max-[900px]:text-2xl">Con qué lo <span class="text-accent">construimos.</span></h3>
-      <p class="m-0 text-lg text-muted max-[900px]:text-base">Tecnologías elegidas por el problema que resuelven, no por moda.</p>
+      <h3 class="m-0 text-[32px] leading-[1.1] font-extrabold tracking-[-0.02em] max-[900px]:text-2xl">{t.techTitle} <span class="text-accent">{t.techHighlight}</span></h3>
+      <p class="m-0 text-lg text-muted max-[900px]:text-base">{t.techSubtitle}</p>
     </div>
     <div class="w-full max-[900px]:-mx-4 max-[900px]:w-[calc(100%+32px)]">
       <LogoMarquee rows={techRows} duration={45} />
     </div>
     <a class="inline-flex min-h-11 items-center gap-2 text-[17px] font-bold text-accent no-underline hover:text-accent-hover" href="/tecnologias/">
-      Ver todas las tecnologías
+      {t.techAll}
       <ArrowIcon size={18} />
     </a>
   </div>

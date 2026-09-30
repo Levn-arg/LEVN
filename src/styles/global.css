@@ -1,6 +1,10 @@
 @import url('https://fonts.cdnfonts.com/css/satoshi');
 @import "tailwindcss";
 
+/* Modo oscuro por clase (.dark en <html>, ver Layout.astro), para poder
+   elegirlo a mano además de seguir al sistema. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --font-sans: "Satoshi", "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
 
@@ -15,6 +19,54 @@
   --color-muted-3: #8b8598;
   --color-ondark: #b3adc4;
   --color-whatsapp: #25d366;
+  /* Fondo de tarjetas, inputs y menús (blanco en claro). */
+  --color-surface: #ffffff;
+  /* Crema fijo para texto sobre paneles oscuros: no cambia con el tema. */
+  --color-cream: #fff7e6;
+}
+
+/* Modo oscuro: se redefinen los mismos tokens, así las utilidades
+   (bg-pearl, text-ink, border-ink/10…) cambian solas. El violeta se aclara
+   un poco para que el texto resaltado se lea bien sobre fondo oscuro. */
+:root {
+  color-scheme: light;
+}
+
+:root.dark {
+  color-scheme: dark;
+  --color-pearl: #110e1a;
+  --color-ink: #f2edfb;
+  --color-panel: #1c1729;
+  --color-accent: #9a7cf5;
+  --color-accent-hover: #c8b3fb;
+  --color-accent-soft: #2a2143;
+  --color-muted: #c2bbd2;
+  --color-muted-2: #a8a1b9;
+  --color-muted-3: #8b8598;
+  --color-surface: #1b1726;
+}
+
+/* En oscuro el violeta de texto es más claro, pero los botones violetas
+   necesitan uno más saturado para que el texto blanco contraste (≥ 4.5:1). */
+:root.dark .bg-accent {
+  background-color: #7d59f0;
+}
+
+/* Las maquetas de pantallas son "capturas" con colores propios: se quedan
+   en claro también en modo oscuro. */
+:root.dark :is(.theme-light, [data-fit]) {
+  color-scheme: light;
+  --color-pearl: #fff7e6;
+  --color-ink: #171225;
+  --color-panel: #15121f;
+  --color-accent: #6c3ce0;
+  --color-accent-hover: #4e28b8;
+  --color-accent-soft: #efe6fc;
+  --color-muted: #4a4458;
+  --color-muted-2: #6a6478;
+  --color-muted-3: #8b8598;
+  --color-surface: #ffffff;
+  color: #171225;
 }
 
 html {
@@ -24,6 +76,18 @@ html {
 @layer base {
   body {
     @apply bg-pearl text-ink font-sans antialiased;
+  }
+
+  /* Mientras se aplica el inglés guardado (ver Layout.astro). */
+  html.i18n-pending body {
+    visibility: hidden;
+  }
+
+  /* Al cambiar de tema, todo cambia de color junto y sin transiciones
+     cruzadas (ver ThemeToggle). */
+  .theme-switching,
+  .theme-switching * {
+    transition: none !important;
   }
 
   a {

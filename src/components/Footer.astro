@@ -1,6 +1,9 @@
 ---
 import { siInstagram, siWhatsapp } from "simple-icons";
 import { EMAIL, INSTAGRAM_HANDLE, INSTAGRAM_URL, WHATSAPP_DISPLAY, WHATSAPP_URL } from "../data/site";
+import { useTranslations } from "../i18n/ui";
+
+const t = useTranslations("es").footer;
 
 const link = "inline-flex min-h-11 items-center gap-2.5 text-muted no-underline hover:text-ink";
 ---
@@ -9,8 +12,9 @@ const link = "inline-flex min-h-11 items-center gap-2.5 text-muted no-underline 
   <div class="mx-auto flex max-w-360 flex-col gap-6 px-21 py-9 text-sm text-muted-2 max-[1100px]:px-10 max-[900px]:gap-5 max-[900px]:px-4 max-[900px]:pt-7">
     <div class="flex items-center justify-between max-[900px]:flex-col max-[900px]:items-start max-[900px]:gap-3.5">
       <div class="flex items-center gap-5 max-[900px]:flex-col max-[900px]:items-start max-[900px]:gap-3.5">
-        <img src="/images/levn-logo.svg" alt="Levn" width="91" height="32" class="h-8 w-auto" />
-        <span>levn.com.ar · Buenos Aires</span>
+        <img src="/images/levn-logo.svg" alt="Levn" width="91" height="32" class="h-8 w-auto dark:hidden" />
+        <img src="/images/levn-logo-dark.svg" alt="Levn" width="91" height="32" class="hidden h-8 w-auto dark:block" />
+        <span>{t.location}</span>
       </div>
       <div class="flex flex-wrap gap-x-7 gap-y-1 font-semibold max-[900px]:flex-col max-[900px]:gap-0">
         <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" class={link}>
@@ -38,9 +42,9 @@ const link = "inline-flex min-h-11 items-center gap-2.5 text-muted no-underline 
     </div>
     <div class="flex items-center justify-between border-t border-ink/6 pt-6 max-[900px]:flex-col max-[900px]:items-start max-[900px]:gap-3 max-[900px]:pt-5">
       <span>© 2026 Levn</span>
-      <nav aria-label="Legal" class="flex flex-wrap gap-6 max-[900px]:gap-5">
-        <a href="/privacidad/" class="text-muted-2 no-underline hover:text-ink">Política de privacidad</a>
-        <a href="/terminos/" class="text-muted-2 no-underline hover:text-ink">Términos y condiciones</a>
+      <nav aria-label={t.legal} class="flex flex-wrap gap-6 max-[900px]:gap-5">
+        <a href="/privacidad/" class="text-muted-2 no-underline hover:text-ink">{t.privacy}</a>
+        <a href="/terminos/" class="text-muted-2 no-underline hover:text-ink">{t.terms}</a>
       </nav>
     </div>
   </div>

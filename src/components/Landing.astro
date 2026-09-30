@@ -1,0 +1,53 @@
+---
+// Landing completa (home).
+import Header from "./Header.astro";
+import Hero from "./Hero.astro";
+import Integrations from "./Integrations.astro";
+import Pain from "./Pain.astro";
+import ServiceSection from "./ServiceSection.astro";
+import ScreenApp from "./screens/ScreenApp.astro";
+import ScreenAuto from "./screens/ScreenAuto.astro";
+import ScreenAds from "./screens/ScreenAds.astro";
+import ScreenWeb from "./screens/ScreenWeb.astro";
+import Projects from "./Projects.astro";
+import Contact from "./Contact.astro";
+import Footer from "./Footer.astro";
+import { useTranslations } from "../i18n/ui";
+
+const { services } = useTranslations("es");
+---
+
+<Header />
+<main>
+  <Hero />
+  <Integrations />
+  <Pain />
+
+  <ServiceSection id="apps" {...services.apps} screenSide="right" wide pillQuote>
+    <div slot="screen" data-fit data-w="380" data-h="700" class="max-w-95">
+      <ScreenApp />
+    </div>
+  </ServiceSection>
+
+  <ServiceSection id="automatizacion" {...services.automation} screenSide="left">
+    <div slot="screen" data-fit data-w="820" data-h="560" class="max-w-205">
+      <ScreenAuto />
+    </div>
+  </ServiceSection>
+
+  <ServiceSection id="clientes" {...services.clients} screenSide="right" pillQuote>
+    <div slot="screen" data-fit data-w="820" data-h="560" class="max-w-205">
+      <ScreenAds />
+    </div>
+  </ServiceSection>
+
+  <ServiceSection id="web" {...services.web} screenSide="left">
+    <div slot="screen" data-fit data-w="820" data-h="560" class="max-w-205">
+      <ScreenWeb />
+    </div>
+  </ServiceSection>
+
+  <Projects />
+  <Contact />
+</main>
+<Footer />

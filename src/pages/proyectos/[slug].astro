@@ -49,7 +49,7 @@ const facts = [
           {project.tags.map((tag) => <span class="rounded-full bg-accent-soft px-3 py-1.5 text-[13px] font-bold text-accent-hover">{tag}</span>)}
         </div>
         <h1 class="m-0 text-[66px] leading-[1.02] font-extrabold tracking-[-0.035em] max-[1100px]:text-[54px] max-[900px]:text-[40px] max-[900px]:leading-[1.04]">{project.title}</h1>
-        <p class="m-0 text-xl leading-[1.55] text-muted max-[900px]:text-lg [&_strong]:font-bold [&_strong]:text-ink" set:html={project.heroDescription} />
+        <p data-i18n-html class="m-0 text-xl leading-[1.55] text-muted max-[900px]:text-lg [&_strong]:font-bold [&_strong]:text-ink" set:html={project.heroDescription} />
       </div>
       <div class="min-w-0 flex-1">
         {
@@ -71,7 +71,7 @@ const facts = [
             <div class="text-[13px] font-extrabold tracking-widest text-accent uppercase">{section.number}</div>
             <h2 class="m-0 text-[46px] leading-[1.05] font-extrabold tracking-[-0.03em] max-[900px]:text-4xl max-[900px]:leading-[1.06]">{section.title}</h2>
             {section.paragraphs.map((paragraph) => (
-              <p class="m-0 text-lg leading-[1.6] text-muted [&_strong]:font-bold [&_strong]:text-ink" set:html={paragraph} />
+              <p data-i18n-html class="m-0 text-lg leading-[1.6] text-muted [&_strong]:font-bold [&_strong]:text-ink" set:html={paragraph} />
             ))}
           </div>
           <div class="min-w-0 flex-1">
@@ -79,7 +79,7 @@ const facts = [
               <img src={section.image} alt={section.title} loading="lazy" class="aspect-4/3 w-full rounded-[26px] object-cover" />
             ) : (
               <div class="trama flex aspect-4/3 w-full items-end rounded-[26px] bg-panel p-8" aria-hidden="true">
-                <span class="text-[120px] leading-none font-extrabold tracking-[-0.04em] text-pearl/15">{section.number}</span>
+                <span class="text-[120px] leading-none font-extrabold tracking-[-0.04em] text-cream/15">{section.number}</span>
               </div>
             )}
           </div>
@@ -91,7 +91,7 @@ const facts = [
       <ul class="m-0 grid list-none grid-cols-3 gap-5 p-0 max-[900px]:grid-cols-1 max-[900px]:gap-3">
         {
           facts.map((fact) => (
-            <li class="flex flex-col gap-3 rounded-3xl border border-ink/6 bg-white p-7 max-[900px]:rounded-[20px] max-[900px]:p-5">
+            <li class="flex flex-col gap-3 rounded-3xl border border-ink/6 bg-surface p-7 max-[900px]:rounded-[20px] max-[900px]:p-5">
               <div class="flex h-13 w-13 items-center justify-center rounded-2xl bg-accent text-white">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <path d={fact.d} />
@@ -137,8 +137,8 @@ const facts = [
     }
 
     <section class="mx-auto max-w-360 px-21 pt-10 pb-20 max-[1100px]:px-10 max-[900px]:px-4 max-[900px]:pb-12">
-      <div class="trama flex flex-col gap-5 rounded-[32px] bg-panel p-20 text-pearl max-[1100px]:p-12 max-[900px]:gap-4 max-[900px]:rounded-[26px] max-[900px]:px-5 max-[900px]:py-10">
-        <h2 class="m-0 text-[56px] leading-[1.05] font-extrabold tracking-[-0.03em] text-pearl max-[900px]:text-[34px] max-[900px]:leading-[1.06]">¿Tu negocio <span class="text-[#B69CF7]">necesita algo así?</span></h2>
+      <div class="trama flex flex-col gap-5 rounded-[32px] bg-panel p-20 text-cream max-[1100px]:p-12 max-[900px]:gap-4 max-[900px]:rounded-[26px] max-[900px]:px-5 max-[900px]:py-10">
+        <h2 class="m-0 text-[56px] leading-[1.05] font-extrabold tracking-[-0.03em] text-cream max-[900px]:text-[34px] max-[900px]:leading-[1.06]">¿Tu negocio <span class="text-[#B69CF7]">necesita algo así?</span></h2>
         <p class="m-0 text-xl leading-[1.45] text-ondark max-[900px]:text-[17px]">El diagnóstico es gratis. Te respondemos en menos de 24 h hábiles.</p>
         <div class="mt-4 flex flex-wrap items-center gap-6 max-[900px]:flex-col max-[900px]:items-stretch max-[900px]:gap-3">
           <a
@@ -148,7 +148,7 @@ const facts = [
             Quiero mi diagnóstico gratis
             <ArrowIcon />
           </a>
-          <a href="/proyectos/" class="inline-flex min-h-11 items-center gap-2 text-[17px] font-bold text-pearl no-underline hover:text-white max-[900px]:justify-center">
+          <a href="/proyectos/" class="inline-flex min-h-11 items-center gap-2 text-[17px] font-bold text-cream no-underline hover:text-white max-[900px]:justify-center">
             Ver más proyectos
           </a>
         </div>

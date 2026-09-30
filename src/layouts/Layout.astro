@@ -1,15 +1,14 @@
 ---
 import "../styles/global.css";
+import { LANG_STORAGE_KEY, useTranslations } from "../i18n/ui";
 
 interface Props {
   title?: string;
   description?: string;
 }
 
-const {
-  title = "Levn — Hacé crecer tu negocio sin sumar más horas de trabajo",
-  description = "Menos tareas a mano. Más consultas. Más ventas. Pedí tu diagnóstico gratis.",
-} = Astro.props;
+const t = useTranslations("es");
+const { title = t.meta.title, description = t.meta.description } = Astro.props;
 ---
 
 <html lang="es">
@@ -19,6 +18,8 @@ const {
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="theme-color" content="#FFF7E6" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#110E1A" media="(prefers-color-scheme: dark)" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -26,12 +27,40 @@ const {
       href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&display=swap"
       rel="stylesheet"
     />
-    <script is:inline>
-      document.documentElement.classList.add("js");
+    <script is:inline define:vars={{ LANG_STORAGE_KEY }}>
+      // Antes de pintar: marca que hay JS y aplica el tema guardado (o el del
+      // sistema) para que no parpadee en claro al cargar en modo oscuro.
+      (function () {
+        var root = document.documentElement;
+        root.classList.add("js");
+        var dark = false;
+        try {
+          var saved = localStorage.getItem("levn-theme");
+          dark = saved ? saved === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
+        } catch (e) {}
+        root.classList.toggle("dark", dark);
+
+        // Idioma guardado: si es inglés, se oculta la página hasta que el
+        // traductor termine (evita ver el español un instante). Si algo
+        // falla, se muestra igual a los 2,5 s.
+        try {
+          if (localStorage.getItem(LANG_STORAGE_KEY) === "en") {
+            root.lang = "en";
+            root.classList.add("i18n-pending");
+            setTimeout(function () {
+              root.classList.remove("i18n-pending");
+            }, 2500);
+          }
+        } catch (e) {}
+      })();
     </script>
   </head>
   <body class="overflow-x-hidden">
     <slot />
+
+    <script>
+      import "../i18n/translator";
+    </script>
 
     <script>
       // Aparición de secciones al entrar en pantalla.

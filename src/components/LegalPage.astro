@@ -33,9 +33,9 @@ const { title, description, updated, sections } = Astro.props;
       <ol class="m-0 flex list-none flex-col gap-3 p-0">
         {
           sections.map((section, i) => (
-            <li class="flex flex-col gap-2 rounded-3xl border border-ink/7 bg-white p-7 max-[900px]:rounded-[20px] max-[900px]:p-5">
+            <li class="flex flex-col gap-2 rounded-3xl border border-ink/7 bg-surface p-7 max-[900px]:rounded-[20px] max-[900px]:p-5">
               <h2 class="m-0 text-[22px] font-extrabold">
-                {i + 1}. {section}
+                {i + 1}. <span>{section}</span>
               </h2>
               <p class="m-0 text-[17px] leading-[1.6] text-muted-2 italic">Contenido pendiente.</p>
             </li>

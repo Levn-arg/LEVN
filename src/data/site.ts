@@ -6,10 +6,4 @@ export const EMAIL = "hola@levn.com.ar";
 export const INSTAGRAM_URL = "https://www.instagram.com/levn.arg/";
 export const INSTAGRAM_HANDLE = "@levn.arg";
 
-export const NAV_LINKS = [
-  { label: "Apps", href: "/#apps" },
-  { label: "Automatización", href: "/#automatizacion" },
-  { label: "Conseguir clientes", href: "/#clientes" },
-  { label: "Web", href: "/#web" },
-  { label: "Preguntas", href: "/#preguntas" },
-];
+// Los links del menú están en src/i18n/ui.ts (navLinks), por idioma.
