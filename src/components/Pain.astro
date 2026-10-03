@@ -1,6 +1,9 @@
 ---
 import ArrowIcon from "./ArrowIcon.astro";
 import PainCard from "./screens/PainCard.astro";
+import { useTranslations } from "../i18n/ui";
+
+const t = useTranslations("es").pain;
 
 const tipos = [1, 2, 3, 4] as const;
 ---
@@ -10,7 +13,7 @@ const tipos = [1, 2, 3, 4] as const;
   class="mx-auto flex max-w-360 flex-col items-center gap-13 px-21 py-24 max-[1100px]:px-10 max-[900px]:items-stretch max-[900px]:gap-7 max-[900px]:px-4 max-[900px]:py-14"
 >
   <h2 class="m-0 text-center text-[52px] leading-[1.05] font-extrabold tracking-[-0.03em] max-[900px]:text-left max-[900px]:text-[34px] max-[900px]:leading-[1.06]">
-    ¿Cuál de estas <span class="text-accent">te está pasando?</span>
+    {t.title} <span class="text-accent">{t.highlight}</span>
   </h2>
   <div
     data-pain-track
@@ -25,10 +28,10 @@ const tipos = [1, 2, 3, 4] as const;
     }
   </div>
   <div class="-mt-3 hidden justify-center gap-1.5 max-[900px]:flex" aria-hidden="true">
-    {tipos.map((_, i) => <span data-pain-dot class:list={["h-1.5 rounded-[3px] transition-all duration-300", i === 0 ? "w-5 bg-accent" : "w-1.5 bg-[#D9CCF7]"]} />)}
+    {tipos.map((_, i) => <span data-pain-dot class:list={["h-1.5 rounded-[3px] transition-all duration-300", i === 0 ? "w-5 bg-accent" : "w-1.5 bg-accent/25"]} />)}
   </div>
   <p class="m-0 flex items-center gap-2.5 text-xl font-semibold text-muted max-[900px]:gap-2 max-[900px]:text-[17px]">
-    Si te reconociste en alguna, seguí bajando.
+    {t.footer}
     <ArrowIcon size={20} down class="text-accent" />
   </p>
 </section>
@@ -49,7 +52,7 @@ const tipos = [1, 2, 3, 4] as const;
         dot.classList.toggle("w-5", active);
         dot.classList.toggle("bg-accent", active);
         dot.classList.toggle("w-1.5", !active);
-        dot.classList.toggle("bg-[#D9CCF7]", !active);
+        dot.classList.toggle("bg-accent/25", !active);
       });
     },
     { passive: true }

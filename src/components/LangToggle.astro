@@ -1,0 +1,36 @@
+---
+// Botón de idioma. Muestra el idioma al que se cambia ("EN" / "English" en
+// español); el traductor (src/i18n/translator.ts) lo invierte al pasar a
+// inglés y maneja el click. No cambia la URL: la elección queda guardada.
+import { useTranslations } from "../i18n/ui";
+
+interface Props {
+  class?: string;
+  // Versión con ícono y nombre del idioma (menú mobile).
+  withLabel?: boolean;
+}
+
+const { class: className, withLabel = false } = Astro.props;
+const t = useTranslations("es").header;
+---
+
+<button
+  type="button"
+  data-lang-toggle
+  aria-label={t.switchLangLabel}
+  class:list={[
+    "flex cursor-pointer items-center justify-center gap-2.5 border border-ink/10 bg-surface font-bold text-ink transition-colors hover:border-accent hover:text-accent",
+    withLabel ? "min-h-12 rounded-2xl px-4 text-base" : "h-11 min-w-11 rounded-[14px] px-3 text-sm font-extrabold tracking-wide",
+    className,
+  ]}
+>
+  {
+    withLabel && (
+      <svg class="flex-none" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="9" />
+        <path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18" />
+      </svg>
+    )
+  }
+  <span class="whitespace-nowrap">{withLabel ? t.switchLang : t.switchLangShort}</span>
+</button>

@@ -2,6 +2,7 @@
 import ArrowIcon from "./ArrowIcon.astro";
 import { publicImage } from "../lib/images";
 import type { projects } from "../data/projects.json";
+import { useTranslations } from "../i18n/ui";
 
 // Bento de 4 columnas que se repite cada 7 proyectos: uno destacado (2×2),
 // cuatro chicos (1×1) y dos anchos oscuros (2×1). Con 5 proyectos queda un
@@ -18,6 +19,8 @@ function variantFor(index: number): Variant {
   if (slot >= 5) return "wide";
   return "small";
 }
+
+const t = useTranslations("es").projects;
 
 const cards = Astro.props.projects.map((project, index) => ({
   ...project,
@@ -40,8 +43,8 @@ const cards = Astro.props.projects.map((project, index) => ({
           class:list={[
             "group relative flex h-full flex-col overflow-hidden rounded-[26px] no-underline transition-[transform,box-shadow] duration-300 hover:-translate-y-1 max-[640px]:rounded-[22px]",
             card.variant === "wide"
-              ? "trama bg-panel p-7 text-pearl hover:text-pearl hover:shadow-[0_30px_60px_-30px_rgba(23,18,37,0.6)] max-[640px]:p-5.5"
-              : "border border-ink/6 bg-white p-7 text-ink hover:text-ink hover:shadow-[0_30px_60px_-30px_rgba(108,60,224,0.55)] max-[640px]:p-5.5",
+              ? "trama bg-panel p-7 text-cream hover:text-cream hover:shadow-[0_30px_60px_-30px_rgba(23,18,37,0.6)] max-[640px]:p-5.5"
+              : "border border-ink/6 bg-surface p-7 text-ink hover:text-ink hover:shadow-[0_30px_60px_-30px_rgba(108,60,224,0.55)] max-[640px]:p-5.5",
           ]}
         >
           {card.variant === "feature" &&
@@ -58,7 +61,7 @@ const cards = Astro.props.projects.map((project, index) => ({
               <span
                 class:list={[
                   "rounded-full px-2.5 py-1 text-xs font-bold",
-                  card.variant === "wide" ? "bg-white/10 text-pearl" : "bg-accent-soft text-accent-hover",
+                  card.variant === "wide" ? "bg-white/10 text-cream" : "bg-accent-soft text-accent-hover",
                 ]}
               >
                 {tag}
@@ -89,14 +92,14 @@ const cards = Astro.props.projects.map((project, index) => ({
             class:list={[
               "mt-auto flex h-11 w-11 items-center justify-center self-end rounded-full transition-colors duration-300 max-[640px]:mt-4",
               card.variant === "wide"
-                ? "bg-white/10 text-pearl group-hover:bg-accent group-hover:text-white"
+                ? "bg-white/10 text-cream group-hover:bg-accent group-hover:text-white"
                 : "bg-accent-soft text-accent group-hover:bg-accent group-hover:text-white",
             ]}
             aria-hidden="true"
           >
             <ArrowIcon size={18} />
           </span>
-          <span class="sr-only">Ver proyecto {card.title}</span>
+          <span class="sr-only">{t.view} <span>{card.title}</span></span>
         </a>
       </li>
     ))

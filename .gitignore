@@ -26,4 +26,5 @@ pnpm-debug.log*
 
 # internal notes / db schema — not for the public repo
 PROJECT_CONTEXT.md
+context.md
 supabase/

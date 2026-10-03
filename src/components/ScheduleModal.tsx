@@ -10,12 +10,9 @@ import {
   TIME_SLOTS,
   type BookedSlots,
 } from "../lib/scheduling";
-
-const WEEKDAYS = ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"];
-const MONTHS = [
-  "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
-  "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre",
-];
+import { SERVICE_LABELS_EN, useTranslations } from "../i18n/ui";
+import { useLang } from "../i18n/useLang";
+import { MESSAGES_EN } from "../i18n/en/pages";
 
 type Status = "idle" | "sending" | "success" | "error";
 
@@ -49,6 +46,12 @@ function buildMonthCells(year: number, month: number) {
 }
 
 export default function ScheduleModal() {
+  const lang = useLang();
+  const m = useTranslations(lang).modal;
+  const t = m.schedule;
+  const monthLabel = (year: number, month: number) =>
+    capitalizeFirst(new Intl.DateTimeFormat(t.locale, { month: "long", year: "numeric" }).format(new Date(year, month, 1)));
+  const serviceLabel = (service: string) => (lang === "en" ? SERVICE_LABELS_EN[service] ?? service : service);
   const [open, setOpen] = useState(false);
   const [status, setStatus] = useState<Status>("idle");
   const [errorMessage, setErrorMessage] = useState("");
@@ -119,7 +122,7 @@ export default function ScheduleModal() {
 
   const selectedDateLabel = selectedDate
     ? capitalizeFirst(
-        new Intl.DateTimeFormat("es-AR", { weekday: "long", day: "numeric", month: "long" }).format(
+        new Intl.DateTimeFormat(t.locale, { weekday: "long", day: "numeric", month: "long" }).format(
           new Date(`${selectedDate}T00:00:00`)
         )
       )
@@ -173,16 +176,16 @@ export default function ScheduleModal() {
     <>
       <ContactOption
         onClick={() => setOpen(true)}
-        title="Agendar llamada"
-        description="Elegí día y hora."
+        title={t.option}
+        description={t.optionText}
         icon={<span className="[&>svg]:h-6.5 [&>svg]:w-6.5">{CALENDAR_ICON}</span>}
       />
 
-      <Modal open={open} onClose={close} title="Agendar una llamada" size="lg">
+      <Modal open={open} onClose={close} title={t.dialog} size="lg" closeLabel={m.close}>
         {status === "success" ? (
           <div className="p-8 max-[480px]:p-5">
-            <SuccessMessage title="¡Llamada agendada!">
-              {selectedDateLabel} a las {selectedTime} hs. Te confirmamos por email.
+            <SuccessMessage title={t.successTitle}>
+              {selectedDateLabel} {t.summaryAt} {selectedTime} {t.hours}. {t.successText}
             </SuccessMessage>
           </div>
         ) : (
@@ -190,34 +193,34 @@ export default function ScheduleModal() {
             <div className="px-9 pt-9 max-[480px]:px-5 max-[480px]:pt-5">
               <ModalHeader
                 icon={CALENDAR_ICON}
-                eyebrow={step === "datetime" ? "Agendar llamada · Paso 1 de 2" : "Agendar llamada · Paso 2 de 2"}
-                title={step === "datetime" ? "Elegí" : "Último"}
-                highlight={step === "datetime" ? "día y hora." : "paso."}
-                subtitle="Una charla de 45 min para contarnos qué te frena. Sin compromiso."
+                eyebrow={step === "datetime" ? t.step1 : t.step2}
+                title={step === "datetime" ? t.title1 : t.title2}
+                highlight={step === "datetime" ? t.highlight1 : t.highlight2}
+                subtitle={t.subtitle}
               />
             </div>
 
             {/* Paso 1: fecha y horario */}
             <div className={step === "datetime" ? "contents" : "hidden"}>
-              <div className="m-9 mb-0 grid grid-cols-[1fr_220px] overflow-hidden rounded-3xl border border-ink/7 bg-white shadow-[0_24px_48px_-32px_rgba(108,60,224,0.5)] max-[720px]:grid-cols-1 max-[480px]:m-5 max-[480px]:mb-0">
+              <div className="m-9 mb-0 grid grid-cols-[1fr_220px] overflow-hidden rounded-3xl border border-ink/7 bg-surface shadow-[0_24px_48px_-32px_rgba(108,60,224,0.5)] max-[720px]:grid-cols-1 max-[480px]:m-5 max-[480px]:mb-0">
               {/* Calendario */}
               <div className="p-6 max-[480px]:p-4">
                 <div className="mb-4 flex items-center justify-between">
                   <button
                     type="button"
                     onClick={() => changeMonth(-1)}
-                    aria-label="Mes anterior"
+                    aria-label={t.prevMonth}
                     className="flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border-0 bg-accent-soft text-accent transition-colors hover:bg-accent hover:text-white"
                   >
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6" /></svg>
                   </button>
                   <p className="m-0 text-lg font-extrabold">
-                    {MONTHS[viewMonth]} {viewYear}
+                    {monthLabel(viewYear, viewMonth)}
                   </p>
                   <button
                     type="button"
                     onClick={() => changeMonth(1)}
-                    aria-label="Mes siguiente"
+                    aria-label={t.nextMonth}
                     className="flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border-0 bg-accent-soft text-accent transition-colors hover:bg-accent hover:text-white"
                   >
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6" /></svg>
@@ -225,7 +228,7 @@ export default function ScheduleModal() {
                 </div>
 
                 <div className="mb-1.5 grid grid-cols-7 text-center text-xs font-bold text-muted-2">
-                  {WEEKDAYS.map((w) => (
+                  {t.weekdays.map((w) => (
                     <div key={w}>{w}</div>
                   ))}
                 </div>
@@ -248,7 +251,7 @@ export default function ScheduleModal() {
                         type="button"
                         disabled={disabled}
                         onClick={() => selectDay(day)}
-                        title={blocked ? "No disponible" : undefined}
+                        title={blocked ? t.unavailable : undefined}
                         className={`relative mx-auto flex h-10 w-10 items-center justify-center rounded-full border-0 text-sm font-bold transition-colors ${
                           isSelected
                             ? "bg-accent text-white shadow-[0_8px_18px_-8px_rgba(108,60,224,0.8)]"
@@ -269,11 +272,11 @@ export default function ScheduleModal() {
 
               {/* Horarios */}
               <div className="border-t border-ink/7 bg-accent-soft/40 p-6 max-[720px]:p-4 min-[721px]:border-t-0 min-[721px]:border-l">
-                <p className="m-0 mb-3 text-sm font-bold text-ink">Horarios</p>
+                <p className="m-0 mb-3 text-sm font-bold text-ink">{t.times}</p>
                 {!selectedDate ? (
-                  <p className="m-0 text-[15px] text-muted-2">Elegí un día para ver los horarios.</p>
+                  <p className="m-0 text-[15px] text-muted-2">{t.pickDay}</p>
                 ) : loadingSlots ? (
-                  <p className="m-0 text-[15px] text-muted-2">Cargando disponibilidad…</p>
+                  <p className="m-0 text-[15px] text-muted-2">{t.loading}</p>
                 ) : (
                   <div className="flex max-h-70 flex-col gap-2 overflow-y-auto pr-1">
                     {TIME_SLOTS.map((slot) => {
@@ -290,7 +293,7 @@ export default function ScheduleModal() {
                               ? "border-accent bg-accent text-white"
                               : taken
                                 ? "cursor-not-allowed border-ink/7 bg-transparent text-muted-3/50 line-through"
-                                : "cursor-pointer border-ink/12 bg-white text-ink hover:border-accent hover:text-accent-hover"
+                                : "cursor-pointer border-ink/12 bg-surface text-ink hover:border-accent hover:text-accent-hover"
                           }`}
                         >
                           {slot}
@@ -307,11 +310,11 @@ export default function ScheduleModal() {
               <p className="m-0 text-base text-muted">
                 {selectedDate && selectedTime ? (
                   <>
-                    Tu llamada sería el <strong className="text-ink">{selectedDateLabel}</strong> a las{" "}
-                    <strong className="text-ink">{selectedTime} hs</strong>.
+                    {t.summaryPrefix} <strong className="text-ink">{selectedDateLabel}</strong> {t.summaryAt}{" "}
+                    <strong className="text-ink">{selectedTime} {t.hours}</strong>.
                   </>
                 ) : (
-                  "Elegí día y horario para continuar."
+                  t.pickToContinue
                 )}
               </p>
 
@@ -321,7 +324,7 @@ export default function ScheduleModal() {
                 onClick={() => setStep("lead")}
                 className={primaryButton}
               >
-                Continuar
+                {t.continue}
                 <ArrowRight />
               </button>
             </div>
@@ -335,26 +338,26 @@ export default function ScheduleModal() {
                 className="flex min-h-11 cursor-pointer items-center gap-1.5 self-start border-0 bg-transparent p-0 text-[15px] font-bold text-accent hover:text-accent-hover"
               >
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6" /></svg>
-                Cambiar fecha y horario
+                {t.change}
               </button>
 
-              <p className="m-0 rounded-2xl border border-accent/15 bg-white px-4.5 py-3.5 text-base text-accent-hover">
-                Tu llamada sería el <strong>{selectedDateLabel}</strong> a las <strong>{selectedTime} hs</strong>.
+              <p className="m-0 rounded-2xl border border-accent/15 bg-surface px-4.5 py-3.5 text-base text-accent-hover">
+                {t.summaryPrefix} <strong>{selectedDateLabel}</strong> {t.summaryAt} <strong>{selectedTime} {t.hours}</strong>.
               </p>
 
               <div className="grid grid-cols-2 gap-4 max-[480px]:grid-cols-1">
                 <label className={fieldLabel}>
-                  Nombre
+                  {m.name}
                   <input required name="nombre" type="text" autoComplete="name" className={fieldInput} />
                 </label>
                 <label className={fieldLabel}>
-                  Email
+                  {m.email}
                   <input required name="email" type="email" autoComplete="email" className={fieldInput} />
                 </label>
               </div>
 
               <label className={fieldLabel}>
-                ¿Qué servicio necesitás?
+                {t.service}
                 <select
                   required
                   name="servicio"
@@ -362,29 +365,29 @@ export default function ScheduleModal() {
                   className={fieldInput}
                 >
                   <option value="" disabled>
-                    Elegí una opción
+                    {t.servicePlaceholder}
                   </option>
                   {SERVICES.map((service) => (
                     <option key={service} value={service}>
-                      {service}
+                      {serviceLabel(service)}
                     </option>
                   ))}
                 </select>
               </label>
 
               <label className={fieldLabel}>
-                Contanos brevemente qué necesitás (opcional)
+                {t.message}
                 <textarea name="mensaje" rows={2} className={`${fieldInput} resize-none py-3.5`} />
               </label>
 
-              {status === "error" && <p className="m-0 text-sm font-semibold text-[#B42318]">{errorMessage}</p>}
+              {status === "error" && <p className="m-0 text-sm font-semibold text-[#B42318] dark:text-[#FF9C94]">{lang === "en" ? MESSAGES_EN[errorMessage] ?? errorMessage : errorMessage}</p>}
 
               <button
                 type="submit"
                 disabled={status === "sending" || !selectedDate || !selectedTime}
                 className={`${primaryButton} mt-2`}
               >
-                {status === "sending" ? "Enviando…" : "Confirmar llamada"}
+                {status === "sending" ? m.sending : t.submit}
                 {status !== "sending" && <ArrowRight />}
               </button>
             </div>

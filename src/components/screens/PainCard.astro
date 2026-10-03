@@ -1,24 +1,17 @@
 ---
 // Tarjeta de dolor: mini-pantalla + la frase que el cliente reconoce.
+import { useTranslations } from "../../i18n/ui";
+
 interface Props {
   tipo: 1 | 2 | 3 | 4;
 }
 
 const { tipo } = Astro.props;
 
-const textos = {
-  1: "Contestás tarde y la consulta se va con otro.",
-  2: "Cargás los mismos datos en tres lugares distintos.",
-  3: "Te buscan y no aparecés.",
-  4: "Tu idea sigue en tu cabeza.",
-};
-
-const contextos = {
-  1: "Te escribieron a las 18:02 y contestaste a las 21. Para entonces, ya le habían comprado a otro.",
-  2: "La misma venta va al Excel, al sistema de facturación y al cuaderno. Un error y a fin de mes nada cierra.",
-  3: "Buscan tu rubro en tu barrio y aparecen tres competidores. Tu negocio no está ni en Google Maps.",
-  4: "Hace meses que sabés cómo debería funcionar. Te falta saber cuánto sale y por dónde empezar.",
-};
+// La frase y su contexto se traducen; la mini-pantalla queda en español.
+const cards = useTranslations("es").pain.cards;
+const textos = { 1: cards[1].text, 2: cards[2].text, 3: cards[3].text, 4: cards[4].text };
+const contextos = { 1: cards[1].context, 2: cards[2].context, 3: cards[3].context, 4: cards[4].context };
 
 const cell = "height:32px; box-sizing:border-box; padding:0 6px; border-right:1px solid #E5E2EA; border-bottom:1px solid #E5E2EA; display:flex; align-items:center; white-space:nowrap; overflow:hidden; font-size:11px;";
 const K: Record<string, string> = {

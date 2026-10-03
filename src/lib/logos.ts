@@ -15,16 +15,20 @@ export type LogoSource = {
 };
 
 export type Logo =
-  | { kind: "icon"; name: string; path: string; color: string }
+  | { kind: "icon"; name: string; path: string; color: { light: string; dark: string } }
   | { kind: "file"; name: string; file: string; wide: boolean }
   | { kind: "monogram"; name: string; initials: string };
 
-// Los logos muy claros (Mailchimp, JavaScript…) no se leen sobre blanco:
-// esos se muestran en tinta.
+// Color del ícono en cada tema. Los logos muy claros (React, WhatsApp…) no se
+// leen sobre blanco y los negros (Vercel, GitHub…) no se leen en oscuro: en
+// esos casos toman el color del texto (currentColor), tinta o crema.
 function readableColor(hex: string) {
   const [r, g, b] = [0, 2, 4].map((i) => parseInt(hex.slice(i, i + 2), 16) / 255);
   const luminance = 0.2126 * r + 0.7152 * g + 0.0722 * b;
-  return luminance > 0.6 ? "#171225" : `#${hex}`;
+  return {
+    light: luminance > 0.6 ? "currentColor" : `#${hex}`,
+    dark: luminance < 0.15 ? "currentColor" : `#${hex}`,
+  };
 }
 
 function initialsOf(name: string) {

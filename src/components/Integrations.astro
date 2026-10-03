@@ -2,6 +2,9 @@
 import ArrowIcon from "./ArrowIcon.astro";
 import LogoMarquee from "./LogoMarquee.astro";
 import { ALL_INTEGRATIONS } from "../data/integrations";
+import { useTranslations } from "../i18n/ui";
+
+const t = useTranslations("es").integrations;
 
 const rows = [1, 2].map((row) => ALL_INTEGRATIONS.filter((tool) => tool.marquee === row));
 ---
@@ -9,15 +12,15 @@ const rows = [1, 2].map((row) => ALL_INTEGRATIONS.filter((tool) => tool.marquee 
 <section aria-labelledby="integraciones-titulo" class="flex flex-col items-center gap-10 pt-6 pb-20 max-[900px]:gap-7 max-[900px]:pt-2 max-[900px]:pb-14">
   <div class="flex max-w-225 flex-col items-center gap-3.5 px-21 text-center max-[1100px]:px-10 max-[900px]:items-start max-[900px]:px-4 max-[900px]:text-left">
     <h2 id="integraciones-titulo" class="m-0 text-[52px] leading-[1.05] font-extrabold tracking-[-0.03em] max-[900px]:text-[34px] max-[900px]:leading-[1.06]">
-      Todo conectado, <span class="text-accent">sin cambiar lo que ya usás.</span>
+      {t.title} <span class="text-accent">{t.highlight}</span>
     </h2>
-    <p class="m-0 text-xl leading-[1.45] text-muted max-[900px]:text-lg">Trabajamos con las herramientas que más usás.</p>
+    <p class="m-0 text-xl leading-[1.45] text-muted max-[900px]:text-lg">{t.subtitle}</p>
   </div>
 
   <LogoMarquee rows={rows} />
 
   <a class="inline-flex min-h-11 items-center gap-2 text-[17px] font-bold text-accent no-underline hover:text-accent-hover" href="/integraciones/">
-    Ver todas las integraciones
+    {t.all}
     <ArrowIcon size={18} />
   </a>
 </section>

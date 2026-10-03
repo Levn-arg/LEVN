@@ -1,18 +1,6 @@
 ---
 import LegalPage from "../components/LegalPage.astro";
-
-// Pendiente: reemplazar las secciones por el texto definitivo de la política.
-const sections = [
-  "Quiénes somos",
-  "Qué datos recopilamos",
-  "Para qué usamos tus datos",
-  "Con quién los compartimos",
-  "Cuánto tiempo los guardamos",
-  "Tus derechos",
-  "Cookies",
-  "Cambios en esta política",
-  "Contacto",
-];
+// El contenido está en src/data/legal.json (documents.privacidad).
 ---
 
-<LegalPage title="Política de privacidad" description="Cómo Levn recopila, usa y protege tus datos personales." sections={sections} />
+<LegalPage id="privacidad" />

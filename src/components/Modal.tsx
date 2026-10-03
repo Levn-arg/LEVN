@@ -7,13 +7,14 @@ type ModalProps = {
   title: string;
   children: ReactNode;
   size?: "md" | "lg";
+  closeLabel?: string;
 };
 
 // Clases compartidas por los formularios de los modales, para que coincidan
 // con el resto de la página.
 export const fieldLabel = "flex flex-col gap-2 text-sm font-bold text-ink";
 export const fieldInput =
-  "min-h-13 rounded-[14px] border border-ink/10 bg-white px-4 text-base font-medium text-ink shadow-[0_1px_2px_rgba(23,18,37,0.04)] transition-[border-color,box-shadow] placeholder:text-muted-3 focus:border-accent focus:shadow-[0_0_0_4px_rgba(108,60,224,0.15)] focus:outline-none";
+  "min-h-13 rounded-[14px] border border-ink/10 bg-surface px-4 text-base font-medium text-ink shadow-[0_1px_2px_rgba(23,18,37,0.04)] transition-[border-color,box-shadow] placeholder:text-muted-3 focus:border-accent focus:shadow-[0_0_0_4px_rgba(108,60,224,0.15)] focus:outline-none";
 export const primaryButton =
   "btn inline-flex min-h-14 w-full cursor-pointer items-center justify-center gap-2.5 rounded-2xl border-0 bg-accent px-6 text-[17px] font-bold text-white shadow-[0_16px_32px_-14px_rgba(108,60,224,0.75)] disabled:cursor-not-allowed disabled:opacity-40 disabled:shadow-none";
 
@@ -68,7 +69,7 @@ export function SuccessMessage({ title, children }: { title: string; children: R
   );
 }
 
-export default function Modal({ open, onClose, title, children, size = "md" }: ModalProps) {
+export default function Modal({ open, onClose, title, children, size = "md", closeLabel = "Cerrar" }: ModalProps) {
   useEffect(() => {
     if (!open) return;
 
@@ -89,6 +90,7 @@ export default function Modal({ open, onClose, title, children, size = "md" }: M
 
   return createPortal(
     <div
+      data-i18n-skip
       className="fixed inset-0 z-50 flex items-center justify-center p-4 animate-[fade-in_0.2s_ease]"
       role="dialog"
       aria-modal="true"
@@ -96,15 +98,15 @@ export default function Modal({ open, onClose, title, children, size = "md" }: M
     >
       <div className="absolute inset-0 bg-panel/70 backdrop-blur-sm" onClick={onClose} aria-hidden="true" />
       <div
-        className={`relative max-h-[90vh] w-full overflow-y-auto rounded-[32px] border border-white/60 bg-pearl text-ink shadow-[0_50px_100px_-40px_rgba(21,18,31,0.6),0_2px_8px_rgba(23,18,37,0.08)] max-[480px]:rounded-[26px] ${
+        className={`relative max-h-[90vh] w-full overflow-y-auto rounded-[32px] border border-ink/8 bg-pearl text-ink shadow-[0_50px_100px_-40px_rgba(21,18,31,0.6),0_2px_8px_rgba(23,18,37,0.08)] max-[480px]:rounded-[26px] ${
           size === "lg" ? "max-w-210" : "max-w-135 p-9 max-[480px]:p-5"
         }`}
       >
         <button
           type="button"
           onClick={onClose}
-          aria-label="Cerrar"
-          className="absolute top-6 right-6 z-10 flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border border-ink/8 bg-white text-ink transition-colors hover:border-accent hover:bg-accent hover:text-white max-[480px]:top-4 max-[480px]:right-4"
+          aria-label={closeLabel}
+          className="absolute top-6 right-6 z-10 flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border border-ink/8 bg-surface text-ink transition-colors hover:border-accent hover:bg-accent hover:text-white max-[480px]:top-4 max-[480px]:right-4"
         >
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
             <path d="M6 6l12 12M18 6L6 18" />

@@ -13,7 +13,14 @@ const { logo, size = 26, class: className } = Astro.props;
 
 {
   logo.kind === "icon" && (
-    <svg viewBox="0 0 24 24" width={size} height={size} fill={logo.color} aria-hidden="true" class:list={["flex-none", className]}>
+    <svg
+      viewBox="0 0 24 24"
+      width={size}
+      height={size}
+      aria-hidden="true"
+      style={`--logo-light:${logo.color.light};--logo-dark:${logo.color.dark}`}
+      class:list={["logo-icon flex-none", className]}
+    >
       <path d={logo.path} />
     </svg>
   )
@@ -21,9 +28,9 @@ const { logo, size = 26, class: className } = Astro.props;
 {
   logo.kind === "file" &&
     (logo.wide ? (
-      <img src={logo.file} alt="" style={`height:${Math.round(size * 0.8)}px;max-width:${size * 4}px`} class:list={["w-auto flex-none object-contain", className]} />
+      <img src={logo.file} alt="" style={`height:${Math.round(size * 0.8)}px;max-width:${size * 4}px`} class:list={["w-auto flex-none object-contain dark:rounded-md dark:bg-white dark:px-1.5 dark:py-0.5 dark:box-content", className]} />
     ) : (
-      <img src={logo.file} alt="" width={size} height={size} class:list={["flex-none rounded-[6px] object-contain", className]} />
+      <img src={logo.file} alt="" width={size} height={size} class:list={["flex-none rounded-[6px] object-contain dark:bg-white dark:p-0.5", className]} />
     ))
 }
 {
@@ -37,3 +44,13 @@ const { logo, size = 26, class: className } = Astro.props;
     </span>
   )
 }
+
+<style>
+  .logo-icon {
+    fill: var(--logo-light);
+  }
+
+  :global(.dark) .logo-icon {
+    fill: var(--logo-dark);
+  }
+</style>

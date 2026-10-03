@@ -2,47 +2,124 @@
 import Layout from "../layouts/Layout.astro";
 import Header from "./Header.astro";
 import Footer from "./Footer.astro";
+import SectionNav from "./SectionNav.astro";
+import { getLegalDocument, legalUpdated, LEGAL_EMAIL, type LegalDocumentId } from "../lib/legal";
 
-// Estructura de las páginas legales. El contenido de cada sección se completa
-// en la página que la usa (slot) o, mientras no esté, queda el aviso de
-// "contenido pendiente".
+// Páginas legales (/terminos y /privacidad), armadas desde src/data/legal.json
+// con la misma navegación que los catálogos. Se arman en español; el inglés lo
+// aplica el traductor (los pares salen del mismo JSON, ver src/i18n/dictionary.ts).
 interface Props {
-  title: string;
-  description: string;
-  // Fecha de la última actualización, p. ej. "27 de septiembre de 2026".
-  updated?: string;
-  sections: string[];
+  id: LegalDocumentId;
 }
 
-const { title, description, updated, sections } = Astro.props;
+const doc = getLegalDocument(Astro.props.id, "es");
+const updated = legalUpdated("es");
+
+// Estilos compartidos por los bloques con HTML (negritas y links).
+const rich = "[&_a]:font-bold [&_a]:text-accent [&_a]:underline [&_a]:decoration-accent/30 [&_a]:underline-offset-3 hover:[&_a]:text-accent-hover [&_strong]:font-bold [&_strong]:text-ink";
 ---
 
-<Layout title={`${title} — Levn`} description={description}>
+<Layout title={`${doc.pageTitle} — Levn`} description={doc.description}>
   <Header />
-  <main class="mx-auto flex max-w-225 flex-col gap-10 px-10 pt-8 pb-24 max-[900px]:gap-7 max-[900px]:px-4 max-[900px]:pt-5 max-[900px]:pb-14">
-    <div class="flex flex-col gap-4">
+  <main>
+    <section class="mx-auto flex max-w-360 flex-col gap-6 px-21 pt-8 pb-6 max-[1100px]:px-10 max-[900px]:gap-5 max-[900px]:px-4 max-[900px]:pt-5 max-[900px]:pb-4">
       <a href="/" class="inline-flex min-h-11 items-center gap-2 self-start text-[15px] font-bold text-accent no-underline hover:text-accent-hover">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"></path></svg>
         Inicio
       </a>
-      <h1 class="m-0 text-[56px] leading-[1.05] font-extrabold tracking-[-0.03em] max-[900px]:text-[40px] max-[900px]:leading-[1.04]">{title}</h1>
-      <p class="m-0 text-base text-muted-2">Última actualización: {updated ?? "[fecha]"}</p>
-    </div>
+      <h1 class="m-0 max-w-250 text-[66px] leading-[1.02] font-extrabold tracking-[-0.035em] max-[1100px]:text-[54px] max-[900px]:text-[40px] max-[900px]:leading-[1.04]">
+        {doc.title} <span class="text-accent">{doc.highlight}</span>
+      </h1>
+      <p class="m-0 max-w-170 text-[22px] leading-[1.45] text-muted max-[900px]:text-lg">{doc.intro}</p>
+      <p class="m-0 flex flex-wrap items-center gap-2 text-[15px] font-semibold text-muted-2">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="4" y="5" width="16" height="15" rx="2"></rect>
+          <path d="M4 10h16M9 3v4M15 3v4"></path>
+        </svg>
+        <span>Última actualización:</span>
+        <time datetime={updated}>{updated}</time>
+      </p>
 
-    <slot>
-      <ol class="m-0 flex list-none flex-col gap-3 p-0">
+      <div class="mt-2 max-w-225 rounded-3xl border border-accent/15 bg-accent-soft p-7 max-[900px]:rounded-[20px] max-[900px]:p-5">
+        <h2 class="m-0 mb-4 text-[13px] font-extrabold tracking-widest text-accent uppercase">{doc.summaryTitle}</h2>
+        <ul class="m-0 flex list-none flex-col gap-3 p-0">
+          {
+            doc.summary.map((item) => (
+              <li class="flex items-start gap-3 text-[17px] leading-normal font-medium max-[900px]:text-base">
+                <span class="mt-0.5 flex h-6 w-6 flex-none items-center justify-center rounded-full bg-accent text-white">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M5 12.5l4.5 4.5L19 7.5" />
+                  </svg>
+                </span>
+                <span>{item}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
+
+    <div class="mx-auto flex max-w-360 items-start gap-16 px-21 pb-8 max-[1100px]:gap-10 max-[1100px]:px-10 max-[900px]:flex-col max-[900px]:gap-0 max-[900px]:px-0">
+      <SectionNav label="Secciones" items={doc.sections.map(({ id, title }, i) => ({ id, title, number: i + 1 }))} />
+
+      <div class="flex max-w-200 min-w-0 flex-1 flex-col max-[900px]:w-full max-[900px]:max-w-none max-[900px]:px-4">
         {
-          sections.map((section, i) => (
-            <li class="flex flex-col gap-2 rounded-3xl border border-ink/7 bg-white p-7 max-[900px]:rounded-[20px] max-[900px]:p-5">
-              <h2 class="m-0 text-[22px] font-extrabold">
-                {i + 1}. {section}
+          doc.sections.map((section, i) => (
+            <section id={section.id} data-section-nav-target class="section-nav-target flex flex-col gap-4 border-b border-ink/7 py-10 last:border-b-0 max-[900px]:py-8">
+              <h2 class="m-0 flex items-baseline gap-3 text-[30px] leading-[1.15] font-extrabold tracking-[-0.02em] max-[900px]:text-2xl">
+                <span class="text-accent" aria-hidden="true">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <span>{section.title}</span>
               </h2>
-              <p class="m-0 text-[17px] leading-[1.6] text-muted-2 italic">Contenido pendiente.</p>
-            </li>
+              {section.blocks.map((block) =>
+                block.type === "list" ? (
+                  <ul class="m-0 flex list-none flex-col gap-2.5 p-0">
+                    {block.items.map((item) => (
+                      <li class="flex gap-3 text-[17px] leading-[1.6] text-muted max-[900px]:text-base">
+                        <span class="mt-2.5 h-1.5 w-1.5 flex-none rounded-full bg-accent" aria-hidden="true" />
+                        <span data-i18n-html class={rich} set:html={item} />
+                      </li>
+                    ))}
+                  </ul>
+                ) : block.type === "note" ? (
+                  <div class="flex gap-3 rounded-2xl bg-accent-soft p-5 text-base leading-[1.6] text-ink">
+                    <svg class="mt-0.5 flex-none text-accent" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <circle cx="12" cy="12" r="9" />
+                      <path d="M12 11v5M12 8h.01" />
+                    </svg>
+                    <p data-i18n-html class:list={["m-0", rich]} set:html={block.html} />
+                  </div>
+                ) : block.type === "legal" ? (
+                  <p data-i18n-html class:list={["m-0 rounded-2xl border border-ink/10 bg-surface px-5 py-4 text-[15px] leading-[1.6] text-muted-2", rich]} set:html={block.html} />
+                ) : (
+                  <p data-i18n-html class:list={["m-0 text-[17px] leading-[1.7] text-muted max-[900px]:text-base", rich]} set:html={block.html} />
+                )
+              )}
+            </section>
           ))
         }
-      </ol>
-    </slot>
+      </div>
+    </div>
+
+    <section class="mx-auto max-w-360 px-21 pt-10 pb-20 max-[1100px]:px-10 max-[900px]:px-4 max-[900px]:pb-12">
+      <div class="trama flex flex-col gap-5 rounded-[32px] bg-panel p-20 text-cream max-[1100px]:p-12 max-[900px]:gap-4 max-[900px]:rounded-[26px] max-[900px]:px-5 max-[900px]:py-10">
+        <h2 class="m-0 text-[56px] leading-[1.05] font-extrabold tracking-[-0.03em] text-cream max-[900px]:text-[34px] max-[900px]:leading-[1.06]">
+          ¿Te quedó alguna duda? <span class="text-[#B69CF7]">Escribinos.</span>
+        </h2>
+        <p class="m-0 text-xl leading-[1.45] text-ondark max-[900px]:text-[17px]">Te respondemos en menos de 24 h hábiles.</p>
+        <a
+          class="btn mt-4 inline-flex min-h-14.5 items-center gap-2.5 self-start rounded-2xl bg-accent px-6.5 text-[17px] font-bold text-white no-underline shadow-[0_16px_32px_-14px_rgba(108,60,224,0.75)] max-[900px]:self-stretch max-[900px]:justify-center"
+          href={`mailto:${LEGAL_EMAIL}`}
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="5" width="18" height="14" rx="2" />
+            <path d="M3 7l9 6 9-6" />
+          </svg>
+          {LEGAL_EMAIL}
+        </a>
+      </div>
+    </section>
   </main>
   <Footer />
 </Layout>

@@ -1,0 +1,119 @@
+---
+// Índice lateral fijo de las páginas largas (catálogos y legales): marca la
+// sección que se está leyendo. En mobile pasa a ser una barra horizontal
+// desplazable debajo del header.
+//
+// Cada sección del contenido tiene que llevar su `id` y el atributo
+// `data-section-nav-target` (y la clase `section-nav-target` para que el
+// salto deje espacio arriba).
+interface Props {
+  // Nombre del índice para lectores de pantalla.
+  label: string;
+  // Cada ítem lleva un ícono (trazo `d` en 24×24) o un número.
+  items: { id: string; title: string; icon?: string; number?: number }[];
+}
+
+const { label, items } = Astro.props;
+---
+
+<aside class="section-nav sticky w-72 flex-none max-[1100px]:w-60 max-[900px]:z-30 max-[900px]:w-full max-[900px]:border-b max-[900px]:border-ink/7 max-[900px]:bg-pearl/90 max-[900px]:backdrop-blur-md">
+  <nav aria-label={label}>
+    <ul class="no-scrollbar m-0 flex list-none flex-col gap-1 p-0 max-[900px]:flex-row max-[900px]:gap-1 max-[900px]:overflow-x-auto max-[900px]:px-4 max-[900px]:py-2.5">
+      {
+        items.map((item) => (
+          <li class="max-[900px]:flex-none">
+            <a
+              href={`#${item.id}`}
+              data-section-nav-link={item.id}
+              class="section-nav-link flex min-h-12 items-center gap-3 rounded-2xl border border-transparent px-2.5 text-base font-bold text-muted no-underline transition-colors duration-200 hover:text-ink max-[900px]:min-h-11 max-[900px]:gap-2 max-[900px]:px-2 max-[900px]:text-[15px]"
+            >
+              <span class="section-nav-ico flex h-9 w-9 flex-none items-center justify-center rounded-xl bg-accent-soft text-sm font-extrabold text-accent transition-colors duration-200 max-[900px]:h-8 max-[900px]:w-8 max-[900px]:text-[13px]">
+                {item.icon ? (
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d={item.icon} />
+                  </svg>
+                ) : (
+                  <span aria-hidden="true">{item.number}</span>
+                )}
+              </span>
+              <span>{item.title}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+</aside>
+
+<script>
+  // Marca en el índice la sección que se está leyendo. En mobile el índice es
+  // una barra horizontal: el ítem activo se desplaza a la vista.
+  const links = new Map(
+    [...document.querySelectorAll<HTMLAnchorElement>("[data-section-nav-link]")].map((link) => [link.dataset.sectionNavLink, link])
+  );
+
+  function setActive(id: string) {
+    for (const [key, link] of links) {
+      if (key === id) {
+        link.setAttribute("aria-current", "true");
+        const bar = link.closest("ul");
+        if (bar && bar.scrollWidth > bar.clientWidth) {
+          bar.scrollTo({ left: link.offsetLeft - 16, behavior: "smooth" });
+        }
+      } else {
+        link.removeAttribute("aria-current");
+      }
+    }
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) if (entry.isIntersecting) setActive(entry.target.id);
+    },
+    { rootMargin: "-35% 0px -60% 0px" }
+  );
+  document.querySelectorAll("[data-section-nav-target]").forEach((section) => observer.observe(section));
+  const first = [...links.keys()][0];
+  if (first) setActive(first);
+</script>
+
+<style>
+  .section-nav {
+    top: calc(var(--header-offset, 0px) + 24px);
+    transition: top 300ms ease-out;
+  }
+
+  /* Con muchas secciones, el índice no puede pasarse del alto de la ventana. */
+  @media (min-width: 900px) {
+    .section-nav {
+      max-height: calc(100vh - var(--header-offset, 0px) - 48px);
+      overflow-y: auto;
+      scrollbar-width: thin;
+    }
+  }
+
+  @media (max-width: 899px) {
+    .section-nav {
+      top: var(--header-offset, 0px);
+    }
+  }
+
+  .section-nav-link[aria-current="true"] {
+    border-color: color-mix(in srgb, var(--color-ink) 7%, transparent);
+    background: var(--color-surface);
+    color: var(--color-ink);
+    box-shadow: 0 12px 28px -22px rgba(108, 60, 224, 0.55);
+  }
+
+  .section-nav-link[aria-current="true"] .section-nav-ico {
+    /* Mismo violeta de botón en los dos temas (texto blanco legible). */
+    background: #6c3ce0;
+    color: #ffffff;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .section-nav {
+      transition: none;
+    }
+  }
+</style>
