@@ -208,6 +208,18 @@ html {
     color: #4e28b8;
   }
 
+  /* Secciones de las páginas con índice lateral (ver SectionNav): el salto
+     deja espacio arriba para el header y, en mobile, la barra del índice. */
+  .section-nav-target {
+    scroll-margin-top: 24px;
+  }
+
+  @media (max-width: 899px) {
+    .section-nav-target {
+      scroll-margin-top: 72px;
+    }
+  }
+
   /* Secciones de servicio fijadas en el centro mientras avanza su pantalla
      (ver Layout.astro). */
   .is-pinned > section {

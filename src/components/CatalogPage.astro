@@ -4,6 +4,7 @@ import Header from "./Header.astro";
 import Footer from "./Footer.astro";
 import ArrowIcon from "./ArrowIcon.astro";
 import LogoMark from "./LogoMark.astro";
+import SectionNav from "./SectionNav.astro";
 import { resolveLogo, type LogoSource } from "../lib/logos";
 
 // Página de catálogo categorizado (/integraciones y /tecnologias): cada
@@ -41,35 +42,12 @@ const sections = categories.map((category) => ({
     </section>
 
     <div class="mx-auto flex max-w-360 items-start gap-16 px-21 pb-8 max-[1100px]:gap-10 max-[1100px]:px-10 max-[900px]:flex-col max-[900px]:gap-0 max-[900px]:px-0">
-      <aside class="catalog-nav sticky w-72 flex-none max-[1100px]:w-60 max-[900px]:z-30 max-[900px]:w-full max-[900px]:border-b max-[900px]:border-ink/7 max-[900px]:bg-pearl/90 max-[900px]:backdrop-blur-md">
-        <nav aria-label="Categorías">
-          <ul class="no-scrollbar m-0 flex list-none flex-col gap-1 p-0 max-[900px]:flex-row max-[900px]:gap-1 max-[900px]:overflow-x-auto max-[900px]:px-4 max-[900px]:py-2.5">
-            {
-              sections.map((section) => (
-                <li class="max-[900px]:flex-none">
-                  <a
-                    href={`#${section.id}`}
-                    data-catalog-link={section.id}
-                    class="catalog-link flex min-h-12 items-center gap-3 rounded-2xl border border-transparent px-2.5 text-base font-bold text-muted no-underline transition-colors duration-200 hover:text-ink max-[900px]:min-h-11 max-[900px]:gap-2 max-[900px]:px-2 max-[900px]:text-[15px]"
-                  >
-                    <span class="catalog-ico flex h-9 w-9 flex-none items-center justify-center rounded-xl bg-accent-soft text-accent transition-colors duration-200 max-[900px]:h-8 max-[900px]:w-8">
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <path d={section.icon} />
-                      </svg>
-                    </span>
-                    {section.title}
-                  </a>
-                </li>
-              ))
-            }
-          </ul>
-        </nav>
-      </aside>
+      <SectionNav label="Categorías" items={sections.map(({ id, title, icon }) => ({ id, title, icon }))} />
 
       <div class="flex min-w-0 flex-1 flex-col max-[900px]:w-full max-[900px]:px-4">
         {
           sections.map((section) => (
-            <section id={section.id} data-catalog-section class="catalog-section flex flex-col gap-6 py-10 max-[900px]:gap-5 max-[900px]:py-8">
+            <section id={section.id} data-section-nav-target class="section-nav-target flex flex-col gap-6 py-10 max-[900px]:gap-5 max-[900px]:py-8">
               <div class="flex flex-col gap-2">
                 <h2 class="m-0 flex items-center gap-3.5 text-[40px] leading-[1.05] font-extrabold tracking-[-0.03em] max-[900px]:text-[30px]">
                   <span class="flex h-12 w-12 flex-none items-center justify-center rounded-2xl bg-accent text-white max-[900px]:h-10 max-[900px]:w-10">
@@ -118,74 +96,3 @@ const sections = categories.map((category) => ({
   </main>
   <Footer />
 </Layout>
-
-<script>
-  // Marca en el sidebar la categoría que se está leyendo. En mobile el menú es
-  // una barra horizontal: la categoría activa se desplaza a la vista.
-  const links = new Map(
-    [...document.querySelectorAll<HTMLAnchorElement>("[data-catalog-link]")].map((link) => [link.dataset.catalogLink, link])
-  );
-
-  function setActive(id: string) {
-    for (const [key, link] of links) {
-      if (key === id) {
-        link.setAttribute("aria-current", "true");
-        const bar = link.closest("ul");
-        if (bar && bar.scrollWidth > bar.clientWidth) {
-          bar.scrollTo({ left: link.offsetLeft - 16, behavior: "smooth" });
-        }
-      } else {
-        link.removeAttribute("aria-current");
-      }
-    }
-  }
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      for (const entry of entries) if (entry.isIntersecting) setActive(entry.target.id);
-    },
-    { rootMargin: "-35% 0px -60% 0px" }
-  );
-  document.querySelectorAll("[data-catalog-section]").forEach((section) => observer.observe(section));
-  setActive([...links.keys()][0]!);
-</script>
-
-<style>
-  .catalog-nav {
-    top: calc(var(--header-offset, 0px) + 24px);
-    transition: top 300ms ease-out;
-  }
-
-  .catalog-section {
-    scroll-margin-top: 24px;
-  }
-
-  @media (max-width: 899px) {
-    .catalog-nav {
-      top: var(--header-offset, 0px);
-    }
-
-    .catalog-section {
-      scroll-margin-top: 72px;
-    }
-  }
-
-  .catalog-link[aria-current="true"] {
-    border-color: color-mix(in srgb, var(--color-ink) 7%, transparent);
-    background: var(--color-surface);
-    color: var(--color-ink);
-    box-shadow: 0 12px 28px -22px rgba(108, 60, 224, 0.55);
-  }
-
-  .catalog-link[aria-current="true"] .catalog-ico {
-    background: #6c3ce0;
-    /* Mismo violeta de botón en los dos temas (texto blanco legible). */
-    color: #ffffff;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .catalog-nav {
-      transition: none;
-    }
-  }
-</style>

@@ -47,31 +47,12 @@ export const PAGES_EN: Record<string, string> = {
   "¿Tenés una idea?": "Got an idea?",
   "Hagámosla realidad.": "Let's make it real.",
 
-  // Legales
-  "Política de privacidad — Levn": "Privacy policy — Levn",
-  "Términos y condiciones — Levn": "Terms and conditions — Levn",
-  "Cómo Levn recopila, usa y protege tus datos personales.": "How Levn collects, uses and protects your personal data.",
-  "Condiciones de uso del sitio y de los servicios de Levn.": "Terms of use of Levn's website and services.",
-  "Última actualización: [fecha]": "Last updated: [date]",
-  "Contenido pendiente.": "Content coming soon.",
-  "Quiénes somos": "Who we are",
-  "Qué datos recopilamos": "What data we collect",
-  "Para qué usamos tus datos": "What we use your data for",
-  "Con quién los compartimos": "Who we share it with",
-  "Cuánto tiempo los guardamos": "How long we keep it",
-  "Tus derechos": "Your rights",
-  Cookies: "Cookies",
-  "Cambios en esta política": "Changes to this policy",
-  Contacto: "Contact",
-  "Aceptación de los términos": "Acceptance of the terms",
-  Servicios: "Services",
-  "Diagnóstico gratuito": "Free diagnosis",
-  "Propuestas, precios y pagos": "Proposals, pricing and payments",
-  "Propiedad intelectual": "Intellectual property",
-  Responsabilidades: "Responsibilities",
-  Cancelación: "Cancellation",
-  Modificaciones: "Changes",
-  "Ley aplicable y jurisdicción": "Governing law and jurisdiction",
+  // Legales (el contenido está en src/data/legal.json)
+  "Última actualización:": "Last updated:",
+  Secciones: "Sections",
+  "¿Te quedó alguna duda?": "Any questions?",
+  "Escribinos.": "Write to us.",
+  "Te respondemos en menos de 24 h hábiles.": "We reply within 24 business hours.",
 };
 
 // Mensajes que devuelven el servidor y Supabase y muestran los formularios.

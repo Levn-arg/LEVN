@@ -14,6 +14,8 @@ import { TECHNOLOGY_CATEGORIES } from "../data/technologies";
 import { PROJECTS_EN } from "./en/projects";
 import { INTEGRATIONS_EN, TECHNOLOGIES_EN } from "./en/catalog";
 import { PAGES_EN } from "./en/pages";
+import { getLegalDocument, legalUpdated, type LegalDocumentId } from "../lib/legal";
+import legal from "../data/legal.json";
 
 export const TEXT = new Map<string, string>();
 export const HTML = new Map<string, string>();
@@ -87,6 +89,30 @@ function catalog(categories: typeof INTEGRATION_CATEGORIES | typeof TECHNOLOGY_C
 }
 catalog(INTEGRATION_CATEGORIES, INTEGRATIONS_EN, "how");
 catalog(TECHNOLOGY_CATEGORIES, TECHNOLOGIES_EN, "use");
+
+// Legales (src/data/legal.json): el JSON ya trae español e inglés con la misma
+// forma. Párrafos e ítems van como bloques HTML; títulos y resumen, como texto.
+for (const id of Object.keys(legal.documents) as LegalDocumentId[]) {
+  const es = getLegalDocument(id, "es");
+  const en = getLegalDocument(id, "en");
+  const where = `legal ${id}`;
+  for (const key of ["title", "highlight", "pageTitle", "description", "intro", "summaryTitle"] as const) add(es[key], en[key], where);
+  add(`${es.pageTitle} — Levn`, `${en.pageTitle} — Levn`, where);
+  es.summary.forEach((item, i) => add(item, en.summary[i], where));
+  es.sections.forEach((section, i) => {
+    const target = en.sections[i];
+    add(section.title, target?.title, where);
+    section.blocks.forEach((block, j) => {
+      const other = target?.blocks[j];
+      if (block.type === "list" && other?.type === "list") {
+        block.items.forEach((item, k) => (other.items[k] ? HTML.set(plain(item), other.items[k]) : missing.push(`${where}: ${section.id}`)));
+      } else if (block.type !== "list" && other && other.type !== "list") {
+        HTML.set(plain(block.html), other.html);
+      } else missing.push(`${where}: ${section.id} bloque ${j + 1}`);
+    });
+  });
+}
+add(legalUpdated("es"), legalUpdated("en"), "legal fecha");
 
 // Textos sueltos.
 for (const [es, en] of Object.entries(PAGES_EN)) add(es, en, "páginas");

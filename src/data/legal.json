@@ -1,0 +1,679 @@
+{
+  "company": {
+    "brand": "Levn",
+    "holder": "PANADERO, Lucas Nahuel",
+    "taxId": "20-42825059-2",
+    "address": "301 945 (1886) Ranelagh, Buenos Aires, Argentina",
+    "email": "hola@levn.com.ar",
+    "site": "levn.com.ar",
+    "jurisdiction": "Ciudad Autónoma de Buenos Aires"
+  },
+  "settings": {
+    "updated": "2026-10-03",
+    "warrantyDays": 30,
+    "liabilityCapMonths": 3,
+    "inquiryRetentionMonths": 24
+  },
+  "documents": {
+    "terminos": {
+      "es": {
+        "title": "Términos y",
+        "highlight": "condiciones.",
+        "pageTitle": "Términos y condiciones",
+        "description": "Condiciones de uso del sitio y de contratación de los servicios de Levn.",
+        "intro": "Las reglas claras desde el principio: qué hacemos, cómo trabajamos, qué podés esperar de nosotros y qué necesitamos de vos.",
+        "summaryTitle": "En resumen",
+        "summary": [
+          "Cada proyecto se rige por una propuesta escrita con alcance, precio y plazos. Lo que no está en la propuesta, se cotiza aparte.",
+          "El diagnóstico es gratis y sin compromiso.",
+          "Cuando pagás el total, lo que construimos para vos es tuyo.",
+          "Si algo falla por nuestro trabajo, lo corregimos sin cargo durante {warrantyDays} días desde la entrega.",
+          "Rige la ley argentina. Si sos consumidor, conservás todos tus derechos de la Ley 24.240."
+        ],
+        "sections": [
+          {
+            "id": "quienes-somos",
+            "title": "Quiénes somos y aceptación",
+            "blocks": [
+              { "type": "p", "html": "{brand} es un estudio digital de Buenos Aires que diseña, desarrolla y automatiza soluciones para negocios. El titular de {brand} es <strong>{holder}</strong>, CUIT {taxId}, con domicilio en {address}." },
+              { "type": "p", "html": "Estos términos regulan el uso del sitio {site} y la contratación de nuestros servicios. Al usar el sitio o contratarnos, aceptás estos términos. Si no estás de acuerdo con alguna parte, te pedimos que no uses el sitio." },
+              { "type": "p", "html": "Si una propuesta firmada o aceptada por escrito dice algo distinto a estos términos, prevalece la propuesta para ese proyecto." }
+            ]
+          },
+          {
+            "id": "servicios",
+            "title": "Qué hacemos",
+            "blocks": [
+              { "type": "p", "html": "Trabajamos en cuatro líneas de servicio:" },
+              { "type": "list", "items": [
+                "<strong>Presencia digital:</strong> sitios web, landings y perfiles para que te encuentren y te elijan.",
+                "<strong>Adquisición y crecimiento:</strong> campañas y medición para conseguir consultas reales.",
+                "<strong>Automatización e integración:</strong> conectar tus herramientas para que los datos pasen solos de una a otra.",
+                "<strong>Desarrollo a medida:</strong> apps y sistemas pensados para tu negocio."
+              ] },
+              { "type": "p", "html": "El detalle de cada trabajo (qué incluye, qué no, plazos y precio) siempre queda en la propuesta de ese proyecto." }
+            ]
+          },
+          {
+            "id": "uso-del-sitio",
+            "title": "Uso del sitio",
+            "blocks": [
+              { "type": "p", "html": "El contenido del sitio es informativo. Las pantallas, chats, tableros y datos que mostramos en la página principal son <strong>ejemplos ilustrativos</strong> de cómo podría verse una solución; no son datos reales de clientes ni resultados garantizados." },
+              { "type": "p", "html": "Te comprometés a usar el sitio y sus formularios de buena fe: sin enviar información falsa o de terceros sin su permiso, sin intentar acceder a partes no públicas y sin usarlo para enviar spam o contenido ilegal." }
+            ]
+          },
+          {
+            "id": "diagnostico",
+            "title": "Diagnóstico gratuito",
+            "blocks": [
+              { "type": "p", "html": "El diagnóstico es una charla de 45 minutos para entender qué te frena y ver si podemos ayudarte. Es gratis y <strong>no te obliga a contratar nada</strong>." },
+              { "type": "p", "html": "Lo que surge del diagnóstico es una orientación general, no un asesoramiento profesional definitivo. Si no podemos ayudarte, te lo decimos. Podemos reprogramar o declinar una reunión si no tenemos disponibilidad o si el pedido no encaja con lo que hacemos." }
+            ]
+          },
+          {
+            "id": "propuestas",
+            "title": "Propuestas y contratación",
+            "blocks": [
+              { "type": "p", "html": "Antes de empezar, te enviamos una <strong>propuesta escrita</strong> con el alcance, los entregables, el precio, la forma de pago y los plazos estimados. El proyecto queda contratado cuando aceptás la propuesta por escrito (un mail alcanza) y, si corresponde, abonás el anticipo." },
+              { "type": "p", "html": "Lo que no figura en la propuesta se considera trabajo adicional y se cotiza por separado. Cualquier cambio de alcance lo acordamos por escrito antes de hacerlo." },
+              { "type": "p", "html": "Los plazos son estimados y dependen de que recibamos a tiempo la información, los accesos y las aprobaciones que necesitamos." }
+            ]
+          },
+          {
+            "id": "precios-y-pagos",
+            "title": "Precios y pagos",
+            "blocks": [
+              { "type": "p", "html": "Los precios, la moneda y la forma de pago son los que figuran en cada propuesta. Pueden ser por proyecto, por abono mensual o una combinación de ambos." },
+              { "type": "list", "items": [
+                "Los proyectos suelen incluir un anticipo para empezar y el saldo contra entrega o por etapas, según la propuesta.",
+                "Los abonos mensuales se pagan por adelantado y se pueden cancelar con el aviso que indique la propuesta.",
+                "Emitimos la factura que corresponda según nuestra condición fiscal.",
+                "Si un pago se atrasa, podemos pausar el trabajo hasta regularizarlo, previo aviso."
+              ] },
+              { "type": "p", "html": "Los costos de servicios de terceros (dominios, hosting, licencias, publicidad, mensajes de WhatsApp, etc.) no están incluidos salvo que la propuesta lo diga expresamente." }
+            ]
+          },
+          {
+            "id": "tu-parte",
+            "title": "Qué necesitamos de vos",
+            "blocks": [
+              { "type": "p", "html": "Para que el proyecto salga bien, como cliente te comprometés a:" },
+              { "type": "list", "items": [
+                "Darnos información correcta y completa sobre tu negocio y lo que necesitás.",
+                "Facilitarnos los accesos, contenidos y materiales a tiempo.",
+                "Asegurarte de tener los derechos sobre los textos, imágenes, marcas y datos que nos compartís.",
+                "Revisar y aprobar las entregas en los plazos acordados.",
+                "Cumplir las normas que apliquen a tu actividad, incluida la protección de datos de tus propios clientes."
+              ] }
+            ]
+          },
+          {
+            "id": "terceros",
+            "title": "Herramientas de terceros",
+            "blocks": [
+              { "type": "p", "html": "Muchas soluciones usan servicios de terceros, como WhatsApp, Mercado Pago, Google, plataformas de hosting o herramientas de automatización. Cada uno tiene sus propios términos, precios y políticas, que también vas a tener que aceptar." },
+              { "type": "p", "html": "Siempre que sea posible, las cuentas se crean <strong>a tu nombre</strong>, para que el control quede en tus manos. No somos responsables por cambios de precio, de condiciones, caídas o discontinuaciones de esos servicios, pero te avisamos y te ayudamos a buscar una alternativa." }
+            ]
+          },
+          {
+            "id": "propiedad-intelectual",
+            "title": "Propiedad intelectual",
+            "blocks": [
+              { "type": "p", "html": "La marca {brand}, el diseño y los contenidos de este sitio nos pertenecen. No podés copiarlos ni usarlos sin nuestro permiso por escrito." },
+              { "type": "p", "html": "Cuando abonás el total del proyecto, <strong>los entregables hechos a medida para vos pasan a ser tuyos</strong>: diseños, textos, código y configuraciones específicas de tu proyecto. Hasta ese momento, te damos una licencia de uso." },
+              { "type": "p", "html": "Conservamos los derechos sobre nuestras herramientas, métodos, plantillas y componentes reutilizables que existían antes del proyecto o que no son específicos de tu negocio; te damos una licencia de uso permanente sobre los que formen parte de tu entrega." },
+              { "type": "p", "html": "Salvo que nos pidas confidencialidad, podemos mostrar el proyecto terminado en nuestro portfolio, sin revelar información sensible de tu negocio." }
+            ]
+          },
+          {
+            "id": "confidencialidad",
+            "title": "Confidencialidad",
+            "blocks": [
+              { "type": "p", "html": "Tratamos como confidencial toda la información de tu negocio a la que accedamos durante el trabajo: datos de clientes, números, procesos y accesos. Solo la usamos para el proyecto y no la compartimos con terceros, salvo con los proveedores necesarios para prestarte el servicio o si una ley o autoridad nos lo exige." },
+              { "type": "p", "html": "Cuando trabajamos con datos personales de tus clientes, lo hacemos según lo que explica nuestra <a href=\"/privacidad/#datos-de-tus-clientes\">política de privacidad</a>." }
+            ]
+          },
+          {
+            "id": "garantia",
+            "title": "Garantía y soporte",
+            "blocks": [
+              { "type": "p", "html": "Si algo de lo que entregamos no funciona como se acordó por un error de nuestro trabajo, lo corregimos <strong>sin cargo durante {warrantyDays} días corridos</strong> desde la entrega." },
+              { "type": "p", "html": "La garantía no cubre cambios pedidos después de la entrega, modificaciones hechas por terceros, ni fallas de servicios externos. El soporte y mantenimiento posteriores se contratan por abono o por hora, según la propuesta." }
+            ]
+          },
+          {
+            "id": "responsabilidad",
+            "title": "Límites de responsabilidad",
+            "blocks": [
+              { "type": "p", "html": "Trabajamos para que cada proyecto mejore tu negocio, pero los resultados comerciales (ventas, consultas, posicionamiento) dependen también de factores que no controlamos. Por eso <strong>no garantizamos resultados comerciales específicos</strong>, salvo que la propuesta diga lo contrario." },
+              { "type": "p", "html": "No respondemos por daños indirectos, lucro cesante ni pérdida de datos causada por terceros o por un uso indebido. En todo caso, nuestra responsabilidad total por un proyecto se limita al monto que nos hayas pagado por él en los últimos {liabilityCapMonths} meses." },
+              { "type": "note", "html": "Estos límites no se aplican en casos de dolo o culpa grave, ni restringen los derechos irrenunciables que tengas como consumidor según la Ley 24.240 de Defensa del Consumidor." }
+            ]
+          },
+          {
+            "id": "cancelacion",
+            "title": "Cancelación y revocación",
+            "blocks": [
+              { "type": "p", "html": "Cualquiera de las partes puede terminar un proyecto avisando por escrito. En ese caso, se abona el trabajo realizado hasta la fecha y te entregamos lo avanzado. Los anticipos cubren el trabajo inicial y la reserva de agenda; si no se usaron, se reintegra la parte proporcional." },
+              { "type": "p", "html": "Si sos consumidor y contrataste a distancia (por mail, WhatsApp o desde el sitio), tenés derecho a <strong>revocar la aceptación dentro de los 10 días corridos</strong> desde que aceptaste la propuesta, sin costo ni explicación, como establece el artículo 34 de la Ley 24.240. Para hacerlo, escribinos a {email}." }
+            ]
+          },
+          {
+            "id": "privacidad",
+            "title": "Privacidad",
+            "blocks": [
+              { "type": "p", "html": "Cómo recolectamos y usamos tus datos personales está explicado en nuestra <a href=\"/privacidad/\">política de privacidad</a>, que forma parte de estos términos." }
+            ]
+          },
+          {
+            "id": "cambios",
+            "title": "Cambios en estos términos",
+            "blocks": [
+              { "type": "p", "html": "Podemos actualizar estos términos. La versión vigente es siempre la publicada en esta página, con su fecha de actualización. Los cambios no afectan a los proyectos ya contratados, que siguen rigiéndose por su propuesta." }
+            ]
+          },
+          {
+            "id": "ley-aplicable",
+            "title": "Ley aplicable y jurisdicción",
+            "blocks": [
+              { "type": "p", "html": "Estos términos se rigen por las leyes de la República Argentina. Ante cualquier conflicto, primero buscamos resolverlo conversando. Si no es posible, son competentes los tribunales ordinarios de la {jurisdiction}." },
+              { "type": "p", "html": "Si sos consumidor, podés reclamar ante los tribunales de tu domicilio, conforme al artículo 36 de la Ley 24.240." }
+            ]
+          },
+          {
+            "id": "contacto",
+            "title": "Contacto",
+            "blocks": [
+              { "type": "p", "html": "Por cualquier consulta sobre estos términos, escribinos a <a href=\"mailto:{email}\">{email}</a>." }
+            ]
+          }
+        ]
+      },
+      "en": {
+        "title": "Terms and",
+        "highlight": "conditions.",
+        "pageTitle": "Terms and conditions",
+        "description": "Terms of use of the website and of hiring Levn's services.",
+        "intro": "Clear rules from the start: what we do, how we work, what you can expect from us and what we need from you.",
+        "summaryTitle": "In short",
+        "summary": [
+          "Every project is governed by a written proposal with scope, price and timeline. Anything not in the proposal is quoted separately.",
+          "The diagnosis is free, no strings attached.",
+          "Once you pay in full, what we built for you is yours.",
+          "If something fails because of our work, we fix it at no cost for {warrantyDays} days after delivery.",
+          "Argentine law applies. If you are a consumer, you keep all your rights under Law 24,240."
+        ],
+        "sections": [
+          {
+            "id": "quienes-somos",
+            "title": "Who we are and acceptance",
+            "blocks": [
+              { "type": "p", "html": "{brand} is a digital studio in Buenos Aires that designs, builds and automates solutions for businesses. {brand} is owned by <strong>{holder}</strong>, tax ID (CUIT) {taxId}, with registered address at {address}." },
+              { "type": "p", "html": "These terms govern the use of the {site} website and the hiring of our services. By using the site or hiring us, you accept these terms. If you disagree with any part, please do not use the site." },
+              { "type": "p", "html": "If a signed or written-accepted proposal says something different from these terms, the proposal prevails for that project." }
+            ]
+          },
+          {
+            "id": "servicios",
+            "title": "What we do",
+            "blocks": [
+              { "type": "p", "html": "We work across four service lines:" },
+              { "type": "list", "items": [
+                "<strong>Digital presence:</strong> websites, landing pages and profiles so people find you and choose you.",
+                "<strong>Acquisition and growth:</strong> campaigns and measurement to get real inquiries.",
+                "<strong>Automation and integration:</strong> connecting your tools so data flows from one to another on its own.",
+                "<strong>Custom development:</strong> apps and systems designed for your business."
+              ] },
+              { "type": "p", "html": "The details of each job (what it includes, what it doesn't, timeline and price) are always set out in that project's proposal." }
+            ]
+          },
+          {
+            "id": "uso-del-sitio",
+            "title": "Use of the website",
+            "blocks": [
+              { "type": "p", "html": "The content of the website is for information purposes. The screens, chats, dashboards and data shown on the home page are <strong>illustrative examples</strong> of what a solution could look like; they are not real client data or guaranteed results." },
+              { "type": "p", "html": "You agree to use the website and its forms in good faith: without submitting false information or third parties' data without their permission, without trying to access non-public areas and without using it to send spam or illegal content." }
+            ]
+          },
+          {
+            "id": "diagnostico",
+            "title": "Free diagnosis",
+            "blocks": [
+              { "type": "p", "html": "The diagnosis is a 45-minute call to understand what is holding you back and see whether we can help. It is free and <strong>does not commit you to hiring anything</strong>." },
+              { "type": "p", "html": "What comes out of the diagnosis is general guidance, not definitive professional advice. If we can't help you, we will tell you. We may reschedule or decline a meeting if we don't have availability or if the request doesn't fit what we do." }
+            ]
+          },
+          {
+            "id": "propuestas",
+            "title": "Proposals and hiring",
+            "blocks": [
+              { "type": "p", "html": "Before we start, we send you a <strong>written proposal</strong> with the scope, deliverables, price, payment terms and estimated timeline. The project is hired once you accept the proposal in writing (an email is enough) and, where applicable, pay the deposit." },
+              { "type": "p", "html": "Anything not included in the proposal is considered additional work and is quoted separately. Any change of scope is agreed in writing before it is done." },
+              { "type": "p", "html": "Timelines are estimates and depend on receiving the information, access and approvals we need on time." }
+            ]
+          },
+          {
+            "id": "precios-y-pagos",
+            "title": "Pricing and payments",
+            "blocks": [
+              { "type": "p", "html": "Prices, currency and payment terms are those stated in each proposal. They can be per project, a monthly retainer or a combination of both." },
+              { "type": "list", "items": [
+                "Projects usually include a deposit to start and the balance on delivery or in stages, as set out in the proposal.",
+                "Monthly retainers are paid in advance and can be cancelled with the notice stated in the proposal.",
+                "We issue the invoice that corresponds to our tax status.",
+                "If a payment is late, we may pause the work until it is settled, with prior notice."
+              ] },
+              { "type": "p", "html": "Third-party service costs (domains, hosting, licenses, advertising, WhatsApp messages, etc.) are not included unless the proposal expressly says so." }
+            ]
+          },
+          {
+            "id": "tu-parte",
+            "title": "What we need from you",
+            "blocks": [
+              { "type": "p", "html": "For the project to go well, as a client you agree to:" },
+              { "type": "list", "items": [
+                "Give us accurate and complete information about your business and what you need.",
+                "Provide access, content and materials on time.",
+                "Make sure you hold the rights to the texts, images, brands and data you share with us.",
+                "Review and approve deliveries within the agreed timeframes.",
+                "Comply with the rules that apply to your business, including protecting your own customers' data."
+              ] }
+            ]
+          },
+          {
+            "id": "terceros",
+            "title": "Third-party tools",
+            "blocks": [
+              { "type": "p", "html": "Many solutions use third-party services, such as WhatsApp, Mercado Pago, Google, hosting platforms or automation tools. Each has its own terms, pricing and policies, which you will also need to accept." },
+              { "type": "p", "html": "Whenever possible, accounts are created <strong>in your name</strong>, so control stays in your hands. We are not responsible for price or policy changes, outages or discontinuation of those services, but we will let you know and help you find an alternative." }
+            ]
+          },
+          {
+            "id": "propiedad-intelectual",
+            "title": "Intellectual property",
+            "blocks": [
+              { "type": "p", "html": "The {brand} brand and the design and content of this website belong to us. You may not copy or use them without our written permission." },
+              { "type": "p", "html": "Once you pay for the project in full, <strong>the deliverables custom-made for you become yours</strong>: designs, copy, code and configurations specific to your project. Until then, we grant you a license to use them." },
+              { "type": "p", "html": "We keep the rights to our tools, methods, templates and reusable components that existed before the project or are not specific to your business; we grant you a permanent license to use those that are part of your delivery." },
+              { "type": "p", "html": "Unless you ask us to keep it confidential, we may show the finished project in our portfolio, without revealing sensitive information about your business." }
+            ]
+          },
+          {
+            "id": "confidencialidad",
+            "title": "Confidentiality",
+            "blocks": [
+              { "type": "p", "html": "We treat as confidential all information about your business that we access during the work: customer data, figures, processes and credentials. We only use it for the project and do not share it with third parties, except with the providers needed to deliver the service or when required by law or an authority." },
+              { "type": "p", "html": "When we work with your customers' personal data, we do so as explained in our <a href=\"/privacidad/#datos-de-tus-clientes\">privacy policy</a>." }
+            ]
+          },
+          {
+            "id": "garantia",
+            "title": "Warranty and support",
+            "blocks": [
+              { "type": "p", "html": "If something we delivered doesn't work as agreed because of an error in our work, we fix it <strong>at no cost for {warrantyDays} calendar days</strong> after delivery." },
+              { "type": "p", "html": "The warranty does not cover changes requested after delivery, modifications made by third parties or failures of external services. Ongoing support and maintenance are hired as a retainer or by the hour, as set out in the proposal." }
+            ]
+          },
+          {
+            "id": "responsabilidad",
+            "title": "Limitation of liability",
+            "blocks": [
+              { "type": "p", "html": "We work so that every project improves your business, but commercial results (sales, inquiries, rankings) also depend on factors we don't control. That's why <strong>we don't guarantee specific commercial results</strong>, unless the proposal says otherwise." },
+              { "type": "p", "html": "We are not liable for indirect damages, loss of profits or data loss caused by third parties or by improper use. In any case, our total liability for a project is limited to the amount you paid us for it in the last {liabilityCapMonths} months." },
+              { "type": "note", "html": "These limits do not apply in cases of willful misconduct or gross negligence, and they do not restrict the non-waivable rights you have as a consumer under Consumer Protection Law 24,240." }
+            ]
+          },
+          {
+            "id": "cancelacion",
+            "title": "Cancellation and withdrawal",
+            "blocks": [
+              { "type": "p", "html": "Either party may end a project with written notice. In that case, the work done up to that date is paid and we hand over what has been completed. Deposits cover the initial work and the scheduling reservation; any unused portion is refunded proportionally." },
+              { "type": "p", "html": "If you are a consumer and hired us remotely (by email, WhatsApp or through the website), you have the right to <strong>withdraw your acceptance within 10 calendar days</strong> of accepting the proposal, at no cost and without giving a reason, as provided in article 34 of Law 24,240. To do so, write to us at {email}." }
+            ]
+          },
+          {
+            "id": "privacidad",
+            "title": "Privacy",
+            "blocks": [
+              { "type": "p", "html": "How we collect and use your personal data is explained in our <a href=\"/privacidad/\">privacy policy</a>, which is part of these terms." }
+            ]
+          },
+          {
+            "id": "cambios",
+            "title": "Changes to these terms",
+            "blocks": [
+              { "type": "p", "html": "We may update these terms. The version in force is always the one published on this page, with its update date. Changes do not affect projects already hired, which remain governed by their proposal." }
+            ]
+          },
+          {
+            "id": "ley-aplicable",
+            "title": "Governing law and jurisdiction",
+            "blocks": [
+              { "type": "p", "html": "These terms are governed by the laws of the Argentine Republic. In case of any dispute, we will first try to resolve it by talking. If that is not possible, the ordinary courts of the {jurisdiction} shall have jurisdiction." },
+              { "type": "p", "html": "If you are a consumer, you may bring a claim before the courts of your place of residence, under article 36 of Law 24,240." }
+            ]
+          },
+          {
+            "id": "contacto",
+            "title": "Contact",
+            "blocks": [
+              { "type": "p", "html": "For any questions about these terms, write to us at <a href=\"mailto:{email}\">{email}</a>." }
+            ]
+          }
+        ]
+      }
+    },
+    "privacidad": {
+      "es": {
+        "title": "Política de",
+        "highlight": "privacidad.",
+        "pageTitle": "Política de privacidad",
+        "description": "Qué datos personales recolecta Levn, para qué los usa, con quién los comparte y cómo podés ejercer tus derechos.",
+        "intro": "Qué datos tuyos recolectamos, para qué, con quién los compartimos y cómo podés pedir verlos, corregirlos o borrarlos.",
+        "summaryTitle": "En resumen",
+        "summary": [
+          "Solo recolectamos lo que nos mandás para contactarte: nombre, email, teléfono y tu mensaje.",
+          "Lo usamos para responderte y preparar una propuesta. No lo vendemos ni lo usamos para publicidad.",
+          "No usamos cookies. El tema y el idioma que elegís quedan guardados solo en tu navegador.",
+          "Podés pedirnos ver, corregir o borrar tus datos escribiendo a {email}."
+        ],
+        "sections": [
+          {
+            "id": "responsable",
+            "title": "Responsable de tus datos",
+            "blocks": [
+              { "type": "p", "html": "El responsable del tratamiento de tus datos personales es <strong>{holder}</strong>, titular de {brand}, CUIT {taxId}, con domicilio en {address}. Para cualquier tema de privacidad, escribinos a <a href=\"mailto:{email}\">{email}</a>." },
+              { "type": "p", "html": "Tratamos tus datos según la <strong>Ley 25.326 de Protección de los Datos Personales</strong> y sus normas complementarias." }
+            ]
+          },
+          {
+            "id": "que-datos",
+            "title": "Qué datos recolectamos",
+            "blocks": [
+              { "type": "list", "items": [
+                "<strong>Formulario de contacto:</strong> nombre, email, teléfono (opcional) y tu mensaje.",
+                "<strong>Agenda de llamadas:</strong> nombre, email, el servicio que te interesa, la fecha y hora elegidas y un mensaje opcional.",
+                "<strong>WhatsApp y email:</strong> los datos y mensajes que nos envíes por esos canales.",
+                "<strong>Si nos contratás:</strong> los datos necesarios para facturar (nombre o razón social, CUIT o DNI, domicilio fiscal) y para llevar adelante el proyecto.",
+                "<strong>Datos técnicos:</strong> como cualquier sitio, nuestro proveedor de hosting registra datos de conexión (dirección IP, navegador, páginas visitadas y fecha) para que el sitio funcione y sea seguro."
+              ] },
+              { "type": "p", "html": "No pedimos datos sensibles (salud, religión, opiniones políticas, etc.). Te pedimos que no los incluyas en tus mensajes." }
+            ]
+          },
+          {
+            "id": "para-que",
+            "title": "Para qué los usamos",
+            "blocks": [
+              { "type": "list", "items": [
+                "Responder tus consultas y coordinar las llamadas que agendás.",
+                "Preparar y enviarte propuestas.",
+                "Prestar los servicios que contrates, facturarlos y cumplir obligaciones legales.",
+                "Mantener el sitio funcionando y protegerlo de abusos."
+              ] },
+              { "type": "p", "html": "<strong>No vendemos ni alquilamos tus datos</strong>, ni los usamos para enviarte publicidad sin tu consentimiento." }
+            ]
+          },
+          {
+            "id": "base-legal",
+            "title": "Base legal",
+            "blocks": [
+              { "type": "p", "html": "Tratamos tus datos porque nos los das voluntariamente para que te contactemos (tu <strong>consentimiento</strong>), porque son necesarios para preparar o cumplir un contrato con vos, o para cumplir obligaciones legales, como las impositivas." },
+              { "type": "p", "html": "Podés retirar tu consentimiento en cualquier momento escribiéndonos; eso no afecta lo que hayamos hecho antes de que lo retires." }
+            ]
+          },
+          {
+            "id": "proveedores",
+            "title": "Con quién los compartimos",
+            "blocks": [
+              { "type": "p", "html": "Para que el sitio y nuestro trabajo funcionen, usamos proveedores que procesan datos por cuenta nuestra y solo para esos fines:" },
+              { "type": "list", "items": [
+                "<strong>Vercel</strong> (Estados Unidos): aloja el sitio y registra los datos técnicos de conexión.",
+                "<strong>Supabase</strong> (servidores en San Pablo, Brasil): guarda las consultas y llamadas agendadas.",
+                "<strong>Resend</strong> (Estados Unidos): envía los mails de aviso cuando completás un formulario.",
+                "<strong>Google Workspace</strong> (Estados Unidos): nuestro correo, donde recibimos tus mensajes.",
+                "<strong>Google Fonts y CDNFonts:</strong> sirven las tipografías del sitio; al cargarlas, reciben tu dirección IP.",
+                "<strong>WhatsApp (Meta):</strong> si nos escribís por WhatsApp, esa conversación también se rige por la política de privacidad de WhatsApp."
+              ] },
+              { "type": "p", "html": "Solo compartimos tus datos con otros terceros si una ley o una autoridad competente nos lo exige." }
+            ]
+          },
+          {
+            "id": "transferencias",
+            "title": "Transferencias internacionales",
+            "blocks": [
+              { "type": "p", "html": "Algunos de esos proveedores guardan o procesan datos fuera de Argentina, en Estados Unidos y Brasil. Elegimos proveedores reconocidos que aplican medidas de seguridad y confidencialidad adecuadas. Al enviarnos tus datos, consentís estas transferencias, que hacemos solo para los fines de esta política." }
+            ]
+          },
+          {
+            "id": "cookies",
+            "title": "Cookies y almacenamiento local",
+            "blocks": [
+              { "type": "p", "html": "<strong>Hoy no usamos cookies</strong>, ni de analítica ni de publicidad." },
+              { "type": "p", "html": "Si elegís un tema (claro u oscuro) o un idioma, esa preferencia se guarda en el almacenamiento local de tu navegador para recordarla en tu próxima visita. Esos datos <strong>no salen de tu dispositivo</strong> y podés borrarlos desde la configuración de tu navegador." },
+              { "type": "p", "html": "Si en el futuro sumamos herramientas de medición o publicidad, vamos a actualizar esta política y, cuando corresponda, a pedirte consentimiento antes de activarlas." }
+            ]
+          },
+          {
+            "id": "conservacion",
+            "title": "Cuánto tiempo los guardamos",
+            "blocks": [
+              { "type": "list", "items": [
+                "<strong>Consultas y llamadas que no terminan en un proyecto:</strong> hasta {inquiryRetentionMonths} meses desde el último contacto.",
+                "<strong>Datos de clientes:</strong> mientras dure la relación y, después, durante los plazos que exigen las leyes impositivas y comerciales.",
+                "<strong>Datos técnicos de conexión:</strong> durante los plazos que defina el proveedor de hosting."
+              ] },
+              { "type": "p", "html": "Pasados esos plazos, los borramos o los anonimizamos." }
+            ]
+          },
+          {
+            "id": "seguridad",
+            "title": "Cómo los protegemos",
+            "blocks": [
+              { "type": "p", "html": "El sitio funciona con conexión cifrada (HTTPS). Las bases de datos tienen acceso restringido: desde el sitio solo se pueden <strong>crear</strong> consultas y reservas, no leerlas, y solo nuestro equipo puede acceder a ellas. Las claves de los servicios se guardan en el servidor, nunca en tu navegador." },
+              { "type": "p", "html": "Ningún sistema es 100% infalible. Si detectáramos un incidente que afecte tus datos, te avisaríamos y tomaríamos las medidas necesarias." }
+            ]
+          },
+          {
+            "id": "datos-de-tus-clientes",
+            "title": "Datos de tus clientes en nuestros proyectos",
+            "blocks": [
+              { "type": "p", "html": "Cuando construimos una automatización, una web o un sistema para tu negocio, muchas veces procesamos datos de <strong>tus</strong> clientes (por ejemplo, conversaciones de WhatsApp o pedidos). En esos casos, vos sos el responsable de esos datos y nosotros actuamos como <strong>encargado del tratamiento</strong>, en los términos del artículo 25 de la Ley 25.326." },
+              { "type": "list", "items": [
+                "Los usamos solo para prestarte el servicio y según tus instrucciones.",
+                "No los usamos para fines propios ni los compartimos con terceros ajenos al proyecto.",
+                "Aplicamos medidas de seguridad y acceso restringido.",
+                "Al terminar el servicio, te los devolvemos o los borramos, según nos indiques."
+              ] }
+            ]
+          },
+          {
+            "id": "tus-derechos",
+            "title": "Tus derechos",
+            "blocks": [
+              { "type": "p", "html": "Podés pedirnos en cualquier momento <strong>acceder</strong> a tus datos, <strong>rectificarlos</strong>, <strong>actualizarlos</strong> o <strong>suprimirlos</strong>, y retirar tu consentimiento. Escribinos a <a href=\"mailto:{email}\">{email}</a> con el asunto «Datos personales» e indicanos qué necesitás; podemos pedirte que acredites tu identidad." },
+              { "type": "p", "html": "Respondemos los pedidos de acceso dentro de los 10 días corridos y los de rectificación, actualización o supresión dentro de los 5 días hábiles, como establece la ley." },
+              { "type": "legal", "html": "El titular de los datos personales tiene la facultad de ejercer el derecho de acceso a los mismos en forma gratuita a intervalos no inferiores a seis meses, salvo que se acredite un interés legítimo al efecto conforme lo establecido en el artículo 14, inciso 3 de la Ley Nº 25.326." },
+              { "type": "legal", "html": "La AGENCIA DE ACCESO A LA INFORMACIÓN PÚBLICA, en su carácter de Órgano de Control de la Ley Nº 25.326, tiene la atribución de atender las denuncias y reclamos que interpongan quienes resulten afectados en sus derechos por incumplimiento de las normas vigentes en materia de protección de datos personales. Más información en <a href=\"https://www.argentina.gob.ar/aaip\" target=\"_blank\" rel=\"noopener noreferrer\">argentina.gob.ar/aaip</a>." }
+            ]
+          },
+          {
+            "id": "menores",
+            "title": "Menores de edad",
+            "blocks": [
+              { "type": "p", "html": "Nuestros servicios están pensados para negocios y personas mayores de 18 años. No recolectamos a sabiendas datos de menores; si detectamos que los recibimos, los borramos." }
+            ]
+          },
+          {
+            "id": "cambios",
+            "title": "Cambios en esta política",
+            "blocks": [
+              { "type": "p", "html": "Podemos actualizar esta política, por ejemplo si sumamos una herramienta nueva. La versión vigente es siempre la publicada en esta página, con su fecha de actualización. Si el cambio es importante, lo vamos a avisar en el sitio." }
+            ]
+          },
+          {
+            "id": "contacto",
+            "title": "Contacto",
+            "blocks": [
+              { "type": "p", "html": "Por cualquier consulta sobre tus datos o esta política, escribinos a <a href=\"mailto:{email}\">{email}</a>." }
+            ]
+          }
+        ]
+      },
+      "en": {
+        "title": "Privacy",
+        "highlight": "policy.",
+        "pageTitle": "Privacy policy",
+        "description": "What personal data Levn collects, what it is used for, who it is shared with and how you can exercise your rights.",
+        "intro": "What data of yours we collect, what for, who we share it with and how you can ask to see, correct or delete it.",
+        "summaryTitle": "In short",
+        "summary": [
+          "We only collect what you send us so we can contact you: name, email, phone and your message.",
+          "We use it to reply and prepare a proposal. We don't sell it or use it for advertising.",
+          "We don't use cookies. The theme and language you choose are stored only in your browser.",
+          "You can ask us to see, correct or delete your data by writing to {email}."
+        ],
+        "sections": [
+          {
+            "id": "responsable",
+            "title": "Who is responsible for your data",
+            "blocks": [
+              { "type": "p", "html": "The controller of your personal data is <strong>{holder}</strong>, owner of {brand}, tax ID (CUIT) {taxId}, with registered address at {address}. For any privacy matter, write to us at <a href=\"mailto:{email}\">{email}</a>." },
+              { "type": "p", "html": "We process your data in accordance with Argentina's <strong>Personal Data Protection Law 25,326</strong> and its complementary rules." }
+            ]
+          },
+          {
+            "id": "que-datos",
+            "title": "What data we collect",
+            "blocks": [
+              { "type": "list", "items": [
+                "<strong>Contact form:</strong> name, email, phone (optional) and your message.",
+                "<strong>Call booking:</strong> name, email, the service you're interested in, the chosen date and time and an optional message.",
+                "<strong>WhatsApp and email:</strong> the data and messages you send us through those channels.",
+                "<strong>If you hire us:</strong> the data needed for invoicing (name or company name, tax ID or national ID, tax address) and to carry out the project.",
+                "<strong>Technical data:</strong> like any website, our hosting provider logs connection data (IP address, browser, pages visited and date) to keep the site running and secure."
+              ] },
+              { "type": "p", "html": "We don't ask for sensitive data (health, religion, political opinions, etc.). Please don't include it in your messages." }
+            ]
+          },
+          {
+            "id": "para-que",
+            "title": "What we use it for",
+            "blocks": [
+              { "type": "list", "items": [
+                "Replying to your inquiries and coordinating the calls you book.",
+                "Preparing and sending you proposals.",
+                "Delivering the services you hire, invoicing them and meeting legal obligations.",
+                "Keeping the website running and protecting it from abuse."
+              ] },
+              { "type": "p", "html": "<strong>We don't sell or rent your data</strong>, and we don't use it to send you advertising without your consent." }
+            ]
+          },
+          {
+            "id": "base-legal",
+            "title": "Legal basis",
+            "blocks": [
+              { "type": "p", "html": "We process your data because you give it to us voluntarily so we can contact you (your <strong>consent</strong>), because it is needed to prepare or perform a contract with you, or to meet legal obligations, such as tax obligations." },
+              { "type": "p", "html": "You can withdraw your consent at any time by writing to us; this does not affect what we did before you withdrew it." }
+            ]
+          },
+          {
+            "id": "proveedores",
+            "title": "Who we share it with",
+            "blocks": [
+              { "type": "p", "html": "To run the website and our work, we use providers that process data on our behalf and only for those purposes:" },
+              { "type": "list", "items": [
+                "<strong>Vercel</strong> (United States): hosts the website and logs technical connection data.",
+                "<strong>Supabase</strong> (servers in São Paulo, Brazil): stores inquiries and booked calls.",
+                "<strong>Resend</strong> (United States): sends the notification emails when you fill in a form.",
+                "<strong>Google Workspace</strong> (United States): our email, where we receive your messages.",
+                "<strong>Google Fonts and CDNFonts:</strong> serve the website's fonts; when loading them, they receive your IP address.",
+                "<strong>WhatsApp (Meta):</strong> if you message us on WhatsApp, that conversation is also governed by WhatsApp's privacy policy."
+              ] },
+              { "type": "p", "html": "We only share your data with other third parties when required by law or a competent authority." }
+            ]
+          },
+          {
+            "id": "transferencias",
+            "title": "International transfers",
+            "blocks": [
+              { "type": "p", "html": "Some of those providers store or process data outside Argentina, in the United States and Brazil. We choose recognized providers that apply adequate security and confidentiality measures. By sending us your data, you consent to these transfers, which we make only for the purposes of this policy." }
+            ]
+          },
+          {
+            "id": "cookies",
+            "title": "Cookies and local storage",
+            "blocks": [
+              { "type": "p", "html": "<strong>We currently don't use cookies</strong>, for analytics or advertising." },
+              { "type": "p", "html": "If you choose a theme (light or dark) or a language, that preference is saved in your browser's local storage so it is remembered on your next visit. That data <strong>never leaves your device</strong> and you can delete it from your browser settings." },
+              { "type": "p", "html": "If we add measurement or advertising tools in the future, we will update this policy and, where applicable, ask for your consent before enabling them." }
+            ]
+          },
+          {
+            "id": "conservacion",
+            "title": "How long we keep it",
+            "blocks": [
+              { "type": "list", "items": [
+                "<strong>Inquiries and calls that don't lead to a project:</strong> up to {inquiryRetentionMonths} months from the last contact.",
+                "<strong>Client data:</strong> for as long as the relationship lasts and, afterwards, for the periods required by tax and commercial laws.",
+                "<strong>Technical connection data:</strong> for the periods set by the hosting provider."
+              ] },
+              { "type": "p", "html": "After those periods, we delete or anonymize it." }
+            ]
+          },
+          {
+            "id": "seguridad",
+            "title": "How we protect it",
+            "blocks": [
+              { "type": "p", "html": "The website runs over an encrypted connection (HTTPS). Databases have restricted access: from the website, inquiries and bookings can only be <strong>created</strong>, not read, and only our team can access them. Service keys are kept on the server, never in your browser." },
+              { "type": "p", "html": "No system is 100% foolproof. If we detected an incident affecting your data, we would let you know and take the necessary measures." }
+            ]
+          },
+          {
+            "id": "datos-de-tus-clientes",
+            "title": "Your customers' data in our projects",
+            "blocks": [
+              { "type": "p", "html": "When we build an automation, a website or a system for your business, we often process <strong>your</strong> customers' data (for example, WhatsApp conversations or orders). In those cases, you are the controller of that data and we act as a <strong>data processor</strong>, under article 25 of Law 25,326." },
+              { "type": "list", "items": [
+                "We only use it to provide the service and according to your instructions.",
+                "We don't use it for our own purposes or share it with third parties outside the project.",
+                "We apply security measures and restricted access.",
+                "When the service ends, we return or delete it, as you instruct."
+              ] }
+            ]
+          },
+          {
+            "id": "tus-derechos",
+            "title": "Your rights",
+            "blocks": [
+              { "type": "p", "html": "You can ask us at any time to <strong>access</strong>, <strong>rectify</strong>, <strong>update</strong> or <strong>delete</strong> your data, and to withdraw your consent. Write to us at <a href=\"mailto:{email}\">{email}</a> with the subject “Personal data” and tell us what you need; we may ask you to verify your identity." },
+              { "type": "p", "html": "We answer access requests within 10 calendar days and rectification, update or deletion requests within 5 business days, as required by law." },
+              { "type": "legal", "html": "The data subject has the right to access their personal data free of charge at intervals of no less than six months, unless a legitimate interest is shown, as established in article 14, paragraph 3 of Law No. 25,326." },
+              { "type": "legal", "html": "The AGENCY FOR ACCESS TO PUBLIC INFORMATION (AAIP), as the Control Authority of Law No. 25,326, has the power to handle complaints and claims filed by anyone whose rights are affected by non-compliance with the rules in force on personal data protection. More information at <a href=\"https://www.argentina.gob.ar/aaip\" target=\"_blank\" rel=\"noopener noreferrer\">argentina.gob.ar/aaip</a>." }
+            ]
+          },
+          {
+            "id": "menores",
+            "title": "Minors",
+            "blocks": [
+              { "type": "p", "html": "Our services are intended for businesses and people over 18. We don't knowingly collect data from minors; if we find out we received it, we delete it." }
+            ]
+          },
+          {
+            "id": "cambios",
+            "title": "Changes to this policy",
+            "blocks": [
+              { "type": "p", "html": "We may update this policy, for example if we add a new tool. The version in force is always the one published on this page, with its update date. If the change is significant, we will announce it on the website." }
+            ]
+          },
+          {
+            "id": "contacto",
+            "title": "Contact",
+            "blocks": [
+              { "type": "p", "html": "For any questions about your data or this policy, write to us at <a href=\"mailto:{email}\">{email}</a>." }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}
